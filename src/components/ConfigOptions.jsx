@@ -1,6 +1,8 @@
+import styles from './ConfigOptions.module.css'
+
 function ConfigOptions() {
   return (
-    <div id="config-options">
+    <div id="config-options" className={styles.configOptions}>
       <FileUpload />
       <Connection />
       <Mode />
@@ -12,7 +14,7 @@ function ConfigOptions() {
 
 function FileUpload() {
   return (
-    <div id="file-upload">
+    <div id="file-upload" className={styles.configSection}>
       <div id="template-name-entry">
         <label htmlFor="template-name">Template Name:</label>
         <input type="text" id="template-name" />
@@ -24,7 +26,7 @@ function FileUpload() {
 
 function Connection() {
   return (
-    <div id="connection">
+    <div id="connection" className={styles.configSection}>
       <label htmlFor="connection-dropdown">Connection:</label>
       <select name="connection-dropdown" id="connection-dropdown">
         <option value="auto">Auto</option>
@@ -38,7 +40,7 @@ function Connection() {
 
 function Mode() {
   return (
-    <div id="mode">
+    <div id="mode" className={styles.configSection}>
       <label htmlFor="mode-dropdown">Mode:</label>
       <select name="mode-dropdown" id="mode-dropdown">
         <option value="1">1</option>
@@ -55,7 +57,7 @@ function Mode() {
 
 function KeypressSound() {
   return (
-    <div id="keypress-sound">
+    <div id="keypress-sound" className={styles.configSection}>
       <div id="keypress-sound-options">
         Keypress Sound:
         <input type="radio" name="keypress" id="keypress-enable" defaultChecked />
@@ -77,7 +79,7 @@ function KeypressSound() {
 
 function Beeper() {
   return (
-    <div id="beeper">
+    <div id="beeper" className={styles.configSection}>
       <div>Beeper Sounds On:</div>
       <div id="beeper-options">
         <input type="radio" name="beeper-option" id="beeper-never" />

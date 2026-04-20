@@ -1,0 +1,10 @@
+.configOptions {
+    display: flex;
+    gap: 20px;
+}
+
+.configSection {
+    display: flex;
+    flex-direction: column;
+    font-size: .75rem;
+}

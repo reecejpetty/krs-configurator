@@ -1,16 +1,5 @@
-.configOptions {
-    display: flex;
-    gap: 20px;
-}
-
-.configSection {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
-    padding: 12px;
-    border: solid 1px white;
-    font-size: .75rem;
+* {
+    text-align: left;
 }
 
 .flexRow {
@@ -21,4 +10,36 @@
 .flexColumn {
     display: flex;
     flex-direction: column;
+}
+
+.configOptions {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    width: 100%;
+    padding: 20px 0;
+}
+
+.configSection {
+    composes: flexColumn;
+    flex-grow: 1;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding: 18px;
+    color: var(--off-white);
+    background-color: var(--navy);
+    border-radius: 12px;
+    font-size: .75rem;
+    font-weight: bold;
+}
+
+.beeperOptions {
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-template-rows: auto auto auto;
+    justify-items: start;
+}
+
+.otherText {
+    width: 25px;
 }

@@ -10,7 +10,6 @@ function App() {
     <>
       <ConfigOptions />
       <BumpbarLayout />
-      <ButtonActions />
       <SequenceBuilder />
     </>
   )

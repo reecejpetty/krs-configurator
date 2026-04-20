@@ -18,6 +18,7 @@ function BumpbarLayout() {
           ))}
         </div>
       </div>
+      <ButtonActions />
     </>
   )
 }
@@ -27,6 +28,16 @@ function BumpbarButton({number}) {
     <button className={styles.bumpbarButton} data-number={number}>
       <span className={styles.bumpbarButtonText}>x</span>
     </button>
+  )
+}
+
+function ButtonActions() {
+  return (
+    <div className={styles.buttonActions}>
+      <button className={styles.updateButton}>Update</button>
+      <button className={styles.eraseButton}>Erase</button>
+      <button className={styles.resetButton}>Reset All</button>
+    </div>
   )
 }
 

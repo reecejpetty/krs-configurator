@@ -3,7 +3,7 @@ import styles from './ConfigOptions.module.css'
 function ConfigOptions() {
   return (
     <>
-      <h2>Configuration Options</h2>
+      <h1>Configuration Options</h1>
       <div id="config-options" className={styles.configOptions}>
         <FileUpload />
         <Connection />
@@ -53,7 +53,7 @@ function Mode() {
           <option value="1">1</option>
           <option value="2">2</option>
           <option value="3">3</option>
-          <option value="4" selected>4</option>
+          <option value="4">4</option>
           <option value="5">5</option>
           <option value="6">6</option>
           <option value="7">7</option>
@@ -84,7 +84,7 @@ function KeypressSound() {
         <select name="volume-dropdown" id="volume-dropdown">
           <option value="1">1 (Quiet)</option>
           <option value="2">2</option>
-          <option value="3" selected>3 (Loud)</option>
+          <option value="3">3 (Loud)</option>
         </select>
       </div>
     </div>

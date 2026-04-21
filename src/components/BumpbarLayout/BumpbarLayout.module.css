@@ -120,6 +120,7 @@
 }
 
 .switch {
+    position: relative;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -132,11 +133,37 @@
     box-shadow: 0 0 6px -1px black inset;
 }
 
+.switch::before {
+    content: "";
+    position: absolute;
+    right: 1.5%;
+    width: 47%;
+    height: 85%;
+    border-radius: 40px;
+    background-color: var(--steel-blue);
+    box-shadow: 0 1px 3px -1px rgb(20, 20, 70);
+    z-index: 1;
+    transition: right 0.5s ease-in-out;
+}
+
+.switch20{
+    composes: switch;
+}
+
+.switch20::before {
+    right: 51.5%;
+}
+
 .switchOption {
     border-radius: 30px;
     padding: 5px 12px;
     font-weight: bold;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
     cursor: pointer;
+    z-index: 2;
 }
 
 .switchOption input {
@@ -144,14 +171,3 @@
     width: 0;
     margin: 0;
 }
-
-.switchOptionActive {
-    composes: switchOption;
-    background-color: var(--steel-blue);
-    box-shadow: 0 1px 3px -1px rgb(20, 20, 70);
-}
-
-.switchOptionOff {
-    composes: switchOption;
-}
-

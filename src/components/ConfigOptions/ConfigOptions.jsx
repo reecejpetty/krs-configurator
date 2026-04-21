@@ -18,8 +18,9 @@ function ConfigOptions() {
 function FileUpload() {
   return (
     <div id="file-upload" className={styles.configSection}>
+      <h2>Template</h2>
       <div className={styles.flexRow}>
-        <label htmlFor="template-name">Template Name:&nbsp;</label>
+        <label htmlFor="template-name">Name:&nbsp;</label>
         <input type="text" id="template-name" />
       </div>
       <input type="file" name="file-upload" id="file-upload" accept=".krs" />
@@ -30,8 +31,8 @@ function FileUpload() {
 function Connection() {
   return (
     <div id="connection" className={styles.configSection}>
+      <h2>Connection</h2>
       <div className={styles.flexRow}>
-        <label htmlFor="connection-dropdown">Connection:&nbsp;</label>
         <select name="connection-dropdown" id="connection-dropdown">
           <option value="auto">Auto</option>
           <option value="ble">Bluetooth</option>
@@ -47,8 +48,8 @@ function Connection() {
 function Mode() {
   return (
     <div id="mode" className={styles.configSection}>
+      <h2>Mode</h2>
       <div className={styles.flexRow}>
-        <label htmlFor="mode-dropdown">Mode:&nbsp;</label>
         <select name="mode-dropdown" id="mode-dropdown">
           <option value="1">1</option>
           <option value="2">2</option>
@@ -66,9 +67,9 @@ function Mode() {
 function KeypressSound() {
   return (
     <div id="keypress-sound" className={styles.configSection}>
+      <h2>Keypress Sound</h2>
       <div className={styles.flexRow}>
-        Keypress<br />Sound:
-        <div className={styles.flexColumn}>
+        <div className={styles.flexRow}>
           <div className={styles.flexRow}>
             <input type="radio" name="keypress" id="keypress-enable" defaultChecked />
             <label htmlFor="keypress-enable">Enable</label>
@@ -80,7 +81,6 @@ function KeypressSound() {
         </div>
       </div>
       <div className={styles.flexRow}>
-        <label htmlFor="volume-dropdown">Volume:&nbsp;</label>
         <select name="volume-dropdown" id="volume-dropdown">
           <option value="1">1 (Quiet)</option>
           <option value="2">2</option>
@@ -94,8 +94,8 @@ function KeypressSound() {
 function Beeper() {
   return (
     <div id="beeper" className={styles.configSection}>
-      <div className={styles.flexRow}>
-        <div>Beeper<br />Sounds On:</div>
+      <h2>Lock Sounds</h2>
+      <div className={styles.flexColumn}>
         <div className={styles.beeperOptions}>
           <div className={styles.flexRow}>
             <input type="radio" name="beeper-option" id="beeper-never" />
@@ -120,7 +120,7 @@ function Beeper() {
           <div className={styles.flexRow}>
             <input type="radio" name="beeper-option" id="beeper-other" />
             <label htmlFor="beeper-other">Other:&nbsp;
-              <input type="text" className={styles.otherText} />
+              <input type="text" className={styles.otherText} value="0x07" />
             </label>
           </div>
         </div>

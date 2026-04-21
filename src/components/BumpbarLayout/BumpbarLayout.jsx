@@ -50,10 +50,10 @@ function ButtonActions() {
 function ButtonCountToggle({ active, setActive }) {
   return (
     <div className={active == 2 ? styles.switch20 : styles.switch}>
-      <label className={styles.switchOption}>
+      <label className={styles.switchOption} htmlFor='20-switch'>
         <input type='radio' id='20-switch' name='button-count-switch' value='2' onChange={e => setActive(e.target.value)} />20 Button
       </label>
-      <label className={styles.switchOption}>
+      <label className={styles.switchOption} htmlFor='30-switch'>
         <input type='radio' id='30-switch' name='button-count-switch' value='3' onChange={e => setActive(e.target.value)} />30 Button
       </label>
     </div>

@@ -1,0 +1,102 @@
+.flexRow {
+    display: flex;
+    flex-direction: row;
+}
+
+.currentSequence {
+    margin-bottom: 20px;
+}
+
+.currentSequenceItems {
+    composes: flexRow;
+    gap: 10px;
+}
+
+.sequenceItem {
+    composes: flexRow;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 10px 20px;
+    border-radius: 40px;
+    color: var(--charcoal);
+    background-color: var(--steel-blue);
+    cursor: pointer;
+}
+
+.sequenceItemText {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.deleteItem {
+    font-size: .75rem;
+}
+
+.deleteItem:hover {
+    color: var(--off-white);
+    font-weight: bold;
+}
+
+.modifierRow {
+    composes: flexRow;
+    justify-content: space-between;
+}
+
+.modifierCheckboxes {
+    composes: flexRow;
+    gap: 10px;
+    border-radius: 40px;
+    width: fit-content;
+}
+
+.modifierCheckboxes label {
+    padding: 10px 20px 10px 15px;
+    border-radius: 40px;
+    background-color: var(--steel-blue);
+    font-weight: bold;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.modifierCheckboxes input[type="checkbox"] {
+    accent-color: var(--amber);
+    cursor: pointer;
+}
+
+.addBlockContent {
+    composes: flexRow;
+    align-items: center;
+    gap: 10px;
+}
+
+.addBlock select,
+.addBlock input {
+    padding: 10px 20px;
+    border: solid 1px black;
+    border-radius: 40px;
+    font-size: 1rem;
+    cursor: pointer;
+    outline-color: var(--amber);
+}
+
+.addBlock button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 40px;
+    color: var(--charcoal);
+    background-color: var(--steel-blue);
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.addBlock button:hover {
+    color: var(--off-white);
+    background-color: var(--navy);
+    cursor: pointer;
+}

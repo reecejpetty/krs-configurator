@@ -12,6 +12,14 @@
     overflow: auto;
 }
 
+.bumpbar:has(.bumpbarLayout20) {
+    padding: 5.5% 4%;
+}
+
+.bumpbar:has(.bumpbarLayout20)::before {
+    top: 7%;
+}
+
 .bumpbar::before {
     content: "";
     position: absolute;
@@ -30,7 +38,6 @@
     gap: 10px;
     margin: 0 auto;
     width: 100%;
-    /* transition: grid-template-rows 0.5s ease-out; */
 }
 
 .bumpbarLayout20 {
@@ -42,7 +49,6 @@
     display: flex;
     position: relative;
     margin: 0;
-    /* aspect-ratio: 1/1; */
     padding: 12px;
     justify-content: center;
     align-items: center;

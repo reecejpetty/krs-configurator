@@ -33,6 +33,18 @@
     font-weight: bold;
 }
 
+.configSection input[type="radio"] {
+    accent-color: var(--amber);
+    margin-top: 0px;
+}
+
+.configSection input[type="text"]:focus,
+.configSection input[type="text"]:focus-visible,
+.configSection select:focus,
+.configSection select:focus-visible {
+    outline-color: var(--amber);
+}
+
 .beeperOptions {
     display: grid;
     grid-template-columns: auto auto;

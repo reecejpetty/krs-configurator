@@ -97,27 +97,27 @@ function Beeper() {
       <div className={styles.flexRow}>
         <div>Beeper<br />Sounds On:</div>
         <div className={styles.beeperOptions}>
-          <div>
+          <div className={styles.flexRow}>
             <input type="radio" name="beeper-option" id="beeper-never" />
             <label htmlFor="beeper-never">Never</label>
           </div>
-          <div>
+          <div className={styles.flexRow}>
             <input type="radio" name="beeper-option" id="beeper-num" />
             <label htmlFor="beeper-num">Num Lock</label>
           </div>
-          <div>
+          <div className={styles.flexRow}>
             <input type="radio" name="beeper-option" id="beeper-caps" />
             <label htmlFor="beeper-caps">Caps Lock</label>
           </div>
-          <div>
+          <div className={styles.flexRow}>
             <input type="radio" name="beeper-option" id="beeper-scrolls" defaultChecked />
             <label htmlFor="beeper-scroll">Scroll Lock</label>
           </div>
-          <div>
+          <div className={styles.flexRow}>
             <input type="radio" name="beeper-option" id="beeper-bel" />
             <label htmlFor="beeper-bel">BEL</label>
           </div>
-          <div>
+          <div className={styles.flexRow}>
             <input type="radio" name="beeper-option" id="beeper-other" />
             <label htmlFor="beeper-other">Other:&nbsp;
               <input type="text" className={styles.otherText} />

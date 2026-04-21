@@ -1,10 +1,13 @@
 .bumpbar {
     position: relative;
+    display: flex;
+    align-items: stretch;
     background-color: var(--charcoal);
     width: 100%;
-    padding: 60px 40px;
+    padding: 4%;
     border-radius: 15px;
     width: 100%;
+    aspect-ratio: 3.5/1;
     margin-bottom: 20px;
     overflow: auto;
 }
@@ -12,9 +15,9 @@
 .bumpbar::before {
     content: "";
     position: absolute;
-    top: 20px;
-    left: 100px;
-    width: 20px;
+    top: 4%;
+    left: 9%;
+    width: 1.75%;
     aspect-ratio: 1/1;
     background-color: red;
     border-radius: 40px;
@@ -22,24 +25,24 @@
 
 .bumpbarLayout {
     display: grid;
-    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-rows: repeat(3, 1fr);
     grid-template-columns: repeat(10, 1fr);
     gap: 10px;
     margin: 0 auto;
-    transition: grid-template-rows 0.5s ease-out;
+    width: 100%;
+    /* transition: grid-template-rows 0.5s ease-out; */
 }
 
 .bumpbarLayout20 {
     composes: bumpbarLayout;
-    grid-template-rows: 1fr 1fr 0fr;
-    margin-bottom: -10px;
+    grid-template-rows: repeat(2, 1fr);
 }
 
 .bumpbarButton {
     display: flex;
     position: relative;
     margin: 0;
-    aspect-ratio: 1/1;
+    /* aspect-ratio: 1/1; */
     padding: 12px;
     justify-content: center;
     align-items: center;
@@ -59,8 +62,9 @@
     position: absolute;
     top: 0;
     left: 0;
-    width: 22px;
-    padding: 3px 0;
+    min-width: fit-content;
+    width: 20%;
+    padding: 3% 2%;
     border-bottom-right-radius: 2px;
     color: var(--navy);
     background-color: var(--steel-blue);

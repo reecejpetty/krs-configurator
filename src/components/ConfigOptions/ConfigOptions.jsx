@@ -110,7 +110,7 @@ function Beeper() {
             <label htmlFor="beeper-caps">Caps Lock</label>
           </div>
           <div className={styles.flexRow}>
-            <input type="radio" name="beeper-option" id="beeper-scrolls" defaultChecked />
+            <input type="radio" name="beeper-option" id="beeper-scroll" defaultChecked />
             <label htmlFor="beeper-scroll">Scroll Lock</label>
           </div>
           <div className={styles.flexRow}>

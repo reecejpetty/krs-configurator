@@ -15,9 +15,3 @@ input {
 input[type="checkbox"] {
     accent-color: var(--amber);
 }
-
-.pageLayout {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}

@@ -3,7 +3,7 @@
   --text-h: #1A3F6F;
   --bg: #F7F8FA;
   --border: #CBD5E0;
-  --code-bg: #f4f3ec;
+  --code-bg: #68a2ce;
   --accent: #E07B00;
   --accent-bg: #4A90C4;
   --accent-border: rgba(170, 59, 255, 0.5);
@@ -81,17 +81,16 @@ p {
   margin: 0;
 }
 
-code,
-.counter {
+code {
   font-family: var(--mono);
-  display: inline-flex;
-  border-radius: 4px;
-  color: var(--text-h);
+  display: flex;
+  border-radius: 20px;
+  color: black;
 }
 
 code {
-  font-size: 15px;
+  font-size: .75rem;
   line-height: 135%;
-  padding: 4px 8px;
+  padding: 10px 20px;
   background: var(--code-bg);
 }

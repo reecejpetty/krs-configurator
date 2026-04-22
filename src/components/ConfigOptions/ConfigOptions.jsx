@@ -2,7 +2,7 @@ import styles from './ConfigOptions.module.css'
 
 function ConfigOptions() {
   return (
-    <>
+    <div>
       <h1>Configuration Options</h1>
       <div id="config-options" className={styles.configOptions}>
         <FileUpload />
@@ -11,7 +11,7 @@ function ConfigOptions() {
         <KeypressSound />
         <Beeper />
       </div>
-    </>
+    </div>
   )
 }
 

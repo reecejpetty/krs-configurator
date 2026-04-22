@@ -1,0 +1,43 @@
+.flexRow {
+    display: flex;
+    flex-direction: row;
+}
+
+.buttonRow {
+    composes: flexRow;
+    justify-content: space-between;
+    padding-bottom: 10px;
+}
+
+.button {
+    padding: 20px 30px;
+    border: none;
+    border-radius: 40px;
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
+.button:hover {
+    cursor: pointer;
+}
+
+.generateButton {
+    composes: button;
+    color: black;
+    background-color: lightgreen;
+}
+
+.generateButton:hover {
+    color: var(--off-white);
+    background-color: var(--navy);
+}
+
+.krsButton {
+    composes: button;
+    color: white;
+    background-color: var(--navy);
+}
+
+.filePreview {
+    
+}

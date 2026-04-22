@@ -85,7 +85,7 @@
 .keyboardFunctions {
     composes: flexRow;
     justify-content: space-between;
-    padding: 20px;
+    padding: 15px;
     border-radius: 20px;
     background-color: var(--navy);
     overflow-y: scroll;

@@ -7,12 +7,12 @@ import GenerateFile from "./components/GenerateFile/GenerateFile"
 
 function App() {
   return (
-    <>
+    <div className="pageLayout">
       <ConfigOptions />
       <BumpbarLayout />
       <SequenceBuilder />
       <GenerateFile />
-    </>
+    </div>
   )
 }
 

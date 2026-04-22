@@ -11,7 +11,7 @@ function BumpbarLayout() {
   const mode1 = [0,1,2,3,4,5,6,7,8,9,'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t']
 
   return (
-    <>
+    <div>
       <div className={styles.flexApart}>
         <h1>Bumpbar Buttons</h1>
         <ButtonCountToggle active={activeSwitch} setActive={setActiveSwitch} />
@@ -27,7 +27,7 @@ function BumpbarLayout() {
       </div>
       <ButtonActions />
       <PinBumpbar sticky={sticky} setSticky={setSticky} />
-    </>
+    </div>
   )
 }
 

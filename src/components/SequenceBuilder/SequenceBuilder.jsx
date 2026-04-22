@@ -2,7 +2,7 @@ import styles from "./SequenceBuilder.module.css"
 
 function SequenceBuilder() {
  return (
-  <>
+  <div>
     <h1>Sequence Builder</h1>
     <div className={styles.flexColumn}>
       <CurrentSequence />
@@ -14,7 +14,7 @@ function SequenceBuilder() {
       <StringEntry />
       <KeyboardFunctions />
     </div>
-  </>
+  </div>
  )
 }
 

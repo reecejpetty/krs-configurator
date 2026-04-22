@@ -3,8 +3,10 @@
     flex-direction: row;
 }
 
-.currentSequence {
-    margin-bottom: 20px;
+.flexColumn {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
 .currentSequenceItems {
@@ -69,13 +71,54 @@
     cursor: pointer;
 }
 
+.stringEntryInput {
+    composes: flexRow;
+    gap: 20px;
+}
+
+.stringEntryInput input {
+    width: 100%;
+}
+
+.keyboardFunctions {
+    composes: flexRow;
+}
+
+.keyboardFunctions button {
+    border: none;
+    border-radius: 5px;
+    background-color: var(--steel-blue);
+    text-align: center;
+}
+
+.leftKeyboard,
+.middleKeyboard,
+.rightKeyboard {
+    display: grid;
+    grid-auto-rows: 60px;
+    gap: 3px;
+}
+
+.leftKeyboard {
+    grid-template-columns: repeat(13, 1fr);
+}
+
+.middleKeyboard {
+    grid-template-columns: repeat(3, 1fr);
+    margin: 0px 15px;
+}
+
+.rightKeyboard {
+    grid-template-columns: repeat(4, 1fr); /* 4 columns of equal width */
+}
+
 .addBlockContent {
     composes: flexRow;
     align-items: center;
     gap: 10px;
 }
 
-.addBlock button {
+.addButton {
     padding: 10px 20px;
     border: none;
     border-radius: 40px;
@@ -85,7 +128,7 @@
     font-weight: bold;
 }
 
-.addBlock button:hover {
+.addButton:hover {
     color: var(--off-white);
     background-color: var(--navy);
     cursor: pointer;

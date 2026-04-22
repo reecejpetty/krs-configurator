@@ -13,6 +13,8 @@ function App() {
 
   const [currentSequence, setCurrentSequence] = useState([]);
 
+  const [currentButton, setCurrentButton] = useState();
+
   return (
     <>
       <ConfigOptions 
@@ -25,7 +27,10 @@ function App() {
         lockSound={lockSound}
         setLockSound={setLockSound}
       />
-      <BumpbarLayout />
+      <BumpbarLayout 
+        currentButton={currentButton}
+        setCurrentButton={setCurrentButton}
+      />
       <SequenceBuilder
         currentSequence={currentSequence}
         setCurrentSequence={setCurrentSequence}

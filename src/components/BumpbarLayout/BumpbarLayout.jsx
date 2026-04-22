@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import styles from './BumpbarLayout.module.css'
 
-function BumpbarLayout() {
+function BumpbarLayout({ currentButton, setCurrentButton }) {
   // User will be able to set rowCount to either 2 or 3
   const [activeSwitch, setActiveSwitch] = useState(3);
   const [sticky, setSticky] = useState(false);
@@ -20,7 +20,14 @@ function BumpbarLayout() {
         <div className={activeSwitch == 2 ? styles.bumpbarLayout20 : styles.bumpbarLayout }>
           {rowArray.map((_, rowIndex) => (
             buttonArray.map((_, colIndex) => (
-              <BumpbarButton key={(rowIndex * 10) + colIndex} number={(rowIndex * 10) + colIndex + 1} text={mode1[(rowIndex * 10) + colIndex] } />
+              <BumpbarButton 
+                key={(rowIndex * 10) + colIndex}
+                number={(rowIndex * 10) + colIndex + 1}
+                text={mode1[(rowIndex * 10) + colIndex] }
+                currentButton={currentButton}
+                setCurrentButton={setCurrentButton}
+                active={(rowIndex * 10) + colIndex + 1 == currentButton}
+              />
             ))
           ))}
         </div>
@@ -31,9 +38,14 @@ function BumpbarLayout() {
   )
 }
 
-function BumpbarButton({number, text}) {
+function BumpbarButton({number, text, currentButton, setCurrentButton, active}) {
+  const handleClick = (e) => {
+    const button = e.target.dataset.number;
+    setCurrentButton((currentButton != button ? button : ""))
+  }
+
   return (
-    <button className={styles.bumpbarButton} data-number={number}>
+    <button className={active ? styles.activeButton : styles.bumpbarButton} data-number={number} onClick={handleClick}>
       <span className={styles.bumpbarButtonText}>{text}</span>
     </button>
   )

@@ -2,7 +2,7 @@
     position: relative;
     display: flex;
     align-items: stretch;
-    background-color: var(--charcoal);
+    background-color: black;
     width: 100%;
     padding: 4%;
     border-radius: 15px;
@@ -86,6 +86,11 @@
 
 .bumpbarButtonText {
     text-align: center;
+}
+
+.activeButton {
+    composes: bumpbarButton;
+    background-color: var(--amber2);
 }
 
 .buttonActions {

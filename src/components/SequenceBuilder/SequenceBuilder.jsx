@@ -30,24 +30,29 @@ function CurrentSequence({ currentSequence, setCurrentSequence }) {
     <div className={styles.currentSequence}>
       <h2>Current Sequence</h2>
       <div className={styles.currentSequenceItems}>
-        <SequenceItem text="test" />
-        <SequenceItem text="[CTRL + A]" />
-        <SequenceItem text="[ESC]" />
-        <SequenceItem text="This is a string" />
-        <SequenceItem text="[PAUSE: 10]" />
         {currentSequence.map((item) => (
-          <SequenceItem text={item.text} />
+          <SequenceItem
+            id={item.id}
+            text={item.text}
+            currentSequence={currentSequence}
+            setCurrentSequence={setCurrentSequence}
+          />
         ))}
       </div>
     </div>
   )
 }
 
-function SequenceItem({ text }) {
+function SequenceItem({ id, text, currentSequence, setCurrentSequence }) {
+
+  const deleteItem = () => {
+    setCurrentSequence(currentSequence.filter(item => item.id != id ))
+  }
+
   return (
     <div className={styles.sequenceItem}>
       <div className={styles.sequenceItemText}>{text}</div>
-      <div className={styles.deleteItem}>✕</div>
+      <div className={styles.deleteItem} onClick={deleteItem}>✕</div>
     </div>
   )
 }
@@ -111,14 +116,17 @@ function AddPause() {
 }
 
 function StringEntry({ string, setString, currentSequence, setCurrentSequence }) {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  }
 
   return (
     <div className={styles.stringEntry}>
       <h2>String Entry</h2>
-      <div className={styles.stringEntryInput}>
+      <form className={styles.stringEntryInput} onSubmit={handleSubmit}>
         <input type="text" value={string} onChange={e => setString(e.target.value)} />
-        <button onClick={() => setCurrentSequence([...currentSequence, {"text": string}])} className={styles.addButton}>ADD</button>
-      </div>
+        <button type="submit" onClick={() => setCurrentSequence([...currentSequence, {"id": currentSequence.length, "text": string}])} className={styles.addButton}>ADD</button>
+      </form>
     </div>
   )
 }

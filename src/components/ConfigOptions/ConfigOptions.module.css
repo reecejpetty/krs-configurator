@@ -41,8 +41,8 @@ input[type="file"]::file-selector-button {
     padding: 10px 20px;
     border: none;
     border-radius: 40px;
-    color: var(--charcoal);
-    background-color: var(--steel-blue);
+    color: var(--off-white);
+    background-color: var(--navy);
     font-size: 1rem;
     font-weight: bold;
     cursor: pointer;

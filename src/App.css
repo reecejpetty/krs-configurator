@@ -11,3 +11,7 @@ input {
     cursor: pointer;
     outline-color: var(--amber);
 }
+
+input[type="checkbox"] {
+    accent-color: var(--amber);
+}

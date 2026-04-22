@@ -79,8 +79,8 @@
     width: 20%;
     padding: 3% 2%;
     border-bottom-right-radius: 2px;
-    color: var(--navy);
-    background-color: var(--steel-blue);
+    color: black;
+    background-color: var(--steel-blue2);
     text-align: center;
 }
 
@@ -135,7 +135,8 @@
     height: fit-content;
     border-radius: 40px;
     padding: 4px;
-    background-color: var(--amber);
+    color: black;
+    background-color: var(--amber2);
     box-shadow: 0 0 6px -1px black inset;
 }
 
@@ -146,7 +147,7 @@
     width: 47%;
     height: 85%;
     border-radius: 40px;
-    background-color: var(--steel-blue);
+    background-color: var(--steel-blue2);
     box-shadow: 0 1px 3px -1px rgb(20, 20, 70);
     z-index: 1;
     transition: right 0.5s ease-in-out;

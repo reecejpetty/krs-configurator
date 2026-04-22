@@ -1,15 +1,15 @@
 import styles from './ConfigOptions.module.css'
 
-function ConfigOptions() {
+function ConfigOptions({ connection, setConnection, mode, setMode, volume, setVolume, lockSound, setLockSound }) {
   return (
     <div>
       <h1>Configuration Options</h1>
       <div id="config-options" className={styles.configOptions}>
         <FileUpload />
-        <Connection />
-        <Mode />
-        <KeypressSound />
-        <Beeper />
+        <Connection connection={connection} setConnection={setConnection} />
+        <Mode mode={mode} setMode={setMode} />
+        <KeypressSound volume={volume} setVolume={setVolume} />
+        <Beeper lockSound={lockSound} setLockSound={setLockSound} />
       </div>
     </div>
   )
@@ -28,12 +28,12 @@ function FileUpload() {
   )
 }
 
-function Connection() {
+function Connection({ connection, setConnection }) {
   return (
     <div id="connection" className={styles.configSection}>
       <h2>Connection</h2>
       <div className={styles.flexRow}>
-        <select name="connection-dropdown" id="connection-dropdown">
+        <select name="connection-dropdown" id="connection-dropdown" value={connection} onChange={e => setConnection(e.target.value)}>
           <option value="auto">Auto</option>
           <option value="ble">Bluetooth</option>
           <option value="usb">USB</option>
@@ -45,12 +45,12 @@ function Connection() {
   )
 }
 
-function Mode() {
+function Mode({ mode, setMode }) {
   return (
     <div id="mode" className={styles.configSection}>
       <h2>Mode</h2>
       <div className={styles.flexRow}>
-        <select name="mode-dropdown" id="mode-dropdown">
+        <select name="mode-dropdown" id="mode-dropdown" value={mode} onChange={e => setMode(e.target.value)}>
           <option value="1">1</option>
           <option value="2">2</option>
           <option value="3">3</option>
@@ -64,7 +64,7 @@ function Mode() {
   )
 }
 
-function KeypressSound() {
+function KeypressSound({ volume, setVolume }) {
   return (
     <div id="keypress-sound" className={styles.configSection}>
       <h2>Keypress Sound</h2>
@@ -81,7 +81,7 @@ function KeypressSound() {
         </div>
       </div>
       <div className={styles.flexRow}>
-        <select name="volume-dropdown" id="volume-dropdown">
+        <select name="volume-dropdown" id="volume-dropdown" value={volume} onChange={e => setVolume(e.target.value)}>
           <option value="1">1 (Quiet)</option>
           <option value="2">2</option>
           <option value="3">3 (Loud)</option>
@@ -91,32 +91,48 @@ function KeypressSound() {
   )
 }
 
-function Beeper() {
+function Beeper({ lockSound, setLockSound }) {
+  const lockSoundOptions = [
+    {
+      "value": "never",
+      "label": "Never"
+    },
+    {
+      "value": "num",
+      "label": "Num Lock"
+    },
+    {
+      "value": "caps",
+      "label": "Caps Lock"
+    },
+    {
+      "value": "scroll",
+      "label": "Scroll Lock"
+    },
+    {
+      "value": "bel",
+      "label": "BEL"
+    }
+  ]
+
   return (
     <div id="beeper" className={styles.configSection}>
       <h2>Lock Sounds</h2>
       <div className={styles.flexColumn}>
         <div className={styles.beeperOptions}>
-          <div className={styles.flexRow}>
-            <input type="radio" name="beeper-option" id="beeper-never" />
-            <label htmlFor="beeper-never">Never</label>
-          </div>
-          <div className={styles.flexRow}>
-            <input type="radio" name="beeper-option" id="beeper-num" />
-            <label htmlFor="beeper-num">Num Lock</label>
-          </div>
-          <div className={styles.flexRow}>
-            <input type="radio" name="beeper-option" id="beeper-caps" />
-            <label htmlFor="beeper-caps">Caps Lock</label>
-          </div>
-          <div className={styles.flexRow}>
-            <input type="radio" name="beeper-option" id="beeper-scroll" defaultChecked />
-            <label htmlFor="beeper-scroll">Scroll Lock</label>
-          </div>
-          <div className={styles.flexRow}>
-            <input type="radio" name="beeper-option" id="beeper-bel" />
-            <label htmlFor="beeper-bel">BEL</label>
-          </div>
+          {lockSoundOptions.map((option) => (
+            <div className={styles.flexRow}>
+              <input
+                type="radio"
+                name="beeper-option"
+                id={`beeper-${option.value}`}
+                value={option.value}
+                checked={lockSound === option.value}
+                onChange={e => setLockSound(e.target.value)}
+              />
+              <label htmlFor={`beeper-${option.value}`}>{option.label}</label>
+            </div>
+          ))}
           <div className={styles.flexRow}>
             <input type="radio" name="beeper-option" id="beeper-other" />
             <label htmlFor="beeper-other">Other:&nbsp;

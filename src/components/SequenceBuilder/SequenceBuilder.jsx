@@ -1,24 +1,31 @@
+import { useState } from 'react';
 import styles from "./SequenceBuilder.module.css"
 
-function SequenceBuilder() {
+function SequenceBuilder({ currentSequence, setCurrentSequence }) {
+  const [string, setString] = useState("")
+
  return (
   <div>
     <h1>Sequence Builder</h1>
     <div className={styles.flexColumn}>
-      <CurrentSequence />
+      <CurrentSequence
+        currentSequence={currentSequence}
+        setCurrentSequence={setCurrentSequence}
+      />
       <div className={styles.modifierRow}>
         <KeypressModifiers />
         <AddRepeat />
         <AddPause />
       </div>
-      <StringEntry />
+      <StringEntry string={string} setString={setString} currentSequence={currentSequence} setCurrentSequence={setCurrentSequence} />
       <KeyboardFunctions />
     </div>
   </div>
  )
 }
 
-function CurrentSequence() {
+function CurrentSequence({ currentSequence, setCurrentSequence }) {
+
   return (
     <div className={styles.currentSequence}>
       <h2>Current Sequence</h2>
@@ -28,6 +35,9 @@ function CurrentSequence() {
         <SequenceItem text="[ESC]" />
         <SequenceItem text="This is a string" />
         <SequenceItem text="[PAUSE: 10]" />
+        {currentSequence.map((item) => (
+          <SequenceItem text={item.text} />
+        ))}
       </div>
     </div>
   )
@@ -100,13 +110,14 @@ function AddPause() {
   )
 }
 
-function StringEntry() {
+function StringEntry({ string, setString, currentSequence, setCurrentSequence }) {
+
   return (
     <div className={styles.stringEntry}>
       <h2>String Entry</h2>
       <div className={styles.stringEntryInput}>
-        <input type="text"/>
-        <button className={styles.addButton}>ADD</button>
+        <input type="text" value={string} onChange={e => setString(e.target.value)} />
+        <button onClick={() => setCurrentSequence([...currentSequence, {"text": string}])} className={styles.addButton}>ADD</button>
       </div>
     </div>
   )

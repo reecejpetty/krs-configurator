@@ -1,5 +1,6 @@
 .bumpbar {
-    position: relative;
+    position: sticky;
+    top: 10px;
     display: flex;
     align-items: stretch;
     background-color: var(--charcoal);

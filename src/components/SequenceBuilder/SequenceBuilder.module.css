@@ -84,35 +84,102 @@
 
 .keyboardFunctions {
     composes: flexRow;
+    justify-content: space-between;
+    padding: 20px;
+    border-radius: 20px;
+    background-color: var(--navy);
+    overflow-y: scroll;
 }
 
 .keyboardFunctions button {
+    margin: 3px;
+    min-height: 50px;
+    padding: 0;
     border: none;
     border-radius: 5px;
-    color: var(--off-white);
-    background-color: var(--navy);
+    color: black;
+    background-color: var(--off-white);
+    font-size: .75rem;
     text-align: center;
+}
+
+.keyboardFunctions button:hover {
+    background-color: var(--steel-blue2);
+    cursor: pointer;
+}
+
+.keyboardFunctions button:active {
+    background-color: var(--amber2);
+}
+
+.u1 {
+    grid-column: span 4;
+}
+
+.u1_25 {
+    grid-column: span 5;
+}
+
+.u1_5 {
+    grid-column: span 6;
+}
+
+.u1_75 {
+    grid-column: span 7;
+}
+
+.u2 {
+    grid-column: span 8;
+}
+
+.u2_25 {
+    grid-column: span 9;
+}
+
+.u2_75 {
+    grid-column: span 11;
+}
+
+.u1_space {
+    grid-column: span 2;
+}
+
+.u0_5_space {
+    grid-column: span 1;
+}
+
+.tabRowSpace {
+    grid-column: span 42;
+}
+
+.shiftRowSpace {
+    grid-column: span 36;
+}
+
+.capsRowSpace {
+    grid-column: span 40;
+}
+
+.spacebar {
+    grid-column: span 22;
 }
 
 .leftKeyboard,
 .middleKeyboard,
 .rightKeyboard {
     display: grid;
-    grid-auto-rows: 60px;
-    gap: 3px;
 }
 
 .leftKeyboard {
-    grid-template-columns: repeat(13, 1fr);
+    grid-template-columns: repeat(56, 13.5px);
 }
 
 .middleKeyboard {
-    grid-template-columns: repeat(3, 1fr);
-    margin: 0px 15px;
+    grid-template-columns: repeat(12, 13.5px);
 }
 
 .rightKeyboard {
-    grid-template-columns: repeat(4, 1fr); /* 4 columns of equal width */
+    grid-template-columns: repeat(16, 13.5px); /* 4 columns of equal width */
 }
 
 .addBlockContent {

@@ -118,72 +118,77 @@ function KeyboardFunctions() {
       <h2>Keyboard Functions</h2>
       <div className={styles.keyboardFunctions}>
         <div className={styles.leftKeyboard}>
-          <button value="[ESC]">ESC</button>
-          <button value="[F1]">F1</button>
-          <button value="[F2]">F2</button>
-          <button value="[F3]">F3</button>
-          <button value="[F4]">F4</button>
-          <button value="[F5]">F5</button>
-          <button value="[F6]">F6</button>
-          <button value="[F7]">F7</button>
-          <button value="[F8]">F8</button>
-          <button value="[F9]">F9</button>
-          <button value="[F10]">F10</button>
-          <button value="[F11]">F11</button>
-          <button value="[F12]">F12</button>
-          <button value="[TAB]" style={{ gridColumn: "span 2" }}>Tab</button>
-          <button style={{ gridColumn: "span 9", visibility: "hidden" }}></button>
-          <button value="[BACKSPACE]" style={{ gridColumn: "span 2" }}>Backspace</button>
-          <button value="[CAPS_LOCK]" style={{ gridColumn: "span 2" }}>Caps Lock</button>
-          <button style={{ gridColumn: "span 9", visibility: "hidden" }}></button>
-          <button value="[ENTER]" style={{ gridColumn: "span 2" }}>Enter</button>
-          <button value="[L_SHIFT]" style={{ gridColumn: "span 3" }}>Left Shift</button>
-          <button style={{ gridColumn: "span 7", visibility: "hidden" }}></button>
-          <button value="[R_SHIFT]" style={{ gridColumn: "span 3" }}>Right Shift</button>
-          <button value="[L_CTRL]" style={{ gridColumn: "span 2" }}>Left Ctrl</button>
-          <button value="[L_WIN]">Left Win</button>
-          <button value="[L_ALT]">Left Alt</button>
-          <button style={{ gridColumn: "span 4", visibility: "hidden" }}></button>
-          <button value="[R_ALT]">Right Alt</button>
-          <button value="[R_WIN]">Right Win</button>
-          <button value="[MENU]">Menu</button>
-          <button value="[R_CTRL]" style={{ gridColumn: "span 2" }}>Right Ctrl</button>
+          <button value="[ESC]" className={styles.u1}>ESC</button>
+          <span className={styles.u1_space}></span>
+          <button value="[F1]" className={styles.u1}>F1</button>
+          <button value="[F2]" className={styles.u1}>F2</button>
+          <button value="[F3]" className={styles.u1}>F3</button>
+          <button value="[F4]" className={styles.u1}>F4</button>
+          <span className={styles.u0_5_space}></span>
+          <button value="[F5]" className={styles.u1}>F5</button>
+          <button value="[F6]" className={styles.u1}>F6</button>
+          <button value="[F7]" className={styles.u1}>F7</button>
+          <button value="[F8]" className={styles.u1}>F8</button>
+          <span className={styles.u0_5_space}></span>
+          <button value="[F9]" className={styles.u1}>F9</button>
+          <button value="[F10]" className={styles.u1}>F10</button>
+          <button value="[F11]" className={styles.u1}>F11</button>
+          <button value="[F12]" className={styles.u1}>F12</button>
+          <button value="[TAB]" className={styles.u1_5}>Tab</button>
+          <span className={styles.tabRowSpace}></span>
+          <button value="[BACKSPACE]" className={styles.u2}>Backspace</button>
+          <button value="[CAPS_LOCK]" className={styles.u1_75}>Caps Lock</button>
+          <span className={styles.capsRowSpace}></span>
+          <button value="[ENTER]" className={styles.u2_25}>Enter</button>
+          <button value="[L_SHIFT]" className={styles.u2_25}>Left Shift</button>
+          <span className={styles.shiftRowSpace}></span>
+          <button value="[R_SHIFT]" className={styles.u2_75}>Right Shift</button>
+          <button value="[L_CTRL]" className={styles.u1_5}>Left Ctrl</button>
+          <button value="[L_WIN]" className={styles.u1}>Left<br/>Win</button>
+          <button value="[L_ALT]" className={styles.u1_25}>Left<br/>Alt</button>
+          <span className={styles.spacebar}></span>
+          <button value="[R_ALT]" className={styles.u1_25}>Right<br/>Alt</button>
+          <button value="[R_WIN]" className={styles.u1}>Right<br/>Win</button>
+          <button value="[MENU]" className={styles.u1}>Menu</button>
+          <button value="[R_CTRL]" className={styles.u1_5}>Right Ctrl</button>
         </div>
         <div className={styles.middleKeyboard}>
-          <button value="[PRINT_SCREEN]">PrtSc</button>
-          <button value="[SCROLL_LOCK]">Scroll Lock</button>
-          <button value="[PAUSE]">Pause</button>
-          <button value="[INSERT]">Ins</button>
-          <button value="[HOME]">Home</button>
-          <button value="[PAGE_UP]">Page Up</button>
-          <button value="[DELETE]">Del</button>
-          <button value="[END]">End</button>
-          <button value="[PAGE_DOWN]">Page Down</button>
-          <button style={{ visibility: "hidden" }}></button>
-          <button value="[UP_ARROW]">Up Arrow</button>
-          <button style={{ visibility: "hidden" }}></button>
-          <button value="[LEFT_ARROW]">Left Arrow</button>
-          <button value="[DOWN_ARROW]">Down Arrow</button>
-          <button value="[RIGHT_ARROW]">Right Arrow</button>
+          <button value="[PRINT_SCREEN]" className={styles.u1}>PrtSc</button>
+          <button value="[SCROLL_LOCK]" className={styles.u1}>Scroll<br/>Lock</button>
+          <button value="[PAUSE]" className={styles.u1}>Pause</button>
+          <button value="[INSERT]" className={styles.u1}>Ins</button>
+          <button value="[HOME]" className={styles.u1}>Home</button>
+          <button value="[PAGE_UP]" className={styles.u1}>Page<br/>Up</button>
+          <button value="[DELETE]" className={styles.u1}>Del</button>
+          <button value="[END]" className={styles.u1}>End</button>
+          <button value="[PAGE_DOWN]" className={styles.u1}>Page<br/>Down</button>
+          <span className={styles.u1_space}></span>
+          <span className={styles.u1_space}></span>
+          <button value="[UP_ARROW]" className={styles.u1}>Up<br/>Arrow</button>
+          <span className={styles.u1_space}></span>
+          <span className={styles.u1_space}></span>
+          <button value="[LEFT_ARROW]" className={styles.u1}>Left<br/>Arrow</button>
+          <button value="[DOWN_ARROW]" className={styles.u1}>Down<br/>Arrow</button>
+          <button value="[RIGHT_ARROW]" className={styles.u1}>Right<br/>Arrow</button>
         </div>
         <div className={styles.rightKeyboard}>
-          <button value="[NUM_LOCK]">Num Lock</button>
-          <button value="[NUM_/]">Num /</button>
-          <button value="[NUM_*]">Num *</button>
-          <button value="[NUM_-]">Num -</button>
-          <button value="[NUM_7]">Num 7</button>
-          <button value="[NUM_8]">Num 8</button>
-          <button value="[NUM_9]">Num 9</button>
-          <button value="[NUM_+]" style={{ gridRow: "span 2" }}>Num +</button>
-          <button value="[NUM_4]">Num 4</button>
-          <button value="[NUM_5]">Num 5</button>
-          <button value="[NUM_6]">Num 6</button>
-          <button value="[NUM_1]">Num 1</button>
-          <button value="[NUM_2]">Num 2</button>
-          <button value="[NUM_3]">Num 3</button>
-          <button value="[NUM_ENTER]" style={{ gridRow: "span 2" }}>Num Enter</button>
-          <button value="[NUM_0]" style={{ gridColumn: "span 2" }}>Num 0</button>
-          <button value="[NUM_.]">Num .</button>
+          <button value="[NUM_LOCK]" className={styles.u1}>Num<br/>Lock</button>
+          <button value="[NUM_/]" className={styles.u1}>Num /</button>
+          <button value="[NUM_*]" className={styles.u1}>Num *</button>
+          <button value="[NUM_-]" className={styles.u1}>Num -</button>
+          <button value="[NUM_7]" className={styles.u1}>Num 7</button>
+          <button value="[NUM_8]" className={styles.u1}>Num 8</button>
+          <button value="[NUM_9]" className={styles.u1}>Num 9</button>
+          <button value="[NUM_+]" className={styles.u1} style={{ gridRow: "span 2" }}>Num +</button>
+          <button value="[NUM_4]" className={styles.u1}>Num 4</button>
+          <button value="[NUM_5]" className={styles.u1}>Num 5</button>
+          <button value="[NUM_6]" className={styles.u1}>Num 6</button>
+          <button value="[NUM_1]" className={styles.u1}>Num 1</button>
+          <button value="[NUM_2]" className={styles.u1}>Num 2</button>
+          <button value="[NUM_3]" className={styles.u1}>Num 3</button>
+          <button value="[NUM_ENTER]" className={styles.u1} style={{ gridRow: "span 2" }}>Num<br/>Enter</button>
+          <button value="[NUM_0]" style={{ gridColumn: "span 8" }}>Num 0</button>
+          <button value="[NUM_.]" className={styles.u1}>Num .</button>
         </div>
       </div>
     </div>

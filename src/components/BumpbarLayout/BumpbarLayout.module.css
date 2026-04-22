@@ -1,6 +1,5 @@
 .bumpbar {
-    position: sticky;
-    top: 10px;
+    position: relative;
     display: flex;
     align-items: stretch;
     background-color: var(--charcoal);
@@ -11,6 +10,12 @@
     aspect-ratio: 3.5/1;
     margin-bottom: 20px;
     overflow: auto;
+}
+
+.bumpbarSticky {
+    composes: bumpbar;
+    position: sticky;
+    top: 10px;
 }
 
 .bumpbar:has(.bumpbarLayout20) {
@@ -171,4 +176,18 @@
     opacity: 0;
     width: 0;
     margin: 0;
+}
+
+.pinBumpbar {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.pinBumpbar label {
+    width: fit-content;
+    border-radius: 40px;
+    padding: 10px 20px;
+    color: var(--off-white);
+    background-color: var(--navy);
+    font-weight: bold;
 }

@@ -4,6 +4,7 @@ import styles from './BumpbarLayout.module.css'
 function BumpbarLayout() {
   // User will be able to set rowCount to either 2 or 3
   const [activeSwitch, setActiveSwitch] = useState(3);
+  const [sticky, setSticky] = useState(false);
   const rowCount = activeSwitch;
   const rowArray = Array.from({ length: rowCount });
   const buttonArray = Array.from({ length: 10 })
@@ -15,7 +16,7 @@ function BumpbarLayout() {
         <h1>Bumpbar Buttons</h1>
         <ButtonCountToggle active={activeSwitch} setActive={setActiveSwitch} />
       </div>
-      <div className={styles.bumpbar}>
+      <div className={sticky ? styles.bumpbarSticky : styles.bumpbar}>
         <div className={activeSwitch == 2 ? styles.bumpbarLayout20 : styles.bumpbarLayout }>
           {rowArray.map((_, rowIndex) => (
             buttonArray.map((_, colIndex) => (
@@ -25,6 +26,7 @@ function BumpbarLayout() {
         </div>
       </div>
       <ButtonActions />
+      <PinBumpbar sticky={sticky} setSticky={setSticky} />
     </>
   )
 }
@@ -55,6 +57,17 @@ function ButtonCountToggle({ active, setActive }) {
       </label>
       <label className={styles.switchOption} htmlFor='30-switch'>
         <input type='radio' id='30-switch' name='button-count-switch' value='3' onChange={e => setActive(e.target.value)} />30 Button
+      </label>
+    </div>
+  )
+}
+
+function PinBumpbar({ sticky, setSticky }) {
+  return (
+    <div className={styles.pinBumpbar}>
+      <label htmlFor="pinBumpbarCheckbox">
+        <input type="checkbox" id="pinBumpbarCheckbox" checked={sticky} onChange={e => setSticky(e.target.checked)} />
+        Pin Bumpbar
       </label>
     </div>
   )

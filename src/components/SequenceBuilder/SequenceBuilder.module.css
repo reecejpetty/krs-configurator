@@ -143,6 +143,11 @@
     grid-column: span 11;
 }
 
+.u1_tall {
+    composes: u1;
+    grid-row: span 2;
+}
+
 .u1_space {
     grid-column: span 2;
 }

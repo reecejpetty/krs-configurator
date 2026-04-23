@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useSortable } from '@dnd-kit/react/sortable';
 import styles from "./SequenceBuilder.module.css"
 
 function SequenceBuilder({ currentSequence, setCurrentSequence }) {
@@ -33,9 +34,10 @@ function CurrentSequence({ currentSequence, setCurrentSequence }) {
     <div className={styles.currentSequence}>
       <h2>Current Sequence</h2>
       <div className={styles.currentSequenceItems}>
-        {currentSequence.map((item) => (
+        {currentSequence.map((item, index) => (
           <SequenceItem
             id={item.id}
+            index={index}
             text={item.text}
             currentSequence={currentSequence}
             setCurrentSequence={setCurrentSequence}
@@ -46,13 +48,15 @@ function CurrentSequence({ currentSequence, setCurrentSequence }) {
   )
 }
 
-function SequenceItem({ id, text, currentSequence, setCurrentSequence }) {
+function SequenceItem({ id, index, text, currentSequence, setCurrentSequence }) {
+  const {ref} = useSortable({id, index});
+
   const deleteItem = () => {
     setCurrentSequence(currentSequence.filter(item => item.id != id ))
   }
 
   return (
-    <div className={styles.sequenceItem}>
+    <div className={styles.sequenceItem} ref={ref}>
       <div className={styles.sequenceItemText}>{text}</div>
       <div className={styles.deleteItem} onClick={deleteItem}>✕</div>
     </div>

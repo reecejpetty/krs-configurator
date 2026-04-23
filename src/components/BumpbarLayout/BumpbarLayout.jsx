@@ -32,7 +32,6 @@ function BumpbarLayout({ currentButton, setCurrentButton }) {
           ))}
         </div>
       </div>
-      <ButtonActions />
       <PinBumpbar sticky={sticky} setSticky={setSticky} />
     </>
   )

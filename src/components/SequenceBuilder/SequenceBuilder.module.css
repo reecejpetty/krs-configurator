@@ -16,7 +16,7 @@
 }
 
 .sequenceItem {
-    composes: flexRow;
+    composes: flexRow, selectOff from global;
     align-items: center;
     justify-content: space-between;
     gap: 10px;

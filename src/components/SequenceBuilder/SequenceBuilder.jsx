@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { useSortable } from '@dnd-kit/react/sortable';
+import { DragDropProvider } from '@dnd-kit/react';
+import { useSortable, isSortable } from '@dnd-kit/react/sortable';
 import styles from "./SequenceBuilder.module.css"
 
 function SequenceBuilder({ currentSequence, setCurrentSequence }) {
@@ -31,20 +32,42 @@ function SequenceBuilder({ currentSequence, setCurrentSequence }) {
 function CurrentSequence({ currentSequence, setCurrentSequence }) {
 
   return (
-    <div className={styles.currentSequence}>
-      <h2>Current Sequence</h2>
-      <div className={styles.currentSequenceItems}>
-        {currentSequence.map((item, index) => (
-          <SequenceItem
-            id={item.id}
-            index={index}
-            text={item.text}
-            currentSequence={currentSequence}
-            setCurrentSequence={setCurrentSequence}
-          />
-        ))}
+    <DragDropProvider
+      onDragEnd={(event) => {
+        if (event.canceled) return;
+
+        const {source} = event.operation;
+
+        if (isSortable(source)) {
+          const {initialIndex, index} = source;
+
+          if (initialIndex !== index) {
+            setCurrentSequence((items) => {
+              const newItems = [...items];
+              const [removed] = newItems.splice(initialIndex, 1);
+              newItems.splice(index, 0, removed);
+              return newItems;
+            });
+          }
+        }
+      }}
+    >
+      <div className={styles.currentSequence}>
+        <h2>Current Sequence</h2>
+        <div className={styles.currentSequenceItems}>
+          {currentSequence.map((item, index) => (
+            <SequenceItem
+              key={item.id}
+              id={item.id}
+              index={index}
+              text={item.text}
+              currentSequence={currentSequence}
+              setCurrentSequence={setCurrentSequence}
+            />
+          ))}
+        </div>
       </div>
-    </div>
+    </DragDropProvider>
   )
 }
 

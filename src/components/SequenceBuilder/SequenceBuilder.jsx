@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { DragDropProvider } from '@dnd-kit/react';
+import { DragDropProvider, DragOverlay } from '@dnd-kit/react';
 import { useSortable, isSortable } from '@dnd-kit/react/sortable';
 import styles from "./SequenceBuilder.module.css"
 
@@ -65,6 +65,14 @@ function CurrentSequence({ currentSequence, setCurrentSequence }) {
               setCurrentSequence={setCurrentSequence}
             />
           ))}
+          <DragOverlay>
+            {source => (
+              <div className={styles.sequenceItem}>
+                <div className={styles.sequenceItemText}>{source.data["dragText"]}</div>
+                <div className={styles.deleteItem} style={{visibility: "hidden"}}>✕</div>
+              </div>
+            )}
+          </DragOverlay>
         </div>
       </div>
     </DragDropProvider>
@@ -72,17 +80,19 @@ function CurrentSequence({ currentSequence, setCurrentSequence }) {
 }
 
 function SequenceItem({ id, index, text, currentSequence, setCurrentSequence }) {
-  const {ref} = useSortable({id, index});
+  const {ref, isDropTarget} = useSortable({id, index, data:{["dragText"]: text}});
 
   const deleteItem = () => {
     setCurrentSequence(currentSequence.filter(item => item.id != id ))
   }
 
   return (
-    <div className={styles.sequenceItem} ref={ref}>
-      <div className={styles.sequenceItemText}>{text}</div>
-      <div className={styles.deleteItem} onClick={deleteItem}>✕</div>
-    </div>
+    <>
+      <div className={isDropTarget ? styles.dropzone : styles.sequenceItem} ref={ref} >
+        <div className={styles.sequenceItemText}>{text}</div>
+        <div className={styles.deleteItem} onClick={deleteItem}>✕</div>
+      </div>
+    </>
   )
 }
 

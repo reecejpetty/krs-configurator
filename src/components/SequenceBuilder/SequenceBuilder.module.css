@@ -28,6 +28,12 @@
     cursor: pointer;
 }
 
+.dropzone {
+    composes: sequenceItem;
+    opacity: 25%;
+    outline: 2px dashed black;
+}
+
 .sequenceItemText {
     -webkit-user-select: none;
     -moz-user-select: none;

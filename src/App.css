@@ -15,3 +15,10 @@ input {
 input[type="checkbox"] {
     accent-color: var(--amber);
 }
+
+.selectOff {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}

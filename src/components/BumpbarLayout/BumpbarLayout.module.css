@@ -167,13 +167,10 @@
 }
 
 .switchOption {
+    composes: selectOff from global;
     border-radius: 30px;
     padding: 5px 12px;
     font-weight: bold;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
     cursor: pointer;
     z-index: 2;
 }
@@ -185,6 +182,7 @@
 }
 
 .pinBumpbar {
+    composes: selectOff from global;
     display: flex;
     justify-content: flex-end;
 }
@@ -195,7 +193,8 @@
     width: fit-content;
     border-radius: 40px;
     padding: 10px 20px;
-    color: var(--off-white);
-    background-color: var(--navy);
+    color: var(--charcoal);
+    background-color: var(--steel-blue2);
     font-weight: bold;
+    cursor: pointer;
 }

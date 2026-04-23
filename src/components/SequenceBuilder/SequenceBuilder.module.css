@@ -50,6 +50,7 @@
 }
 
 .modifierCheckboxes {
+    composes: selectOff from global;
     composes: flexRow;
     gap: 10px;
     border-radius: 40px;
@@ -61,14 +62,10 @@
     align-items: center;
     padding: 10px 20px 10px 15px;
     border-radius: 40px;
-    color: var(--off-white);
-    background-color: var(--navy);
+    color: var(--charcoal);
+    background-color: var(--steel-blue2);
     font-weight: bold;
     cursor: pointer;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
 }
 
 .modifierCheckboxes input[type="checkbox"] {

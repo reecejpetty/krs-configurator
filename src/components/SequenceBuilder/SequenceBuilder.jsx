@@ -67,7 +67,7 @@ function CurrentSequence({ currentSequence, setCurrentSequence }) {
           ))}
           <DragOverlay>
             {source => (
-              <div className={styles.sequenceItem}>
+              <div className={styles.dragOverlay}>
                 <div className={styles.sequenceItemText}>{source.data["dragText"]}</div>
                 <div className={styles.deleteItem} style={{visibility: "hidden"}}>✕</div>
               </div>

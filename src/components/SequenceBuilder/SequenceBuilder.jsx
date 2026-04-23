@@ -252,10 +252,11 @@ function KeyboardFunctions({ currentSequence, setCurrentSequence }) {
     <div>
       <h2>Keyboard Functions</h2>
       <div className={styles.keyboardFunctions}>
-        {keyboardKeys.map((side) => (
-          <div className={styles[side.keyboardSide]}>
-            {side.keys.map((key) => (
+        {keyboardKeys.map((side, index) => (
+          <div className={styles[side.keyboardSide]} key={index}>
+            {side.keys.map((key, index) => (
               <KeyboardButton
+                key={index}
                 value={key.value}
                 text={key.text}
                 spacing={key.spacing}

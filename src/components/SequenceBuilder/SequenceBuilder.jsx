@@ -39,53 +39,75 @@ function SequenceBuilder({ currentSequence, setCurrentSequence, nextSequence, se
 }
 
 function CurrentSequence({ currentSequence, setCurrentSequence }) {
-
-  return (
-    <DragDropProvider
-      onDragEnd={(event) => {
-        if (event.canceled) return;
-
-        const {source} = event.operation;
-
-        if (isSortable(source)) {
-          const {initialIndex, index} = source;
-
-          if (initialIndex !== index) {
-            setCurrentSequence((items) => {
-              const newItems = [...items];
-              const [removed] = newItems.splice(initialIndex, 1);
-              newItems.splice(index, 0, removed);
-              return newItems;
-            });
-          }
-        }
-      }}
-    >
+  if (currentSequence.length == 0) {
+    return (
       <div className={styles.currentSequence}>
         <h2>Current Sequence</h2>
         <div className={styles.currentSequenceItems}>
-          {currentSequence.map((item, index) => (
-            <SequenceItem
-              key={item.id}
-              id={item.id}
-              index={index}
-              text={item.text}
-              currentSequence={currentSequence}
-              setCurrentSequence={setCurrentSequence}
-            />
-          ))}
-          <DragOverlay>
-            {source => (
-              <div className={`${styles.dragOverlay} ${styles.sequenceItem}`}>
-                <div className={styles.sequenceItemText}>{source.data["dragText"]}</div>
-                <div className={styles.deleteItem} style={{visibility: "hidden"}}>✕</div>
-              </div>
-            )}
-          </DragOverlay>
+          <div className={`${styles.sequenceItem} ${styles.emptySequence}`}>
+            <div className={styles.sequenceItemText}>Create</div>
+          </div>
+          <div className={`${styles.sequenceItem} ${styles.emptySequence}`}>
+            <div className={styles.sequenceItemText}>new</div>
+          </div>
+          <div className={`${styles.sequenceItem} ${styles.emptySequence}`}>
+            <div className={styles.sequenceItemText}>sequence</div>
+          </div>
+          <div className={`${styles.sequenceItem} ${styles.emptySequence}`}>
+            <div className={styles.sequenceItemText}>here</div>
+          </div>
         </div>
       </div>
-    </DragDropProvider>
-  )
+    )
+  } else {
+    return (
+      <DragDropProvider
+        onDragEnd={(event) => {
+          if (event.canceled) return;
+  
+          const {source} = event.operation;
+  
+          if (isSortable(source)) {
+            const {initialIndex, index} = source;
+  
+            if (initialIndex !== index) {
+              setCurrentSequence((items) => {
+                const newItems = [...items];
+                const [removed] = newItems.splice(initialIndex, 1);
+                newItems.splice(index, 0, removed);
+                return newItems;
+              });
+            }
+          }
+        }}
+      >
+        <div className={styles.currentSequence}>
+          <h2>Current Sequence</h2>
+          <div className={styles.currentSequenceItems}>
+            {currentSequence.map((item, index) => (
+              <SequenceItem
+                key={item.id}
+                id={item.id}
+                index={index}
+                text={item.text}
+                currentSequence={currentSequence}
+                setCurrentSequence={setCurrentSequence}
+              />
+            ))}
+            <DragOverlay>
+              {source => (
+                <div className={`${styles.dragOverlay} ${styles.sequenceItem}`}>
+                  <div className={styles.sequenceItemText}>{source.data["dragText"]}</div>
+                  <div className={styles.deleteItem} style={{visibility: "hidden"}}>✕</div>
+                </div>
+              )}
+            </DragOverlay>
+          </div>
+        </div>
+      </DragDropProvider>
+    )
+  }
+
 }
 
 function SequenceItem({ id, index, text, currentSequence, setCurrentSequence }) {

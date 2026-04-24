@@ -39,6 +39,14 @@
     box-shadow: 0 5px 5px rgba(0, 0, 0, 0.5);
 }
 
+.emptySequence {
+    opacity: 50%;
+    background-color: lightgray;
+    outline: 1px dashed black;
+    box-shadow: none;
+    cursor: default;
+}
+
 .sequenceItemText {
     -webkit-user-select: none;
     -moz-user-select: none;

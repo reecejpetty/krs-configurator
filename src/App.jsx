@@ -4,7 +4,7 @@ import ConfigOptions from './components/ConfigOptions/ConfigOptions'
 import BumpbarLayout from './components/BumpbarLayout/BumpbarLayout'
 import SequenceBuilder from './components/SequenceBuilder/SequenceBuilder'
 import GenerateFile from "./components/GenerateFile/GenerateFile"
-import { SequenceProvider } from './context/SequenceContext'
+import { SequenceProvider } from './context/SequenceProvider'
 
 function App() {
   const [connection, setConnection] = useState("auto");

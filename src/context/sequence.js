@@ -1,19 +1,7 @@
-import { createContext, useContext, useReducer } from "react";
+import { useContext, createContext } from "react";
 
-const SequenceContext = createContext(null);
-const SequenceDispatchContext = createContext(null);
-
-export function SequenceProvider({ children }) {
-  const [state, dispatch] = useReducer(sequenceReducer, initialState);
-
-  return (
-    <SequenceContext value={state}>
-      <SequenceDispatchContext value={dispatch}>
-        {children}
-      </SequenceDispatchContext>
-    </SequenceContext>
-  )
-}
+export const SequenceContext = createContext(null);
+export const SequenceDispatchContext = createContext(null);
 
 export function useSequence() {
   return useContext(SequenceContext);
@@ -23,7 +11,7 @@ export function useSequenceDispatch() {
   return useContext(SequenceDispatchContext);
 }
 
-function sequenceReducer(state, action) {
+export function sequenceReducer(state, action) {
   switch (action.type) {
     case "added": {
       return {
@@ -53,7 +41,7 @@ function sequenceReducer(state, action) {
   }
 }
 
-const initialState = {
+export const initialState = {
   sequence: [],
   nextId: 0
 }

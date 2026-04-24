@@ -4,15 +4,13 @@ import ConfigOptions from './components/ConfigOptions/ConfigOptions'
 import BumpbarLayout from './components/BumpbarLayout/BumpbarLayout'
 import SequenceBuilder from './components/SequenceBuilder/SequenceBuilder'
 import GenerateFile from "./components/GenerateFile/GenerateFile"
+import { SequenceProvider } from './context/SequenceContext'
 
 function App() {
   const [connection, setConnection] = useState("auto");
   const [mode, setMode] = useState("4");
   const [volume, setVolume] = useState("3");
   const [lockSound, setLockSound] = useState("scroll");
-
-  const [currentSequence, setCurrentSequence] = useState([]);
-  const [nextSequence, setNextSequence] = useState(0)
 
   const [currentButton, setCurrentButton] = useState();
 
@@ -32,12 +30,9 @@ function App() {
         currentButton={currentButton}
         setCurrentButton={setCurrentButton}
       />
-      <SequenceBuilder
-        currentSequence={currentSequence}
-        setCurrentSequence={setCurrentSequence}
-        nextSequence={nextSequence}
-        setNextSequence={setNextSequence}
-       />
+      <SequenceProvider>
+        <SequenceBuilder/>
+      </SequenceProvider>
       <GenerateFile />
     </>
   )

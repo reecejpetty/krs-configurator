@@ -1,51 +1,44 @@
 import { useState } from 'react';
 import { DragDropProvider, DragOverlay } from '@dnd-kit/react';
 import { useSortable, isSortable } from '@dnd-kit/react/sortable';
+import { useSequence } from '../../context/SequenceContext';
+import { useSequenceDispatch } from '../../context/SequenceContext';
 import styles from "./SequenceBuilder.module.css"
 
-function SequenceBuilder({ currentSequence, setCurrentSequence, nextSequence, setNextSequence }) {
+function SequenceBuilder() {
   const [string, setString] = useState("")
 
- return (
-  <div>
-    <h1>Sequence Builder</h1>
-    <div className={styles.flexColumn}>
-      <CurrentSequence
-        currentSequence={currentSequence}
-        setCurrentSequence={setCurrentSequence}
-      />
-      <div className={styles.modifierRow}>
-        <KeypressModifiers />
-        <AddRepeat />
-        <AddPause />
+  return (
+    <div>
+      <h1>Sequence Builder</h1>
+      <div className={styles.flexColumn}>
+        <CurrentSequence/>
+        <div className={styles.modifierRow}>
+          <KeypressModifiers />
+          <AddRepeat />
+          <AddPause />
+        </div>
+        <StringEntry
+          string={string}
+          setString={setString}
+        />
+        <KeyboardFunctions />
       </div>
-      <StringEntry
-        string={string}
-        setString={setString}
-        currentSequence={currentSequence}
-        setCurrentSequence={setCurrentSequence}
-        nextSequence={nextSequence}
-        setNextSequence={setNextSequence}
-      />
-      <KeyboardFunctions 
-        currentSequence={currentSequence}
-        setCurrentSequence={setCurrentSequence}
-        nextSequence={nextSequence}
-        setNextSequence={setNextSequence}
-      />
     </div>
-  </div>
- )
+  )
 }
 
-function CurrentSequence({ currentSequence, setCurrentSequence }) {
-  if (currentSequence.length == 0) {
+function CurrentSequence() {
+  const sequence = useSequence();
+  const sequenceDispatch = useSequenceDispatch();
+
+  if (sequence.sequence.length == 0) {
     return (
       <div className={styles.currentSequence}>
         <h2>Current Sequence</h2>
         <div className={styles.currentSequenceItems}>
           <div className={`${styles.sequenceItem} ${styles.emptySequence}`}>
-            <div className={styles.sequenceItemText}>Create</div>
+            <div className={styles.sequenceItemText}>Your</div>
           </div>
           <div className={`${styles.sequenceItem} ${styles.emptySequence}`}>
             <div className={styles.sequenceItemText}>new</div>
@@ -71,12 +64,11 @@ function CurrentSequence({ currentSequence, setCurrentSequence }) {
             const {initialIndex, index} = source;
   
             if (initialIndex !== index) {
-              setCurrentSequence((items) => {
-                const newItems = [...items];
-                const [removed] = newItems.splice(initialIndex, 1);
-                newItems.splice(index, 0, removed);
-                return newItems;
-              });
+              sequenceDispatch({
+                type: "reordered",
+                initialIndex: initialIndex,
+                index: index
+              })
             }
           }
         }}
@@ -84,14 +76,12 @@ function CurrentSequence({ currentSequence, setCurrentSequence }) {
         <div className={styles.currentSequence}>
           <h2>Current Sequence</h2>
           <div className={styles.currentSequenceItems}>
-            {currentSequence.map((item, index) => (
+            {sequence.sequence.map((item, index) => (
               <SequenceItem
                 key={item.id}
                 id={item.id}
                 index={index}
                 text={item.text}
-                currentSequence={currentSequence}
-                setCurrentSequence={setCurrentSequence}
               />
             ))}
             <DragOverlay>
@@ -110,11 +100,15 @@ function CurrentSequence({ currentSequence, setCurrentSequence }) {
 
 }
 
-function SequenceItem({ id, index, text, currentSequence, setCurrentSequence }) {
+function SequenceItem({ id, index, text }) {
+  const sequenceDispatch = useSequenceDispatch();
   const {ref, isDragSource} = useSortable({id, index, data:{["dragText"]: text}});
 
   const deleteItem = () => {
-    setCurrentSequence(currentSequence.filter(item => item.id != id ))
+    sequenceDispatch({
+      type: "deleted",
+      id: id
+    })
   }
 
   return (
@@ -185,12 +179,16 @@ function AddPause() {
   )
 }
 
-function StringEntry({ string, setString, currentSequence, setCurrentSequence, nextSequence, setNextSequence }) {
+function StringEntry({ string, setString }) {
+  const sequenceDispatch = useSequenceDispatch();
+
   const handleSubmit = (e) => {
     e.preventDefault();
     setString("");
-    setCurrentSequence([...currentSequence, {"id": nextSequence, "text": string}]);
-    setNextSequence(nextSequence => nextSequence + 1);
+    sequenceDispatch({
+      type: "added",
+      text: string
+    })
   }
 
   return (
@@ -204,7 +202,7 @@ function StringEntry({ string, setString, currentSequence, setCurrentSequence, n
   )
 }
 
-function KeyboardFunctions({ currentSequence, setCurrentSequence, nextSequence, setNextSequence }) {
+function KeyboardFunctions() {
   const keyboardKeys = [
     {
       "keyboardSide": "leftKeyboard",
@@ -302,10 +300,6 @@ function KeyboardFunctions({ currentSequence, setCurrentSequence, nextSequence, 
                 value={key.value}
                 text={key.text}
                 spacing={key.spacing}
-                currentSequence={currentSequence}
-                setCurrentSequence={setCurrentSequence}
-                nextSequence={nextSequence}
-                setNextSequence={setNextSequence}
               />
             ))}
           </div>
@@ -315,13 +309,17 @@ function KeyboardFunctions({ currentSequence, setCurrentSequence, nextSequence, 
   )
 }
 
-function KeyboardButton({ value, text, spacing, currentSequence, setCurrentSequence, nextSequence, setNextSequence }) {
+function KeyboardButton({ value, text, spacing }) {
+  const sequenceDispatch = useSequenceDispatch();
+
   if (value === "") {
     return <span className={styles[spacing]}></span>
   } else {
     return <button value={value} className={styles[spacing]} onClick={() => {
-      setCurrentSequence([...currentSequence, {"id": nextSequence, "text": value}]);
-      setNextSequence(nextSequence => nextSequence + 1);
+      sequenceDispatch({
+        type: "added",
+        text: value
+      })
     }}>{text}</button>
   }
 }

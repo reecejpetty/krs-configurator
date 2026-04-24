@@ -12,6 +12,7 @@ function App() {
   const [lockSound, setLockSound] = useState("scroll");
 
   const [currentSequence, setCurrentSequence] = useState([]);
+  const [nextSequence, setNextSequence] = useState(0)
 
   const [currentButton, setCurrentButton] = useState();
 
@@ -34,6 +35,8 @@ function App() {
       <SequenceBuilder
         currentSequence={currentSequence}
         setCurrentSequence={setCurrentSequence}
+        nextSequence={nextSequence}
+        setNextSequence={setNextSequence}
        />
       <GenerateFile />
     </>

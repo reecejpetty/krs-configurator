@@ -3,7 +3,7 @@ import { DragDropProvider, DragOverlay } from '@dnd-kit/react';
 import { useSortable, isSortable } from '@dnd-kit/react/sortable';
 import styles from "./SequenceBuilder.module.css"
 
-function SequenceBuilder({ currentSequence, setCurrentSequence }) {
+function SequenceBuilder({ currentSequence, setCurrentSequence, nextSequence, setNextSequence }) {
   const [string, setString] = useState("")
 
  return (
@@ -19,10 +19,19 @@ function SequenceBuilder({ currentSequence, setCurrentSequence }) {
         <AddRepeat />
         <AddPause />
       </div>
-      <StringEntry string={string} setString={setString} currentSequence={currentSequence} setCurrentSequence={setCurrentSequence} />
+      <StringEntry
+        string={string}
+        setString={setString}
+        currentSequence={currentSequence}
+        setCurrentSequence={setCurrentSequence}
+        nextSequence={nextSequence}
+        setNextSequence={setNextSequence}
+      />
       <KeyboardFunctions 
         currentSequence={currentSequence}
         setCurrentSequence={setCurrentSequence}
+        nextSequence={nextSequence}
+        setNextSequence={setNextSequence}
       />
     </div>
   </div>
@@ -154,11 +163,12 @@ function AddPause() {
   )
 }
 
-function StringEntry({ string, setString, currentSequence, setCurrentSequence }) {
+function StringEntry({ string, setString, currentSequence, setCurrentSequence, nextSequence, setNextSequence }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     setString("");
-    setCurrentSequence([...currentSequence, {"id": currentSequence.length, "text": string}])
+    setCurrentSequence([...currentSequence, {"id": nextSequence, "text": string}]);
+    setNextSequence(nextSequence => nextSequence + 1);
   }
 
   return (
@@ -172,7 +182,7 @@ function StringEntry({ string, setString, currentSequence, setCurrentSequence })
   )
 }
 
-function KeyboardFunctions({ currentSequence, setCurrentSequence }) {
+function KeyboardFunctions({ currentSequence, setCurrentSequence, nextSequence, setNextSequence }) {
   const keyboardKeys = [
     {
       "keyboardSide": "leftKeyboard",
@@ -272,6 +282,8 @@ function KeyboardFunctions({ currentSequence, setCurrentSequence }) {
                 spacing={key.spacing}
                 currentSequence={currentSequence}
                 setCurrentSequence={setCurrentSequence}
+                nextSequence={nextSequence}
+                setNextSequence={setNextSequence}
               />
             ))}
           </div>
@@ -281,11 +293,14 @@ function KeyboardFunctions({ currentSequence, setCurrentSequence }) {
   )
 }
 
-function KeyboardButton({ value, text, spacing, currentSequence, setCurrentSequence }) {
+function KeyboardButton({ value, text, spacing, currentSequence, setCurrentSequence, nextSequence, setNextSequence }) {
   if (value === "") {
     return <span className={styles[spacing]}></span>
   } else {
-    return <button value={value} className={styles[spacing]} onClick={() => setCurrentSequence([...currentSequence, {"id": currentSequence.length, "text": value}])}>{text}</button>
+    return <button value={value} className={styles[spacing]} onClick={() => {
+      setCurrentSequence([...currentSequence, {"id": nextSequence, "text": value}]);
+      setNextSequence(nextSequence => nextSequence + 1);
+    }}>{text}</button>
   }
 }
 

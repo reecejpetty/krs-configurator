@@ -184,16 +184,27 @@ function AddRepeat() {
 }
 
 function AddPause() {
+  const sequenceDispatch = useSequenceDispatch();
+  const [pause, setPause] = useState("");
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    sequenceDispatch({
+      type: "added",
+      text: `[PAUSE: ${pause}]`
+    })
+  }
+
   return (
     <div className={styles.addBlock}>
       <h2>Pause</h2>
-        <div className={styles.addBlockContent}>
+      <form className={styles.addBlockContent} onSubmit={handleSubmit}>
         <div><b>Seconds (1-60):</b></div>
         <div>
-          <input type="number" min="1" max="60" />
+          <input id="pause" type="number" min="1" max="60" value={pause} onChange={(e) => setPause(e.target.value)} />
         </div>
-        <button className={styles.addButton}>ADD</button>
-      </div>
+        <button type="submit" className={styles.addButton}>ADD</button>
+      </form>
     </div>
   )
 }

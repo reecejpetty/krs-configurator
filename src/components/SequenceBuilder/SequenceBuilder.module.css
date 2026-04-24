@@ -70,6 +70,7 @@
     opacity: 25%;
     box-shadow: none;
     outline: 1px dashed black;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0);
 }
 
 .dragOverlay {

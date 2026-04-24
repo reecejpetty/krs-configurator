@@ -285,7 +285,7 @@ function AddPause() {
     <div className={styles.addBlock}>
       <div className={styles.flexRow}>
         <h2>Pause</h2>
-        <Tooltip text={<span>Your sequence will be paused by the desired time before the next input is sent.</span>} />
+        <Tooltip text={<span>Your sequence will be paused for the desired amount of time before the next input is sent.</span>} />
       </div>
       <form className={styles.addBlockContent} onSubmit={handleSubmit}>
         <div><b>Seconds (1-60):</b></div>

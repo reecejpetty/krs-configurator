@@ -143,13 +143,30 @@ function KeypressModifiers() {
 }
 
 function AddRepeat() {
+  // Need to add way to prevent sortability when using AddRepeat()
+  const sequence = useSequence();
+  const sequenceDispatch = useSequenceDispatch();
+  const [delay, setDelay] = useState("1");
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (sequence.sequence.length > 0) {
+      return
+    } else {
+      sequenceDispatch({
+        type: "added",
+        text: `[REPEAT: ${delay}]`
+      })
+    }
+  }
+
   return (
     <div className={styles.addBlock}>
       <h2>Repeat Keypress</h2>
-      <div className={styles.addBlockContent}>
+      <form className={styles.addBlockContent} onSubmit={handleSubmit}>
         <div><b>Delay:</b></div>
         <div>
-          <select>
+          <select value={delay} onChange={(e) => setDelay(e.target.value)}>
             <option value="1">1 (Slow)</option>
             <option value="2">2</option>
             <option value="3">3</option>
@@ -157,8 +174,11 @@ function AddRepeat() {
             <option value="5">5 (Fast)</option>
           </select>
         </div>
-        <button className={styles.addButton}>ADD</button>
-      </div>
+        <button
+          type="submit"
+          className={sequence.sequence.length === 0 ? styles.addButton : `${styles.addButton} ${styles.disabled}`}
+        >ADD</button>
+      </form>
     </div>
   )
 }

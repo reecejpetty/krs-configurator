@@ -227,3 +227,12 @@
     background-color: var(--navy);
     cursor: pointer;
 }
+
+.disabled {
+    background-color: gray;
+}
+
+.disabled:hover {
+    background-color: gray;
+    cursor: default;
+}

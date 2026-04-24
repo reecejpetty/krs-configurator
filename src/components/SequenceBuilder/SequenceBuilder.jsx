@@ -189,10 +189,14 @@ function AddPause() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    sequenceDispatch({
-      type: "added",
-      text: `[PAUSE: ${pause}]`
-    })
+    if (pause === "" || pause === 0 || pause > 60) {
+      return
+    } else {
+      sequenceDispatch({
+        type: "added",
+        text: `[PAUSE: ${pause}]`
+      })
+    }
   }
 
   return (
@@ -203,7 +207,10 @@ function AddPause() {
         <div>
           <input id="pause" type="number" min="1" max="60" value={pause} onChange={(e) => setPause(e.target.value)} />
         </div>
-        <button type="submit" className={styles.addButton}>ADD</button>
+        <button
+          type="submit"
+          className={(pause !== "" && pause > 0 && pause <= 60) ? styles.addButton : `${styles.addButton} ${styles.disabled}` }
+        >ADD</button>
       </form>
     </div>
   )

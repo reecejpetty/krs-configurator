@@ -7,7 +7,7 @@ import styles from "./SequenceBuilder.module.css"
 
 
 function SequenceBuilder() {
-  const [string, setString] = useState("")
+  const [string, setString] = useState("");
   const [modifiers, setModifiers] = useState(
     {
       "ctrl": false,
@@ -15,7 +15,14 @@ function SequenceBuilder() {
       "alt": false,
       "win": false
     }
-  )
+  );
+  let modifierString = "";
+  if (Object.values(modifiers).some(Boolean)) {
+    modifierString = "[ " + Object.entries(modifiers)
+      .filter(([key, active]) => active)
+      .map(([key]) => key.toUpperCase())
+      .join(" + ") + " ] + "
+  }
 
   return (
     <div>
@@ -37,7 +44,9 @@ function SequenceBuilder() {
           string={string}
           setString={setString}
         />
-        <KeyboardFunctions />
+        <KeyboardFunctions 
+          modifierString={modifierString}
+        />
       </div>
     </div>
   )
@@ -184,7 +193,7 @@ function KeypressModifiers({ modifiers, setModifiers }) {
       <h2>Modifiers</h2>
       <div className={styles.modifierCheckboxes}>
         {modifierArray.map((modifier) => (
-          <label htmlFor={modifier}>
+          <label htmlFor={modifier} key={modifier}>
             <input
               type="checkbox"
               id={modifier}
@@ -307,7 +316,7 @@ function StringEntry({ string, setString }) {
 }
 
 
-function KeyboardFunctions() {
+function KeyboardFunctions({ modifierString }) {
   const keyboardKeys = [
     {
       "keyboardSide": "leftKeyboard",
@@ -405,6 +414,7 @@ function KeyboardFunctions() {
                 value={key.value}
                 text={key.text}
                 spacing={key.spacing}
+                modifierString={modifierString}
               />
             ))}
           </div>
@@ -415,7 +425,7 @@ function KeyboardFunctions() {
 }
 
 
-function KeyboardButton({ value, text, spacing }) {
+function KeyboardButton({ value, text, spacing, modifierString }) {
   const sequenceDispatch = useSequenceDispatch();
 
   if (value === "") {
@@ -424,7 +434,7 @@ function KeyboardButton({ value, text, spacing }) {
     return <button value={value} className={styles[spacing]} onClick={() => {
       sequenceDispatch({
         type: "added",
-        text: value
+        text: `${modifierString} ${value}`
       })
     }}>{text}</button>
   }

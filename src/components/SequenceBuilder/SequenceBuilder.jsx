@@ -74,14 +74,16 @@ function SequenceOptions() {
 
   return (
     <div className={styles.sequenceOptions}>
-      <div
-        className={sequence.sequence.length > 0 ? `${styles.optionButton} ${styles.resetOption}` : `${styles.optionButton} ${styles.disabled}`}
+      <button
+        className={`${styles.optionButton} ${styles.resetOption}`}
         onClick={handleReset}
-      >Reset Current Sequence</div>
-      <div
-        className={sequence.sequence.length > 0 ? `${styles.optionButton} ${styles.addOption}` : `${styles.optionButton} ${styles.disabled}`}
+        disabled={sequence.sequence.length === 0}
+      >Reset Current Sequence</button>
+      <button
+        className={`${styles.optionButton} ${styles.addOption}`}
         onClick={handleSubmit}
-      >Add to Bumpbar Button</div>
+        disabled={sequence.sequence.length === 0}
+      >Add to Bumpbar Button</button>
     </div>
   )
 }
@@ -195,7 +197,7 @@ function KeypressModifiers({ modifiers, setModifiers, string }) {
     <div className={styles.keypressModifiers}>
       <div className={styles.flexRow}>
         <h2>Modifiers</h2>
-        <Tooltip text={<span>Enter any keypress with modifiers. Useful for sending multi-keypress inputs like <b>CTRL+ALT+DEL</b> or <b>CTRL+a</b>. Check any modifier needed and then either click desired keyboard function or enter key in Text Entry box (NOTE: Only one keypress can be assigned with modifiers at a time. Checkboxes are disabled if textbox is longer than one character.)</span>} />
+        <Tooltip text={<span>Enter any keypress with modifiers. Useful for sending multi-keypress inputs like <b>CTRL+ALT+DEL</b> or <b>CTRL+a</b>. Check any modifier needed and then either click desired keyboard function or enter key in Text Entry box.<br/>(<b>NOTE:</b> Only one keypress can be assigned with modifiers at a time. Checkboxes are disabled if Text Entry box is longer than one character.)</span>} />
       </div>
       <div className={styles.modifierCheckboxes}>
         {modifierArray.map((modifier) => (
@@ -254,7 +256,8 @@ function AddRepeat() {
         </div>
         <button
           type="submit"
-          className={sequence.sequence.length === 0 ? styles.addButton : `${styles.addButton} ${styles.disabled}`}
+          className={styles.addButton}
+          disabled={sequence.sequence.length > 0}
         >ADD</button>
       </form>
     </div>
@@ -291,7 +294,8 @@ function AddPause() {
         </div>
         <button
           type="submit"
-          className={(pause !== "" && pause > 0 && pause <= 60) ? styles.addButton : `${styles.addButton} ${styles.disabled}` }
+          className={styles.addButton}
+          disabled={(pause === "" || pause === 0 || pause > 60)}
         >ADD</button>
       </form>
     </div>
@@ -327,7 +331,7 @@ function StringEntry({ string, setString, modifiers, modifierString }) {
       <h2>Text Entry</h2>
       <form className={styles.stringEntryInput} onSubmit={handleSubmit}>
         <input type="text" value={string} onChange={handleChange} />
-        <button type="submit" className={styles.addButton}>ADD</button>
+        <button type="submit" className={styles.addButton} disabled={string.length === 0}>ADD</button>
       </form>
     </div>
   )
@@ -367,7 +371,7 @@ function KeyboardFunctions({ modifierString }) {
         {"value": "[L_CTRL]", "text": "Left Ctrl", "spacing": "u1_5"},
         {"value": "[L_WIN]", "text": "Left\nWin", "spacing": "u1"},
         {"value": "[L_ALT]", "text": "Left\nAlt", "spacing": "u1_25"},
-        {"value": "", "text": "", "spacing": "spacebar"},
+        {"value": "[SPACE]", "text": "Spacebar", "spacing": "spacebar"},
         {"value": "[R_ALT]", "text": "Right\nAlt", "spacing": "u1_25"},
         {"value": "[R_WIN]", "text": "Right\nWin", "spacing": "u1"},
         {"value": "[MENU]", "text": "Menu", "spacing": "u1"},

@@ -265,12 +265,8 @@
     cursor: pointer;
 }
 
-.disabled {
-    color: lightgray;
-    background-color: gray;
-}
-
-.disabled:hover {
+.addButton:disabled,
+.optionButton:disabled {
     color: lightgray;
     background-color: gray;
     cursor: default;

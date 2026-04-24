@@ -9,7 +9,10 @@ function SequenceBuilder() {
 
   return (
     <div>
-      <h1>Sequence Builder</h1>
+      <div className={styles.flexApart}>
+        <h1>Sequence Builder</h1>
+        <SequenceOptions />
+      </div>
       <div className={styles.flexColumn}>
         <CurrentSequence/>
         <div className={styles.modifierRow}>
@@ -23,6 +26,36 @@ function SequenceBuilder() {
         />
         <KeyboardFunctions />
       </div>
+    </div>
+  )
+}
+
+function SequenceOptions() {
+  const sequence = useSequence();
+  const sequenceDispatch = useSequenceDispatch();
+
+  const handleReset = () => {
+    if (sequence.sequence.length > 0) {
+      sequenceDispatch({type: "reset"})
+    }
+  }
+
+  const handleSubmit = () => {
+    if (sequence.sequence.length > 0) {
+      sequenceDispatch({type: "submitted"})
+    }
+  }
+
+  return (
+    <div className={styles.sequenceOptions}>
+      <div
+        className={sequence.sequence.length > 0 ? `${styles.optionButton} ${styles.resetOption}` : `${styles.optionButton} ${styles.disabled}`}
+        onClick={handleReset}
+      >Reset Current Sequence</div>
+      <div
+        className={sequence.sequence.length > 0 ? `${styles.optionButton} ${styles.addOption}` : `${styles.optionButton} ${styles.disabled}`}
+        onClick={handleSubmit}
+      >Add to Bumpbar Button</div>
     </div>
   )
 }

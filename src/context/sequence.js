@@ -35,6 +35,18 @@ export function sequenceReducer(state, action) {
         sequence: newItems
       };
     }
+    case "reset": {
+      return {
+        ...state,
+        sequence: []
+      };
+    }
+    case "submitted": {
+      // Implement Add to Bumpbar Button logic
+      return {
+        ...state
+      }
+    }
     default: {
       throw Error("Unknown action: " + action.type)
     }

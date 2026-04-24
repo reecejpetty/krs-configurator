@@ -21,7 +21,7 @@ function SequenceBuilder() {
     modifierString = "[ " + Object.entries(modifiers)
       .filter(([key, active]) => active)
       .map(([key]) => key.toUpperCase())
-      .join(" + ") + " ] + "
+      .join(" + ") + " ] +"
   }
 
   return (
@@ -36,6 +36,7 @@ function SequenceBuilder() {
           <KeypressModifiers
             modifiers={modifiers}
             setModifiers={setModifiers}
+            string={string}
           />
           <AddRepeat />
           <AddPause />
@@ -43,6 +44,8 @@ function SequenceBuilder() {
         <StringEntry
           string={string}
           setString={setString}
+          modifiers={modifiers}
+          modifierString={modifierString}
         />
         <KeyboardFunctions 
           modifierString={modifierString}
@@ -178,7 +181,7 @@ function SequenceItem({ id, index, text }) {
 }
 
 
-function KeypressModifiers({ modifiers, setModifiers }) {
+function KeypressModifiers({ modifiers, setModifiers, string }) {
   const modifierArray = ["ctrl", "shift", "alt", "win"]
   const handleChange = (e) => {
     const { value, checked } = e.target;
@@ -190,7 +193,10 @@ function KeypressModifiers({ modifiers, setModifiers }) {
 
   return (
     <div className={styles.keypressModifiers}>
-      <h2>Modifiers</h2>
+      <div className={styles.flexRow}>
+        <h2>Modifiers</h2>
+        <Tooltip text={<span>Enter any keypress with modifiers. Useful for sending multi-keypress inputs like <b>CTRL+ALT+DEL</b> or <b>CTRL+a</b>. Check any modifier needed and then either click desired keyboard function or enter key in Text Entry box (NOTE: Only one keypress can be assigned with modifiers at a time. Checkboxes are disabled if textbox is longer than one character.)</span>} />
+      </div>
       <div className={styles.modifierCheckboxes}>
         {modifierArray.map((modifier) => (
           <label htmlFor={modifier} key={modifier}>
@@ -200,6 +206,7 @@ function KeypressModifiers({ modifiers, setModifiers }) {
               value={modifier}
               checked={modifiers[modifier]}
               onChange={handleChange}
+              disabled={string.length > 1}
             />{modifier.toUpperCase()}
           </label>
           )
@@ -292,7 +299,7 @@ function AddPause() {
 }
 
 
-function StringEntry({ string, setString }) {
+function StringEntry({ string, setString, modifiers, modifierString }) {
   const sequenceDispatch = useSequenceDispatch();
 
   const handleSubmit = (e) => {
@@ -300,15 +307,26 @@ function StringEntry({ string, setString }) {
     setString("");
     sequenceDispatch({
       type: "added",
-      text: string
+      text: `${modifierString} ${string}`
     })
+  }
+
+  const handleChange = (e) => {
+    if ((Object.values(modifiers).some(Boolean)) && string.length === 0) {
+      sequenceDispatch({
+        type: "added",
+        text: `${modifierString} ${e.target.value[0]}`
+      })
+    } else {
+      setString(e.target.value);
+    }
   }
 
   return (
     <div className={styles.stringEntry}>
       <h2>Text Entry</h2>
       <form className={styles.stringEntryInput} onSubmit={handleSubmit}>
-        <input type="text" value={string} onChange={e => setString(e.target.value)} />
+        <input type="text" value={string} onChange={handleChange} />
         <button type="submit" className={styles.addButton}>ADD</button>
       </form>
     </div>

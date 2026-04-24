@@ -7,6 +7,14 @@ import styles from "./SequenceBuilder.module.css"
 
 function SequenceBuilder() {
   const [string, setString] = useState("")
+  const [modifiers, setModifiers] = useState(
+    {
+      "ctrl": false,
+      "shift": false,
+      "alt": false,
+      "win": false
+    }
+  )
 
   return (
     <div>
@@ -17,7 +25,10 @@ function SequenceBuilder() {
       <div className={styles.flexColumn}>
         <CurrentSequence/>
         <div className={styles.modifierRow}>
-          <KeypressModifiers />
+          <KeypressModifiers
+            modifiers={modifiers}
+            setModifiers={setModifiers}
+          />
           <AddRepeat />
           <AddPause />
         </div>
@@ -154,23 +165,32 @@ function SequenceItem({ id, index, text }) {
   )
 }
 
-function KeypressModifiers() {
+function KeypressModifiers({ modifiers, setModifiers }) {
+  const modifierArray = ["ctrl", "shift", "alt", "win"]
+  const handleChange = (e) => {
+    const { value, checked } = e.target;
+    setModifiers({
+      ...modifiers,
+      [value]: checked
+    });
+  }
+
   return (
     <div className={styles.keypressModifiers}>
       <h2>Modifiers</h2>
       <div className={styles.modifierCheckboxes}>
-        <label htmlFor="ctrl">
-          <input type="checkbox" id="ctrl" />CTRL
-        </label>
-        <label htmlFor="shift">
-          <input type="checkbox" id="shift" />SHIFT
-        </label>
-        <label htmlFor="alt">
-          <input type="checkbox" id="alt" />ALT
-        </label>
-        <label htmlFor="win">
-          <input type="checkbox" id="win" />WIN
-        </label>
+        {modifierArray.map((modifier) => (
+          <label htmlFor={modifier}>
+            <input
+              type="checkbox"
+              id={modifier}
+              value={modifier}
+              checked={modifiers[modifier]}
+              onChange={handleChange}
+            />{modifier.toUpperCase()}
+          </label>
+          )
+        )}
       </div>
     </div>
   )

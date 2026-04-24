@@ -26,16 +26,16 @@
     background-color: var(--amber2);
     font-weight: bold;
     cursor: pointer;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
 }
 
 .dropzone {
-    composes: sequenceItem;
     opacity: 25%;
-    outline: 2px dashed black;
+    box-shadow: none;
+    outline: 1px dashed black;
 }
 
 .dragOverlay {
-    composes: sequenceItem;
     box-shadow: 0 5px 5px rgba(0, 0, 0, 0.5);
 }
 

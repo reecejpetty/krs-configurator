@@ -76,7 +76,7 @@ function CurrentSequence({ currentSequence, setCurrentSequence }) {
           ))}
           <DragOverlay>
             {source => (
-              <div className={styles.dragOverlay}>
+              <div className={`${styles.dragOverlay} ${styles.sequenceItem}`}>
                 <div className={styles.sequenceItemText}>{source.data["dragText"]}</div>
                 <div className={styles.deleteItem} style={{visibility: "hidden"}}>✕</div>
               </div>
@@ -89,7 +89,7 @@ function CurrentSequence({ currentSequence, setCurrentSequence }) {
 }
 
 function SequenceItem({ id, index, text, currentSequence, setCurrentSequence }) {
-  const {ref, isDropTarget} = useSortable({id, index, data:{["dragText"]: text}});
+  const {ref, isDragSource} = useSortable({id, index, data:{["dragText"]: text}});
 
   const deleteItem = () => {
     setCurrentSequence(currentSequence.filter(item => item.id != id ))
@@ -97,7 +97,7 @@ function SequenceItem({ id, index, text, currentSequence, setCurrentSequence }) 
 
   return (
     <>
-      <div className={isDropTarget ? styles.dropzone : styles.sequenceItem} ref={ref} >
+      <div className={(isDragSource) ? `${styles.dropzone} ${styles.sequenceItem}` : styles.sequenceItem} ref={ref} >
         <div className={styles.sequenceItemText}>{text}</div>
         <div className={styles.deleteItem} onClick={deleteItem}>✕</div>
       </div>

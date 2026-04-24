@@ -5,6 +5,7 @@ import { useSequence, useSequenceDispatch } from '../../context/sequence';
 import { Tooltip } from '../Snippets';
 import styles from "./SequenceBuilder.module.css"
 
+
 function SequenceBuilder() {
   const [string, setString] = useState("")
   const [modifiers, setModifiers] = useState(
@@ -42,6 +43,7 @@ function SequenceBuilder() {
   )
 }
 
+
 function SequenceOptions() {
   const sequence = useSequence();
   const sequenceDispatch = useSequenceDispatch();
@@ -71,6 +73,7 @@ function SequenceOptions() {
     </div>
   )
 }
+
 
 function CurrentSequence() {
   const sequence = useSequence();
@@ -141,8 +144,8 @@ function CurrentSequence() {
       </DragDropProvider>
     )
   }
-
 }
+
 
 function SequenceItem({ id, index, text }) {
   const sequenceDispatch = useSequenceDispatch();
@@ -164,6 +167,7 @@ function SequenceItem({ id, index, text }) {
     </>
   )
 }
+
 
 function KeypressModifiers({ modifiers, setModifiers }) {
   const modifierArray = ["ctrl", "shift", "alt", "win"]
@@ -195,6 +199,7 @@ function KeypressModifiers({ modifiers, setModifiers }) {
     </div>
   )
 }
+
 
 function AddRepeat() {
   // Need to add way to prevent sortability when using AddRepeat()
@@ -240,6 +245,7 @@ function AddRepeat() {
   )
 }
 
+
 function AddPause() {
   const sequenceDispatch = useSequenceDispatch();
   const [pause, setPause] = useState("");
@@ -276,6 +282,7 @@ function AddPause() {
   )
 }
 
+
 function StringEntry({ string, setString }) {
   const sequenceDispatch = useSequenceDispatch();
 
@@ -298,6 +305,7 @@ function StringEntry({ string, setString }) {
     </div>
   )
 }
+
 
 function KeyboardFunctions() {
   const keyboardKeys = [
@@ -406,6 +414,7 @@ function KeyboardFunctions() {
   )
 }
 
+
 function KeyboardButton({ value, text, spacing }) {
   const sequenceDispatch = useSequenceDispatch();
 
@@ -420,5 +429,6 @@ function KeyboardButton({ value, text, spacing }) {
     }}>{text}</button>
   }
 }
+
 
 export default SequenceBuilder

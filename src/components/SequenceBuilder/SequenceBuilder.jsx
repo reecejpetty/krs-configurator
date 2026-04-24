@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { DragDropProvider, DragOverlay } from '@dnd-kit/react';
 import { useSortable, isSortable } from '@dnd-kit/react/sortable';
 import { useSequence, useSequenceDispatch } from '../../context/sequence';
+import { Tooltip } from '../Snippets';
 import styles from "./SequenceBuilder.module.css"
 
 function SequenceBuilder() {
@@ -195,7 +196,10 @@ function AddRepeat() {
 
   return (
     <div className={styles.addBlock}>
-      <h2>Repeat Keypress</h2>
+      <div className={styles.flexRow}>
+        <h2>Repeat Keypress</h2>
+        <Tooltip text={<span><b>For Wireless Bumpbars Only</b><br/>Speed at which Bumpbar button keypress is repeated. Must be the first part of sequence, and only one keypress can follow.</span>} />
+      </div>
       <form className={styles.addBlockContent} onSubmit={handleSubmit}>
         <div><b>Delay:</b></div>
         <div>
@@ -234,7 +238,10 @@ function AddPause() {
 
   return (
     <div className={styles.addBlock}>
-      <h2>Pause</h2>
+      <div className={styles.flexRow}>
+        <h2>Pause</h2>
+        <Tooltip text={<span>Your sequence will be paused by the desired time before the next input is sent.</span>} />
+      </div>
       <form className={styles.addBlockContent} onSubmit={handleSubmit}>
         <div><b>Seconds (1-60):</b></div>
         <div>
@@ -263,7 +270,7 @@ function StringEntry({ string, setString }) {
 
   return (
     <div className={styles.stringEntry}>
-      <h2>String Entry</h2>
+      <h2>Text Entry</h2>
       <form className={styles.stringEntryInput} onSubmit={handleSubmit}>
         <input type="text" value={string} onChange={e => setString(e.target.value)} />
         <button type="submit" className={styles.addButton}>ADD</button>

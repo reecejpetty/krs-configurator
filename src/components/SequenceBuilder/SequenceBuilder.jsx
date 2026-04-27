@@ -240,7 +240,7 @@ function KeypressModifiers({ modifiers, setModifiers, string }) {
     <div className={styles.keypressModifiers}>
       <div className={styles.flexRow}>
         <h2>Modifiers</h2>
-        <Tooltip text={<span>Enter any keypress with modifiers. Useful for sending multi-keypress inputs like <b>CTRL+ALT+DEL</b> or <b>CTRL+a</b>. Check any modifier needed and then either click desired keyboard function or enter key in Text Entry box.<br/>(<b>NOTE:</b> Only one keypress can be assigned with modifiers at a time. Checkboxes are disabled if Text Entry box is longer than one character.)</span>} />
+        <Tooltip name="modifiers" text={<span>Enter any keypress with modifiers. Useful for sending multi-keypress inputs like <b>CTRL+ALT+DEL</b> or <b>CTRL+a</b>. Check any modifier needed and then either click desired keyboard function or enter key in Text Entry box.<br/>(<b>NOTE:</b> Only one keypress can be assigned with modifiers at a time. Checkboxes are disabled if Text Entry box is longer than one character.)</span>} />
       </div>
       <div className={styles.modifierCheckboxes}>
         {modifierArray.map((modifier) => (
@@ -286,7 +286,7 @@ function AddRepeat() {
     <div className={styles.addBlock}>
       <div className={styles.flexRow}>
         <h2>Repeat Keypress</h2>
-        <Tooltip text={<span><b>For Wireless Bumpbars Only</b><br/>Speed at which Bumpbar button keypress is repeated. Must be the first part of sequence, and only one keypress can follow.</span>} />
+        <Tooltip name="repeat" text={<span><b>For Wireless Bumpbars Only</b><br/>Speed at which Bumpbar button keypress is repeated. Must be the first part of sequence, and only one keypress can follow.</span>} />
       </div>
       <form className={styles.addBlockContent} onSubmit={handleSubmit}>
         <div><b>Delay:</b></div>
@@ -333,7 +333,7 @@ function AddPause() {
     <div className={styles.addBlock}>
       <div className={styles.flexRow}>
         <h2>Pause</h2>
-        <Tooltip text={<span>Your sequence will be paused for the desired amount of time before the next input is sent.</span>} />
+        <Tooltip name="pause" text={<span>Your sequence will be paused for the desired amount of time before the next input is sent.</span>} />
       </div>
       <form className={styles.addBlockContent} onSubmit={handleSubmit}>
         <div><b>Seconds (1-60):</b></div>

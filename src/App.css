@@ -26,7 +26,6 @@ input[type="checkbox"] {
 }
 
 .tooltipIndicator {
-    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -45,11 +44,10 @@ input[type="checkbox"] {
 
 .tooltipContent {
     display: none;
-    position: absolute;
-    bottom: 100%;
-    left: 100%;
+    position: fixed;
+    position-area: top right;
     width: max-content;
-    max-width: 300px;
+    max-width: clamp(30px, calc(100% - 10px), 300px);
     padding: 5px 10px;
     background-color: var(--off-white);
     border: solid 1px var(--steel-blue2);
@@ -59,7 +57,7 @@ input[type="checkbox"] {
     white-space: pre-line;
 }
 
-.tooltipIndicator:hover .tooltipContent {
+.tooltip:hover .tooltipContent {
     display: block;
 }
 

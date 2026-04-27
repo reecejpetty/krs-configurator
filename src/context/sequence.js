@@ -56,6 +56,26 @@ export function sequenceReducer(state, action) {
         nextId: state.nextId + 1
       };
     }
+    case "added special": {
+      return {
+        ...state,
+        sequence: [
+          ...state.sequence,
+          {
+            id: state.nextId,
+            string: action.string,
+            keypresses: [
+              {
+                "string": action.string,
+                "usage": action.value,
+                "modifier": action.modifier
+              }
+            ]
+          }
+        ],
+        nextId: state.nextId + 1
+      };
+    }
     case "deleted": {
       return {
         ...state,

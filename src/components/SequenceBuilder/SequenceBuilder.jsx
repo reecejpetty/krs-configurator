@@ -265,8 +265,10 @@ function AddRepeat() {
       return
     } else {
       sequenceDispatch({
-        type: "added",
-        text: `[REPEAT: ${delay}]`
+        type: "added special",
+        string: `[REPEAT: ${delay}]`,
+        value: "FD",
+        modifier: parseInt(delay).toString(16).toUpperCase().padStart(2, "0")
       })
     }
   }
@@ -305,12 +307,14 @@ function AddPause() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (pause === "" || pause === 0 || pause > 60) {
+    if (pause === "" || pause == 0 || pause > 60) {
       return
     } else {
       sequenceDispatch({
-        type: "added",
-        text: `[PAUSE: ${pause}]`
+        type: "added special",
+        string: `[PAUSE: ${pause}]`,
+        value: "FE",
+        modifier: parseInt(pause).toString(16).toUpperCase().padStart(2, "0")
       })
     }
   }
@@ -329,7 +333,7 @@ function AddPause() {
         <button
           type="submit"
           className={styles.addButton}
-          disabled={(pause === "" || pause === 0 || pause > 60)}
+          disabled={(pause === "" || pause == 0 || pause > 60)}
         >ADD</button>
       </form>
     </div>

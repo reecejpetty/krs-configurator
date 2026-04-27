@@ -76,6 +76,7 @@
     "[": { "usage": "2F", "modifier": "00" },
     "]": { "usage": "30", "modifier": "00" },
     "\\": { "usage": "31", "modifier": "00" },
+    ";": { "usage": "33", "modifier": "00" },
     "'": { "usage": "34", "modifier": "00" },
     "`": { "usage": "35", "modifier": "00" },
     ",": { "usage": "36", "modifier": "00" },

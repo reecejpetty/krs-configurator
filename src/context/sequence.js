@@ -16,7 +16,16 @@ export function sequenceReducer(state, action) {
   switch (action.type) {
     case "added string": {
       const keypressArray = [];
-      for (const char of action.string) {
+      for (let char of action.string) {
+        if (char == "&") {
+            char = "&amp;";
+        }
+        if (char == "<") {
+            char = "&lt;";
+        }
+        if (char == ">") {
+            char = "&gt;";
+        }
         keypressArray.push({
           "string": char,
           "usage": keyboardHexMap[char].usage,

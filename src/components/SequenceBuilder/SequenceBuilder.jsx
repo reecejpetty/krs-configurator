@@ -61,6 +61,13 @@ function SequenceBuilder({ bumpbarButtons, setBumpbarButtons, currentButton }) {
       </div>
       <div className={styles.flexColumn}>
         <CurrentSequence/>
+        <StringEntry
+          string={string}
+          setString={setString}
+          modifiers={modifiers}
+          modifierString={modifierString}
+          modifierValue={modifierValue}
+        />
         <div className={styles.modifierRow}>
           <KeypressModifiers
             modifiers={modifiers}
@@ -72,13 +79,6 @@ function SequenceBuilder({ bumpbarButtons, setBumpbarButtons, currentButton }) {
             <AddPause />
           </div>
         </div>
-        <StringEntry
-          string={string}
-          setString={setString}
-          modifiers={modifiers}
-          modifierString={modifierString}
-          modifierValue={modifierValue}
-        />
         <KeyboardFunctions 
           modifierString={modifierString}
           modifierValue={modifierValue}
@@ -325,6 +325,7 @@ function AddPause() {
         value: "FE",
         modifier: parseInt(pause).toString(16).toUpperCase().padStart(2, "0")
       })
+      setPause("");
     }
   }
 

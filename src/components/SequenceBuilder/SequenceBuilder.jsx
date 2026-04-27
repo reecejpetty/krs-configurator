@@ -56,6 +56,7 @@ function SequenceBuilder({ bumpbarButtons, setBumpbarButtons, currentButton }) {
           bumpbarButtons={bumpbarButtons}
           setBumpbarButtons={setBumpbarButtons}
           currentButton={currentButton}
+          setModifiers={setModifiers}
         />
       </div>
       <div className={styles.flexColumn}>
@@ -88,13 +89,19 @@ function SequenceBuilder({ bumpbarButtons, setBumpbarButtons, currentButton }) {
 }
 
 
-function SequenceOptions({ bumpbarButtons, setBumpbarButtons, currentButton }) {
+function SequenceOptions({ bumpbarButtons, setBumpbarButtons, currentButton, setModifiers }) {
   const sequence = useSequence();
   const sequenceDispatch = useSequenceDispatch();
 
   const handleReset = () => {
     if (sequence.sequence.length > 0) {
       sequenceDispatch({type: "reset"})
+      setModifiers({
+        "ctrl": false,
+        "shift": false,
+        "alt": false,
+        "win": false
+      })
     }
   }
 
@@ -115,12 +122,12 @@ function SequenceOptions({ bumpbarButtons, setBumpbarButtons, currentButton }) {
         className={`${styles.optionButton} ${styles.resetOption}`}
         onClick={handleReset}
         disabled={sequence.sequence.length === 0}
-      >Reset Current Sequence</button>
+      >Reset Sequence</button>
       <button
         className={`${styles.optionButton} ${styles.addOption}`}
         onClick={handleSubmit}
         disabled={sequence.sequence.length === 0 || currentButton === null}
-      >Add to Bumpbar Button</button>
+      >Save to Button</button>
     </div>
   )
 }

@@ -110,8 +110,8 @@ function GenerateFile() {
       <h1>Generate File</h1>
       <div className={styles.buttonRow}>
       <button className={styles.generateButton}>Generate KRS File</button>
-      <button className={styles.krsButton}>Download KRS File (Wired Bumpbars)</button>
-      <button className={styles.krsButton}>Download KRSB File (Wireless Bumpbars)</button>
+      <button className={styles.krsButton}>Download KRS File (Wired)</button>
+      <button className={styles.krsButton}>Download KRSB File (Wireless)</button>
       </div>
       <div className={styles.filePreview}>
       <code><pre>{sampleCode}</pre></code>

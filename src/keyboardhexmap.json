@@ -98,6 +98,7 @@
     "[BACKSPACE]": { "usage": "2A", "modifier": "00" },
     "[TAB]": { "usage": "2B", "modifier": "00" },
     " ": { "usage": "2C", "modifier": "00" },
+    "[SPACE]": { "usage": "2C", "modifier": "00" },
     "[CAPS_LOCK]": { "usage": "39", "modifier": "00" },
     "[F1]": { "usage": "3A", "modifier": "00" },
     "[F2]": { "usage": "3B", "modifier": "00" },

@@ -19,9 +19,10 @@ function SequenceBuilder() {
   let modifierString = "";
   if (Object.values(modifiers).some(Boolean)) {
     modifierString = "[ " + Object.entries(modifiers)
+      // eslint-disable-next-line no-unused-vars
       .filter(([key, active]) => active)
       .map(([key]) => key.toUpperCase())
-      .join(" + ") + " ] +"
+      .join(" + ") + " ] + "
   }
 
   return (
@@ -311,7 +312,7 @@ function StringEntry({ string, setString, modifiers, modifierString }) {
     setString("");
     sequenceDispatch({
       type: "added",
-      text: `${modifierString} ${string}`
+      text: `${modifierString}${string}`
     })
   }
 

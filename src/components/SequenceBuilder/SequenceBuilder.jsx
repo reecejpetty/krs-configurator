@@ -185,12 +185,17 @@ function SequenceItem({ id, index, text }) {
 
 
 function KeypressModifiers({ modifiers, setModifiers, string }) {
-  const modifierArray = ["ctrl", "shift", "alt", "win"]
+  const modifierArray = [
+    {"name": "ctrl", "value": "1"},
+    {"name": "shift", "value": "2"},
+    {"name": "alt", "value": "4"},
+    {"name": "win", "value": "8"}
+  ]
   const handleChange = (e) => {
-    const { value, checked } = e.target;
+    const { id, checked } = e.target;
     setModifiers({
       ...modifiers,
-      [value]: checked
+      [id]: checked
     });
   }
 
@@ -202,15 +207,15 @@ function KeypressModifiers({ modifiers, setModifiers, string }) {
       </div>
       <div className={styles.modifierCheckboxes}>
         {modifierArray.map((modifier) => (
-          <label htmlFor={modifier} key={modifier}>
+          <label htmlFor={modifier.name} key={modifier.name}>
             <input
               type="checkbox"
-              id={modifier}
-              value={modifier}
-              checked={modifiers[modifier]}
+              id={modifier.name}
+              value={modifier.value}
+              checked={modifiers[modifier.name]}
               onChange={handleChange}
               disabled={string.length > 1}
-            />{modifier.toUpperCase()}
+            />{modifier.name.toUpperCase()}
           </label>
           )
         )}

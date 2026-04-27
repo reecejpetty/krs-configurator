@@ -117,7 +117,7 @@ function SequenceOptions({ bumpbarButtons, setBumpbarButtons, currentButton }) {
       <button
         className={`${styles.optionButton} ${styles.addOption}`}
         onClick={handleSubmit}
-        disabled={sequence.sequence.length === 0}
+        disabled={sequence.sequence.length === 0 || currentButton === null}
       >Add to Bumpbar Button</button>
     </div>
   )

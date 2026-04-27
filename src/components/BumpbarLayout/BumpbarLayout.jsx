@@ -39,7 +39,7 @@ function BumpbarLayout({ currentButton, setCurrentButton, bumpbarButtons }) {
 
 function BumpbarButton({number, id, text, currentButton, setCurrentButton, active}) {
   const handleClick = (e) => {
-    const button = e.target.id;
+    const button = e.currentTarget.id;
     setCurrentButton((currentButton != button ? button : null))
   }
 

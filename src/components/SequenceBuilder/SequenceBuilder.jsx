@@ -6,15 +6,15 @@ import { Tooltip } from '../Snippets';
 import styles from "./SequenceBuilder.module.css"
 
 
-  const modifierArray = [
-    {"name": "ctrl", "value": "1"},
-    {"name": "shift", "value": "2"},
-    {"name": "alt", "value": "4"},
-    {"name": "win", "value": "8"}
-  ]
+const modifierArray = [
+  {"name": "ctrl", "value": "1"},
+  {"name": "shift", "value": "2"},
+  {"name": "alt", "value": "4"},
+  {"name": "win", "value": "8"}
+]
 
 
-function SequenceBuilder() {
+function SequenceBuilder({ bumpbarButtons, setBumpbarButtons, currentButton }) {
   const [string, setString] = useState("");
   const [modifiers, setModifiers] = useState(
     {
@@ -52,7 +52,11 @@ function SequenceBuilder() {
     <div>
       <div className={styles.flexApart}>
         <h1>Sequence Builder</h1>
-        <SequenceOptions />
+        <SequenceOptions 
+          bumpbarButtons={bumpbarButtons}
+          setBumpbarButtons={setBumpbarButtons}
+          currentButton={currentButton}
+        />
       </div>
       <div className={styles.flexColumn}>
         <CurrentSequence/>
@@ -82,7 +86,7 @@ function SequenceBuilder() {
 }
 
 
-function SequenceOptions() {
+function SequenceOptions({ bumpbarButtons, setBumpbarButtons, currentButton }) {
   const sequence = useSequence();
   const sequenceDispatch = useSequenceDispatch();
 
@@ -94,7 +98,12 @@ function SequenceOptions() {
 
   const handleSubmit = () => {
     if (sequence.sequence.length > 0) {
-      sequenceDispatch({type: "submitted"})
+      const updatedArray = [...bumpbarButtons];
+      updatedArray[currentButton] = {
+        string: sequence.sequence.map(item => item.string).join(""),
+        keypresses: sequence.sequence.flatMap(item => item.keypresses)
+      }
+      setBumpbarButtons(updatedArray);
     }
   }
 
@@ -328,7 +337,7 @@ function AddPause() {
 }
 
 
-function StringEntry({ string, setString, modifiers, modifierString }) {
+function StringEntry({ string, setString, modifiers, modifierString, modifierValue }) {
   const sequenceDispatch = useSequenceDispatch();
 
   const handleSubmit = (e) => {
@@ -343,8 +352,10 @@ function StringEntry({ string, setString, modifiers, modifierString }) {
   const handleChange = (e) => {
     if ((Object.values(modifiers).some(Boolean)) && string.length === 0) {
       sequenceDispatch({
-        type: "added string",
-        string: `${modifierString}${e.target.value[0]}`
+        type: "added key",
+        string: `${modifierString}${e.target.value[0]}`,
+        value: e.target.value[0],
+        modifier: modifierValue
       })
     } else {
       setString(e.target.value);

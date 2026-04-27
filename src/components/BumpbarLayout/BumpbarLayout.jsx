@@ -1,14 +1,13 @@
 import { useState } from 'react';
 import styles from './BumpbarLayout.module.css'
 
-function BumpbarLayout({ currentButton, setCurrentButton }) {
+function BumpbarLayout({ currentButton, setCurrentButton, bumpbarButtons }) {
   // User will be able to set rowCount to either 2 or 3
   const [activeSwitch, setActiveSwitch] = useState(3);
   const [sticky, setSticky] = useState(false);
   const rowCount = activeSwitch;
   const rowArray = Array.from({ length: rowCount });
   const buttonArray = Array.from({ length: 10 })
-  const mode1 = [0,1,2,3,4,5,6,7,8,9,'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t']
 
   return (
     <>
@@ -20,13 +19,14 @@ function BumpbarLayout({ currentButton, setCurrentButton }) {
         <div className={activeSwitch == 2 ? styles.bumpbarLayout20 : styles.bumpbarLayout }>
           {rowArray.map((_, rowIndex) => (
             buttonArray.map((_, colIndex) => (
-              <BumpbarButton 
+              <BumpbarButton
                 key={(rowIndex * 10) + colIndex}
+                id={(rowIndex * 10) + colIndex}
                 number={(rowIndex * 10) + colIndex + 1}
-                text={mode1[(rowIndex * 10) + colIndex] }
+                text={bumpbarButtons[(rowIndex * 10) + colIndex].string }
                 currentButton={currentButton}
                 setCurrentButton={setCurrentButton}
-                active={(rowIndex * 10) + colIndex + 1 == currentButton}
+                active={(rowIndex * 10) + colIndex == currentButton}
               />
             ))
           ))}
@@ -37,14 +37,14 @@ function BumpbarLayout({ currentButton, setCurrentButton }) {
   )
 }
 
-function BumpbarButton({number, text, currentButton, setCurrentButton, active}) {
+function BumpbarButton({number, id, text, currentButton, setCurrentButton, active}) {
   const handleClick = (e) => {
-    const button = e.target.dataset.number;
-    setCurrentButton((currentButton != button ? button : ""))
+    const button = e.target.id;
+    setCurrentButton((currentButton != button ? button : null))
   }
 
   return (
-    <button className={active ? styles.activeButton : styles.bumpbarButton} data-number={number} onClick={handleClick}>
+    <button id={id} className={active ? styles.activeButton : styles.bumpbarButton} data-number={number} onClick={handleClick}>
       <span className={styles.bumpbarButtonText}>{text}</span>
     </button>
   )

@@ -38,6 +38,10 @@
   }
 }
 
+html {
+  scrollbar-gutter: stable;
+}
+
 body {
   margin: 0;
 }
@@ -93,4 +97,10 @@ code {
   line-height: 135%;
   padding: 10px 20px;
   background: var(--code-bg);
+}
+
+@media screen and (max-width: 600px) {
+    #root {
+      max-width: 95%;
+    }
 }

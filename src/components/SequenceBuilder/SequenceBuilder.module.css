@@ -14,6 +14,7 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: flex-end;
+    flex-wrap: wrap;
 }
 
 .sequenceOptions {
@@ -24,7 +25,6 @@
     margin-bottom: 10px;
     height: fit-content;
     border-radius: 40px;
-    color: black;
 }
 
 .optionButton {
@@ -36,6 +36,7 @@
     font-size: 1rem;
     font-weight: bold;
     cursor: pointer;
+    color: black;
 }
 
 .resetOption {
@@ -93,7 +94,7 @@
 }
 
 .deleteItem {
-    font-size: .75rem;
+    font-size: 1rem;
 }
 
 .deleteItem:hover {
@@ -104,6 +105,7 @@
 .modifierRow {
     composes: flexRow;
     justify-content: space-between;
+    gap: 20px;
 }
 
 .modifierCheckboxes {
@@ -128,6 +130,10 @@
 .modifierCheckboxes input[type="checkbox"] {
     accent-color: var(--amber);
     cursor: pointer;
+}
+
+.addSpecial {
+    composes: flexRow;
 }
 
 .stringEntryInput {
@@ -271,4 +277,16 @@
     color: lightgray;
     background-color: gray;
     cursor: default;
+}
+
+@media screen and (max-width: 600px) {
+    .modifierRow {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .addSpecial {
+        flex-direction: column;
+        gap: 10px;
+    }
 }

@@ -66,8 +66,10 @@ function SequenceBuilder({ bumpbarButtons, setBumpbarButtons, currentButton }) {
             setModifiers={setModifiers}
             string={string}
           />
-          <AddRepeat />
-          <AddPause />
+          <div className={styles.addSpecial}>
+            <AddRepeat />
+            <AddPause />
+          </div>
         </div>
         <StringEntry
           string={string}

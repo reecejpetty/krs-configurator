@@ -38,6 +38,13 @@
     background-color: var(--navy);
 }
 
-.filePreview {
-    
+.filePreview pre {
+    overflow: auto;
+}
+
+@media screen and (max-width: 600px) {
+    .buttonRow {
+        flex-direction: column;
+        gap: 10px;
+    }
 }

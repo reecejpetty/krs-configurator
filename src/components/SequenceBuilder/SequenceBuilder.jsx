@@ -143,7 +143,7 @@ function CurrentSequence() {
                 key={item.id}
                 id={item.id}
                 index={index}
-                text={item.text}
+                text={item.string}
               />
             ))}
             <DragOverlay>
@@ -311,16 +311,16 @@ function StringEntry({ string, setString, modifiers, modifierString }) {
     e.preventDefault();
     setString("");
     sequenceDispatch({
-      type: "added",
-      text: `${modifierString}${string}`
+      type: "added string",
+      string: `${modifierString}${string}`
     })
   }
 
   const handleChange = (e) => {
     if ((Object.values(modifiers).some(Boolean)) && string.length === 0) {
       sequenceDispatch({
-        type: "added",
-        text: `${modifierString} ${e.target.value[0]}`
+        type: "added string",
+        string: `${modifierString}${e.target.value[0]}`
       })
     } else {
       setString(e.target.value);
@@ -456,8 +456,9 @@ function KeyboardButton({ value, text, spacing, modifierString }) {
   } else {
     return <button value={value} className={styles[spacing]} onClick={() => {
       sequenceDispatch({
-        type: "added",
-        text: `${modifierString} ${value}`
+        type: "added key",
+        string: `${modifierString}${value}`,
+        value: value
       })
     }}>{text}</button>
   }

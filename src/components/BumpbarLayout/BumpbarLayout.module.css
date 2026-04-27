@@ -16,6 +16,7 @@
     composes: bumpbar;
     position: sticky;
     top: 10px;
+    z-index: 2;
 }
 
 .bumpbar:has(.bumpbarLayout20) {

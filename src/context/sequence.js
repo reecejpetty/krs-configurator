@@ -1,4 +1,5 @@
 import { useContext, createContext } from "react";
+import keyboardHexMap from "../keyboardhexmap.json"
 
 export const SequenceContext = createContext(null);
 export const SequenceDispatchContext = createContext(null);
@@ -13,10 +14,45 @@ export function useSequenceDispatch() {
 
 export function sequenceReducer(state, action) {
   switch (action.type) {
-    case "added": {
+    case "added string": {
+      const keypressArray = [];
+      for (const char of action.string) {
+        keypressArray.push({
+          "string": char,
+          "usage": keyboardHexMap[char].usage,
+          "modifier": keyboardHexMap[char].modifier
+        })
+      }
       return {
         ...state,
-        sequence: [...state.sequence, {id: state.nextId, text: action.text}],
+        sequence: [
+          ...state.sequence,
+          {
+            id: state.nextId,
+            string: action.string,
+            keypresses: keypressArray
+          }
+        ],
+        nextId: state.nextId + 1
+      };
+    }
+    case "added key": {
+      return {
+        ...state,
+        sequence: [
+          ...state.sequence,
+          {
+            id: state.nextId,
+            string: action.string,
+            keypresses: [
+              {
+                "string": action.string,
+                "usage": keyboardHexMap[action.value].usage,
+                "modifier": ""
+              }
+            ]
+          }
+        ],
         nextId: state.nextId + 1
       };
     }

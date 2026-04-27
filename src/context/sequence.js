@@ -48,7 +48,7 @@ export function sequenceReducer(state, action) {
               {
                 "string": action.string,
                 "usage": keyboardHexMap[action.value].usage,
-                "modifier": ""
+                "modifier": action.modifier
               }
             ]
           }

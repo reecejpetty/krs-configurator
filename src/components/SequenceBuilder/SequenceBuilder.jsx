@@ -6,6 +6,14 @@ import { Tooltip } from '../Snippets';
 import styles from "./SequenceBuilder.module.css"
 
 
+  const modifierArray = [
+    {"name": "ctrl", "value": "1"},
+    {"name": "shift", "value": "2"},
+    {"name": "alt", "value": "4"},
+    {"name": "win", "value": "8"}
+  ]
+
+
 function SequenceBuilder() {
   const [string, setString] = useState("");
   const [modifiers, setModifiers] = useState(
@@ -16,13 +24,28 @@ function SequenceBuilder() {
       "win": false
     }
   );
+
+  const modifierValue = (() => {
+    let i = 0;
+    for (const [key, value] of Object.entries(modifiers)) {
+      if (value) {
+        for (const modifier of modifierArray) {
+          if (modifier.name == key) {
+            i += parseInt(modifier.value);
+          }
+        }
+      }
+    }
+    return `0${i.toString(16).toUpperCase()}`;
+  })();
+
   let modifierString = "";
   if (Object.values(modifiers).some(Boolean)) {
-    modifierString = "[ " + Object.entries(modifiers)
+    modifierString = "[" + Object.entries(modifiers)
       // eslint-disable-next-line no-unused-vars
       .filter(([key, active]) => active)
       .map(([key]) => key.toUpperCase())
-      .join(" + ") + " ] + "
+      .join(" + ") + "] + "
   }
 
   return (
@@ -47,9 +70,11 @@ function SequenceBuilder() {
           setString={setString}
           modifiers={modifiers}
           modifierString={modifierString}
+          modifierValue={modifierValue}
         />
         <KeyboardFunctions 
           modifierString={modifierString}
+          modifierValue={modifierValue}
         />
       </div>
     </div>
@@ -185,12 +210,6 @@ function SequenceItem({ id, index, text }) {
 
 
 function KeypressModifiers({ modifiers, setModifiers, string }) {
-  const modifierArray = [
-    {"name": "ctrl", "value": "1"},
-    {"name": "shift", "value": "2"},
-    {"name": "alt", "value": "4"},
-    {"name": "win", "value": "8"}
-  ]
   const handleChange = (e) => {
     const { id, checked } = e.target;
     setModifiers({
@@ -344,7 +363,7 @@ function StringEntry({ string, setString, modifiers, modifierString }) {
 }
 
 
-function KeyboardFunctions({ modifierString }) {
+function KeyboardFunctions({ modifierString, modifierValue }) {
   const keyboardKeys = [
     {
       "keyboardSide": "leftKeyboard",
@@ -443,7 +462,8 @@ function KeyboardFunctions({ modifierString }) {
                 text={key.text}
                 spacing={key.spacing}
                 modifierString={modifierString}
-              />
+                modifierValue={modifierValue}
+                />
             ))}
           </div>
         ))}
@@ -453,7 +473,7 @@ function KeyboardFunctions({ modifierString }) {
 }
 
 
-function KeyboardButton({ value, text, spacing, modifierString }) {
+function KeyboardButton({ value, text, spacing, modifierString, modifierValue }) {
   const sequenceDispatch = useSequenceDispatch();
 
   if (value === "") {
@@ -463,7 +483,8 @@ function KeyboardButton({ value, text, spacing, modifierString }) {
       sequenceDispatch({
         type: "added key",
         string: `${modifierString}${value}`,
-        value: value
+        value: value,
+        modifier: modifierValue
       })
     }}>{text}</button>
   }

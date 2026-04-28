@@ -302,7 +302,8 @@
 }
 
 .addButton:disabled,
-.optionButton:disabled {
+.optionButton:disabled,
+.modifierCheckbox:has(input[type="checkbox"]:disabled) {
     color: lightgray;
     background-color: gray;
     background-image: linear-gradient(to bottom, gray, dimgray);

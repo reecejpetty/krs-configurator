@@ -68,6 +68,7 @@ function SequenceBuilder({ bumpbarButtons, setBumpbarButtons, currentButton }) {
           modifiers={modifiers}
           modifierString={modifierString}
           modifierValue={modifierValue}
+          setModifiers={setModifiers}
         />
         <div className={styles.modifierRow}>
           <KeypressModifiers
@@ -83,6 +84,7 @@ function SequenceBuilder({ bumpbarButtons, setBumpbarButtons, currentButton }) {
         <KeyboardFunctions 
           modifierString={modifierString}
           modifierValue={modifierValue}
+          setModifiers={setModifiers}
         />
       </div>
     </div>
@@ -369,7 +371,7 @@ function AddPause() {
 }
 
 
-function StringEntry({ string, setString, modifiers, modifierString, modifierValue }) {
+function StringEntry({ string, setString, modifiers, modifierString, modifierValue, setModifiers }) {
   const sequenceDispatch = useSequenceDispatch();
 
   const handleSubmit = (e) => {
@@ -389,6 +391,12 @@ function StringEntry({ string, setString, modifiers, modifierString, modifierVal
         value: e.target.value[0],
         modifier: modifierValue
       })
+      setModifiers({
+        "ctrl": false,
+        "shift": false,
+        "alt": false,
+        "win": false
+      })
     } else {
       setString(e.target.value);
     }
@@ -406,7 +414,7 @@ function StringEntry({ string, setString, modifiers, modifierString, modifierVal
 }
 
 
-function KeyboardFunctions({ modifierString, modifierValue }) {
+function KeyboardFunctions({ modifierString, modifierValue, setModifiers }) {
   const keyboardKeys = [
     {
       "keyboardSide": "leftKeyboard",
@@ -506,7 +514,8 @@ function KeyboardFunctions({ modifierString, modifierValue }) {
                 spacing={key.spacing}
                 modifierString={modifierString}
                 modifierValue={modifierValue}
-                />
+                setModifiers={setModifiers}
+              />
             ))}
           </div>
         ))}
@@ -516,20 +525,28 @@ function KeyboardFunctions({ modifierString, modifierValue }) {
 }
 
 
-function KeyboardButton({ value, text, spacing, modifierString, modifierValue }) {
+function KeyboardButton({ value, text, spacing, modifierString, modifierValue, setModifiers }) {
   const sequenceDispatch = useSequenceDispatch();
+
+  const handleClick = () => {
+    sequenceDispatch({
+      type: "added key",
+      string: `${modifierString}${value}`,
+      value: value,
+      modifier: modifierValue
+    })
+    setModifiers({
+      "ctrl": false,
+      "shift": false,
+      "alt": false,
+      "win": false
+    })
+  }
 
   if (value === "") {
     return <span className={styles[spacing]}></span>
   } else {
-    return <button value={value} className={styles[spacing]} onClick={() => {
-      sequenceDispatch({
-        type: "added key",
-        string: `${modifierString}${value}`,
-        value: value,
-        modifier: modifierValue
-      })
-    }}>{text}</button>
+    return <button value={value} className={styles[spacing]} onClick={handleClick}>{text}</button>
   }
 }
 

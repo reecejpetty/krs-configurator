@@ -39,15 +39,18 @@
     text-align: center;
     cursor: pointer;
     color: black;
+    box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.5);
 }
 
 .resetOption {
     /* background-color: rgb(251, 76, 93); */
     background-color: #ff606b;
+    background-image: linear-gradient(to bottom, #ff606b, #e34550);
 }
 
 .addOption {
-    background-color: rgb(31, 232, 135);
+    background-color: #1fe887;
+    background-image: linear-gradient(to bottom, #1fe887, #13bc6a);
 }
 
 .currentSequenceItems {
@@ -269,8 +272,10 @@
     border-radius: 40px;
     color: var(--off-white);
     background-color: var(--navy);
+    background-image: linear-gradient(to bottom, #265ca2, #16355d);
     font-size: 1rem;
     font-weight: bold;
+    box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.5);
 }
 
 .addButton:hover {
@@ -283,6 +288,7 @@
 .optionButton:disabled {
     color: lightgray;
     background-color: gray;
+    background-image: linear-gradient(to bottom, gray, dimgray);
     cursor: default;
 }
 

@@ -225,7 +225,12 @@
 }
 
 @media screen and (max-width: 600px) {
+    .bumpbarLayout {
+        gap: 3px;
+    }
+    
     .bumpbarButton {
+        border-radius: 5px;
         overflow: hidden;
     }
 

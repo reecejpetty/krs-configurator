@@ -159,6 +159,7 @@
     height: 34px;
     border-radius: 40px;
     background-color: var(--steel-blue2);
+    background-image: linear-gradient(to bottom, var(--steel-blue2), #3778aa);
     box-shadow: 0 1px 3px -1px rgb(20, 20, 70);
     z-index: 1;
     transition: right 0.5s ease-in-out;
@@ -193,7 +194,7 @@
     justify-content: flex-end;
 }
 
-.pinBumpbar label {
+.pinBumpbarLabel {
     display: flex;
     align-items: center;
     width: fit-content;
@@ -204,6 +205,20 @@
     background-color: var(--steel-blue2);
     font-weight: bold;
     cursor: pointer;
+    background-image: linear-gradient(to bottom, var(--steel-blue2), #3778aa);
+    box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.5);
+}
+
+.pinBumpbarActive {
+    composes: pinBumpbarLabel;
+    background-color: var(--amber2);
+    background-image: unset;
+    box-shadow: 0 0 15px -5px #965200 inset, inset 0 0 3px 1px #965200;
+}
+
+.pinBumpbar input[type="checkbox"] {
+    width: 0;
+    opacity: 0;
 }
 
 @media screen and (max-width: 600px) {

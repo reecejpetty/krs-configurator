@@ -76,7 +76,7 @@ function ButtonCountToggle({ active, setActive }) {
 function PinBumpbar({ sticky, setSticky }) {
   return (
     <div className={styles.pinBumpbar}>
-      <label htmlFor="pinBumpbarCheckbox">
+      <label htmlFor="pinBumpbarCheckbox" className={sticky ? styles.pinBumpbarActive : styles.pinBumpbarLabel}>
         <input type="checkbox" id="pinBumpbarCheckbox" checked={sticky} onChange={e => setSticky(e.target.checked)} />
         Pin Bumpbar
       </label>

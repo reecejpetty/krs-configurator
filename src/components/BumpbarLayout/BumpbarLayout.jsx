@@ -11,9 +11,10 @@ function BumpbarLayout({ currentButton, setCurrentButton, bumpbarButtons }) {
 
   return (
     <>
-      <div className={styles.flexApart}>
-        <h1>Bumpbar Buttons</h1>
+      <div className={styles.flexApart} style={{ columnGap: "30px" }}>
+        <h1 style={{ flexGrow: 1 }}>Bumpbar Buttons</h1>
         <ButtonCountToggle active={activeSwitch} setActive={setActiveSwitch} />
+        <PinBumpbar sticky={sticky} setSticky={setSticky} />
       </div>
       <div className={sticky ? styles.bumpbarSticky : styles.bumpbar}>
         <div className={activeSwitch == 2 ? styles.bumpbarLayout20 : styles.bumpbarLayout }>
@@ -34,7 +35,6 @@ function BumpbarLayout({ currentButton, setCurrentButton, bumpbarButtons }) {
       </div>
       <div className={styles.flexRow}>
         <SelectedButtonSequence currentButton={currentButton} bumpbarButtons={bumpbarButtons} />
-        <PinBumpbar sticky={sticky} setSticky={setSticky} />
       </div>
     </>
   )

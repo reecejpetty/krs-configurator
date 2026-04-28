@@ -228,6 +228,7 @@
     composes: selectOff from global;
     display: flex;
     justify-content: flex-end;
+    margin-bottom: 10px;
 }
 
 .pinBumpbarLabel {

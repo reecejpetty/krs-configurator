@@ -199,7 +199,7 @@
     composes: flexRow;
     flex-wrap: wrap;
     gap: 10px;
-    flex-grow: 1;
+    margin-top: 5px;
 }
 
 .sequenceItem {
@@ -213,7 +213,6 @@
     color: black;
     background-color: var(--steel-blue2);
     font-weight: bold;
-    cursor: pointer;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
 }
 

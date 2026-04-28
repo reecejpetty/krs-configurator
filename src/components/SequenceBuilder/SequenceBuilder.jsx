@@ -118,6 +118,17 @@ function SequenceOptions({ bumpbarButtons, setBumpbarButtons, currentButton, set
     }
   }
 
+  const handleEdit = () => {
+    if (currentButton == null) {
+      return;
+    }
+    const selectedSequence = bumpbarButtons[currentButton].sequenceItems;
+    sequenceDispatch({
+      type: "edit",
+      sequence: selectedSequence
+    });
+  }
+
   return (
     <div className={styles.sequenceOptions}>
       <button
@@ -125,6 +136,11 @@ function SequenceOptions({ bumpbarButtons, setBumpbarButtons, currentButton, set
         onClick={handleReset}
         disabled={sequence.sequence.length === 0}
       >Reset Sequence</button>
+      <button
+        className={`${styles.optionButton} ${styles.editOption}`}
+        onClick={handleEdit}
+        disabled={currentButton === null}
+      >Edit Button</button>
       <button
         className={`${styles.optionButton} ${styles.addOption}`}
         onClick={handleSubmit}

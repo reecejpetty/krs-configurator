@@ -106,6 +106,12 @@ export function sequenceReducer(state, action) {
         sequence: []
       };
     }
+    case "edit": {
+      return {
+        ...state,
+        sequence: action.sequence
+      }
+    }
     case "submitted": {
       // Implement Add to Bumpbar Button logic
       return {

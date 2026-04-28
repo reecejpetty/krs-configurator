@@ -201,7 +201,7 @@
     height: 40px;
     border-radius: 40px;
     padding: 10px 20px;
-    color: var(--charcoal);
+    color: black;
     background-color: var(--steel-blue2);
     font-weight: bold;
     cursor: pointer;
@@ -219,6 +219,7 @@
 .pinBumpbar input[type="checkbox"] {
     width: 0;
     opacity: 0;
+    margin: 0;
 }
 
 @media screen and (max-width: 600px) {

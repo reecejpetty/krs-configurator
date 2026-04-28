@@ -18,6 +18,15 @@ input[type="checkbox"] {
     accent-color: var(--amber);
 }
 
+.button {
+    padding: 0 20px;
+    height: 40px;
+    border: none;
+    border-radius: 40px;
+    box-shadow: var(--button-shadow);
+    cursor: pointer;
+}
+
 .selectOff {
     -webkit-user-select: none;
     -moz-user-select: none;

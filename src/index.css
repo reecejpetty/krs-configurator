@@ -10,6 +10,12 @@
   --social-bg: rgba(244, 243, 236, 0.5);
   --shadow:
     rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
+  --button-shadow: 0 1px 2px rgba(0, 0, 0, 0.7);
+  --navy-button-gradient: linear-gradient(to bottom, #265ca2, #16355d);
+  --blue-button-gradient: linear-gradient(to bottom, var(--steel-blue2), #3778aa);
+  --green-button-gradient: linear-gradient(to bottom, #1fe887, #13bc6a);
+  --red-button-gradient: linear-gradient(to bottom, #ff606b, #e34550);
+  --disabled-button-gradient: linear-gradient(to bottom, gray, dimgray);
 
   --navy: #1A3F6F;
   --steel-blue: #4A90C4;

@@ -262,7 +262,7 @@ function KeypressModifiers({ modifiers, setModifiers, string }) {
       </div>
       <div className={styles.modifierCheckboxes}>
         {modifierArray.map((modifier) => (
-          <label htmlFor={modifier.name} key={modifier.name}>
+          <label htmlFor={modifier.name} key={modifier.name} className={modifiers[modifier.name] ? styles.modifierCheckboxActive : styles.modifierCheckbox }>
             <input
               type="checkbox"
               id={modifier.name}

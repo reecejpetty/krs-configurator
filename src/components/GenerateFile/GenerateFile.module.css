@@ -16,6 +16,8 @@
     border-radius: 40px;
     font-size: 1.1rem;
     font-weight: bold;
+    cursor: pointer;
+    box-shadow: var(--button-shadow);
 }
 
 .button:hover {
@@ -26,17 +28,14 @@
     composes: button;
     color: black;
     background-color: lightgreen;
-}
-
-.generateButton:hover {
-    color: var(--off-white);
-    background-color: var(--navy);
+    background-image: var(--green-button-gradient);
 }
 
 .krsButton {
     composes: button;
     color: white;
     background-color: var(--navy);
+    background-image: var(--navy-button-gradient);
 }
 
 .filePreview pre {

@@ -10,13 +10,15 @@
     position: relative;
     display: flex;
     align-items: stretch;
-    background-color: black;
     min-width: 350px;
     width: 100%;
-    padding: 4%;
-    border-radius: 15px;
     aspect-ratio: 3.5/1;
     margin-bottom: 10px;
+    padding: 4%;
+    border-radius: 15px;
+    background-color: rgb(0, 0, 0);
+    background-image: radial-gradient(150% 100% at top, rgba(255, 255, 255, .3), rgba(255, 255, 255, .3) 40%, transparent 40%, transparent);
+    box-shadow: 0 3px 5px 0 black;
     overflow: auto;
 }
 

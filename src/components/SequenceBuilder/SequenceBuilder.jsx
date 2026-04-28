@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { pointerIntersection } from '@dnd-kit/collision';
 import { DragDropProvider, DragOverlay } from '@dnd-kit/react';
 import { useSortable, isSortable } from '@dnd-kit/react/sortable';
 import { useSequence, useSequenceDispatch } from '../../context/sequence';
@@ -207,7 +208,7 @@ function CurrentSequence() {
 
 function SequenceItem({ id, index, text }) {
   const sequenceDispatch = useSequenceDispatch();
-  const {ref, isDragSource} = useSortable({id, index, data:{["dragText"]: text}});
+  const {ref, isDragSource} = useSortable({id, index, data:{["dragText"]: text}, collisionDetector: pointerIntersection});
 
   const deleteItem = () => {
     sequenceDispatch({

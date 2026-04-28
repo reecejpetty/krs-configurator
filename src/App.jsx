@@ -59,7 +59,16 @@ const initialState = (() => {
           usage: keyboardHexMap[key].usage,
           modifier: keyboardHexMap[key].modifier
         }
-      ]
+      ],
+      sequenceItems: [{
+        id: 0,
+        string: key,
+        keypresses: [{
+          string: key,
+          usage: keyboardHexMap[key].usage,
+          modifier: keyboardHexMap[key].modifier
+        }]
+      }]
     }
   })
 })

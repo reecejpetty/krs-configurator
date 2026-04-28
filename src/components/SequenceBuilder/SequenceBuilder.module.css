@@ -87,7 +87,7 @@
 
 .emptySequence {
     opacity: 50%;
-    background-color: var(--amber2);
+    background-color: darkgray;
     outline: 1px dashed black;
     box-shadow: none;
     cursor: default;

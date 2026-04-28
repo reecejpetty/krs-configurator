@@ -32,7 +32,10 @@ function BumpbarLayout({ currentButton, setCurrentButton, bumpbarButtons }) {
           ))}
         </div>
       </div>
-      <PinBumpbar sticky={sticky} setSticky={setSticky} />
+      <div className={styles.flexRow}>
+        <SelectedButtonSequence currentButton={currentButton} bumpbarButtons={bumpbarButtons} />
+        <PinBumpbar sticky={sticky} setSticky={setSticky} />
+      </div>
     </>
   )
 }
@@ -85,6 +88,23 @@ function ButtonCountToggle({ active, setActive }) {
       </label>
     </div>
   )
+}
+
+function SelectedButtonSequence({ currentButton, bumpbarButtons }) {
+  if (currentButton == null) {
+    return null;
+  }
+
+  return (
+    <div className={styles.selectedButtonSequence}>
+      {bumpbarButtons[currentButton].sequenceItems.map((item, index) => (
+        <div key={index} className={styles.sequenceItem}>
+          <div className={styles.sequenceItemText}>{item.string}</div>
+        </div>
+      ))}
+    </div>
+  )
+
 }
 
 function PinBumpbar({ sticky, setSticky }) {

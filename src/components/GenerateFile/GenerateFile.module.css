@@ -14,10 +14,11 @@
     height: 45px;
     border: none;
     border-radius: 40px;
+    box-shadow: var(--button-shadow);
     font-size: 1.1rem;
     font-weight: bold;
+    text-align: center;
     cursor: pointer;
-    box-shadow: var(--button-shadow);
 }
 
 .button:hover {

@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import styles from "./GenerateFile.module.css"
+import { krstobin, downloadKrsb } from "../../krstobin";
+
 
 function GenerateFile({ activeSwitch, templateName, connection, mode, keypressSound, volume, lockSound, bumpbarButtons }) {
   const [showPreview, setShowPreview] = useState(false);
@@ -26,7 +28,7 @@ function GenerateFile({ activeSwitch, templateName, connection, mode, keypressSo
   xml += `    <properties filename="${fileName}">\n`;
   xml += `    </properties>\n`;
   xml += `    <version ver="1" date="${formattedDate}" time="${formattedTime}">\n`;
-  xml += `        <config connect="${connection}" serial="9600N81" mode="${mode}" sound="${keypressSound ? 'on' : 'off'}" volume="${volume}" lock="${lockSound}">\n`;
+  xml += `        <config connect="${connection}" serial="9600N81" mode="${mode}" sound="${keypressSound ? 'On' : 'Off'}" volume="${volume}" lock="${lockSound}">\n`;
   xml += `        </config>\n`;
   for (let i = 0; i < 30; i++) {
     xml += `        <key keynum="${i + 1}">\n`;
@@ -52,7 +54,12 @@ function GenerateFile({ activeSwitch, templateName, connection, mode, keypressSo
         link.click();
         URL.revokeObjectURL(link.href);
     }
-}
+  }
+
+  const downloadKRSB = () => {
+    const krsbData = krstobin(xml);
+    downloadKrsb(krsbData, fileName.replace(".krs", ".krsb"));
+  }
 
   return (
     <div>
@@ -60,7 +67,7 @@ function GenerateFile({ activeSwitch, templateName, connection, mode, keypressSo
       <div className={styles.buttonRow}>
         <button className={showPreview ? styles.previewButtonHide : styles.previewButton} onClick={() => setShowPreview(!showPreview)}>{showPreview ? "Hide" : "Show"} Preview</button>
         <button className={styles.krsButton} onClick={downloadKRS} disabled={xml == ""}>Download KRS File (Wired)</button>
-        <button className={styles.krsButton}>Download KRSB File (Wireless)</button>
+        <button className={styles.krsButton} onClick={downloadKRSB}>Download KRSB File (Wireless)</button>
       </div>
       <div className={showPreview ? styles.filePreview : styles.filePreviewHide}>
         <code><pre>{xml}</pre></code>

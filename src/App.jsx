@@ -8,10 +8,13 @@ import { SequenceProvider } from './context/SequenceProvider'
 import keyboardHexMap from "./keyboardhexmap.json"
 
 function App() {
+  const [templateName, setTemplateName] = useState("");
   const [connection, setConnection] = useState("auto");
   const [mode, setMode] = useState("4");
+  const [keypressSound, setKeypressSound] = useState(true);  
   const [volume, setVolume] = useState("3");
   const [lockSound, setLockSound] = useState("scroll");
+  const [activeSwitch, setActiveSwitch] = useState(3)
 
   const [currentButton, setCurrentButton] = useState(null);
 
@@ -19,17 +22,23 @@ function App() {
 
   return (
     <>
-      <ConfigOptions 
+      <ConfigOptions
+        templateName={templateName}
+        setTemplateName={setTemplateName}
         connection={connection}
         setConnection={setConnection}
         mode={mode}
         setMode={setMode}
+        keypressSound={keypressSound}
+        setKeypressSound={setKeypressSound}
         volume={volume}
         setVolume={setVolume}
         lockSound={lockSound}
         setLockSound={setLockSound}
       />
-      <BumpbarLayout 
+      <BumpbarLayout
+        activeSwitch={activeSwitch}
+        setActiveSwitch={setActiveSwitch}
         bumpbarButtons={bumpbarButtons}
         setBumpbarButtons={setBumpbarButtons}
         currentButton={currentButton}
@@ -42,7 +51,17 @@ function App() {
           currentButton={currentButton}
         />
       </SequenceProvider>
-      <GenerateFile />
+      <GenerateFile
+        activeSwitch={activeSwitch}
+        setActiveSwitch={setActiveSwitch}
+        templateName={templateName}
+        connection={connection}
+        mode={mode}
+        keypressSound={keypressSound}
+        volume={volume}
+        lockSound={lockSound}
+        bumpbarButtons={bumpbarButtons}
+      />
     </>
   )
 }

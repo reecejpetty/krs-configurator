@@ -1,27 +1,27 @@
 import styles from './ConfigOptions.module.css'
 
-function ConfigOptions({ connection, setConnection, mode, setMode, volume, setVolume, lockSound, setLockSound }) {
+function ConfigOptions({ templateName, setTemplateName, connection, setConnection, mode, setMode, keypressSound, setKeypressSound, volume, setVolume, lockSound, setLockSound }) {
   return (
     <div>
       <h1>Configuration Options</h1>
       <div id="config-options" className={styles.configOptions}>
-        <FileUpload />
+        <FileUpload templateName={templateName} setTemplateName={setTemplateName} />
         <Connection connection={connection} setConnection={setConnection} />
         <Mode mode={mode} setMode={setMode} />
-        <KeypressSound volume={volume} setVolume={setVolume} />
+        <KeypressSound keypressSound={keypressSound} setKeypressSound={setKeypressSound} volume={volume} setVolume={setVolume} />
         <Beeper lockSound={lockSound} setLockSound={setLockSound} />
       </div>
     </div>
   )
 }
 
-function FileUpload() {
+function FileUpload({ templateName, setTemplateName }) {
   return (
     <div id="file-upload" className={styles.configSection}>
       <h2>Template</h2>
       <div className={styles.flexRow}>
         <label htmlFor="template-name">Name:&nbsp;</label>
-        <input type="text" id="template-name" />
+        <input type="text" id="template-name" value={templateName} onChange={(e) => setTemplateName(e.target.value)} />
       </div>
       <input type="file" name="file-upload" id="file-upload" accept=".krs" />
     </div>
@@ -64,18 +64,18 @@ function Mode({ mode, setMode }) {
   )
 }
 
-function KeypressSound({ volume, setVolume }) {
+function KeypressSound({ keypressSound, setKeypressSound, volume, setVolume }) {
   return (
     <div id="keypress-sound" className={styles.configSection}>
       <h2>Keypress Sound</h2>
       <div className={styles.flexRow}>
         <div className={styles.flexRow}>
           <div className={styles.flexRow}>
-            <input type="radio" name="keypress" id="keypress-enable" defaultChecked />
+            <input type="radio" name="keypress" id="keypress-enable" value="true" checked={keypressSound} onChange={e => setKeypressSound(e.target.value === "true")} />
             <label htmlFor="keypress-enable">Enable</label>
           </div>
           <div className={styles.flexRow}>
-            <input type="radio" name="keypress" id="keypress-disable" />
+            <input type="radio" name="keypress" id="keypress-disable" value="false" checked={!keypressSound} onChange={e => setKeypressSound(e.target.value === "true")} />
             <label htmlFor="keypress-disable">Disable</label>
           </div>
         </div>

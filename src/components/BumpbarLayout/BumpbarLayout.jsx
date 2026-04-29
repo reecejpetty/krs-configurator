@@ -1,9 +1,8 @@
 import { useState } from 'react';
 import styles from './BumpbarLayout.module.css'
 
-function BumpbarLayout({ currentButton, setCurrentButton, bumpbarButtons }) {
+function BumpbarLayout({ activeSwitch, setActiveSwitch, currentButton, setCurrentButton, bumpbarButtons }) {
   // User will be able to set rowCount to either 2 or 3
-  const [activeSwitch, setActiveSwitch] = useState(3);
   const [sticky, setSticky] = useState(false);
   const rowCount = activeSwitch;
   const rowArray = Array.from({ length: rowCount });

@@ -34,11 +34,11 @@ function Connection({ connection, setConnection }) {
       <h2>Connection</h2>
       <div className={styles.flexRow}>
         <select name="connection-dropdown" id="connection-dropdown" value={connection} onChange={e => setConnection(e.target.value)}>
-          <option value="auto">Auto</option>
-          <option value="ble">Bluetooth</option>
-          <option value="usb">USB</option>
-          <option value="ps2">PS/2</option>
-          <option value="serial">Serial</option>
+          <option value="Auto">Auto</option>
+          <option value="BLE">Bluetooth</option>
+          <option value="USB">USB</option>
+          <option value="PS/2">PS/2</option>
+          <option value="Serial">Serial</option>
         </select>
       </div>
     </div>
@@ -94,23 +94,23 @@ function KeypressSound({ keypressSound, setKeypressSound, volume, setVolume }) {
 function Beeper({ lockSound, setLockSound }) {
   const lockSoundOptions = [
     {
-      "value": "never",
+      "value": "None",
       "label": "Never"
     },
     {
-      "value": "num",
+      "value": "Num",
       "label": "Num Lock"
     },
     {
-      "value": "caps",
+      "value": "Caps",
       "label": "Caps Lock"
     },
     {
-      "value": "scroll",
+      "value": "Scroll",
       "label": "Scroll Lock"
     },
     {
-      "value": "bel",
+      "value": "Bel",
       "label": "BEL"
     }
   ]

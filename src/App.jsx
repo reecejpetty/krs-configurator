@@ -9,11 +9,11 @@ import keyboardHexMap from "./keyboardhexmap.json"
 
 function App() {
   const [templateName, setTemplateName] = useState("");
-  const [connection, setConnection] = useState("auto");
+  const [connection, setConnection] = useState("Auto");
   const [mode, setMode] = useState("4");
   const [keypressSound, setKeypressSound] = useState(true);  
   const [volume, setVolume] = useState("3");
-  const [lockSound, setLockSound] = useState("scroll");
+  const [lockSound, setLockSound] = useState("Scroll");
   const [activeSwitch, setActiveSwitch] = useState(3)
 
   const [currentButton, setCurrentButton] = useState(null);

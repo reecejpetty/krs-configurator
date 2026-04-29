@@ -45,7 +45,7 @@ function GenerateFile({ activeSwitch, templateName, connection, mode, keypressSo
     <div>
       <h1>Generate File</h1>
       <div className={styles.buttonRow}>
-        <button className={styles.generateButton} onClick={() => setShowPreview(!showPreview)}>{showPreview ? "Hide" : "Show"} Preview</button>
+        <button className={showPreview ? styles.previewButtonHide : styles.previewButton} onClick={() => setShowPreview(!showPreview)}>{showPreview ? "Hide" : "Show"} Preview</button>
         <button className={styles.krsButton}>Download KRS File (Wired)</button>
         <button className={styles.krsButton}>Download KRSB File (Wireless)</button>
       </div>

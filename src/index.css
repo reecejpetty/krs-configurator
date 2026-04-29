@@ -3,16 +3,17 @@
   --text-h: #1A3F6F;
   --bg: #F7F8FA;
   --border: #CBD5E0;
-  --code-bg: #68a2ce;
+  --code-bg: #a5c7e2;
   --accent: #E07B00;
   --accent-bg: #4A90C4;
   --accent-border: rgba(170, 59, 255, 0.5);
   --social-bg: rgba(244, 243, 236, 0.5);
   --shadow:
     rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
-  --button-shadow: 0 1px 2px rgba(0, 0, 0, 0.7);
-  --navy-button-gradient: linear-gradient(to bottom, #265ca2, #16355d);
-  --blue-button-gradient: linear-gradient(to bottom, var(--steel-blue2), #3778aa);
+    --button-shadow: 0 1px 2px rgba(0, 0, 0, 0.7);
+    --orange-button-shadow: 0 0 15px -5px #965200 inset, inset 0 0 3px 1px #965200, 0 0 3px -1px black;
+  --navy-button-gradient: linear-gradient(to bottom, #265ca2, var(--navy));
+  --blue-button-gradient: linear-gradient(to bottom, #86b5d8, var(--steel-blue));
   --green-button-gradient: linear-gradient(to bottom, #1fe887, #13bc6a);
   --red-button-gradient: linear-gradient(to bottom, #ff606b, #e34550);
   --disabled-button-gradient: linear-gradient(to bottom, gray, dimgray);
@@ -96,13 +97,10 @@ code {
   display: flex;
   border-radius: 20px;
   color: black;
-}
-
-code {
+  background: var(--code-bg);
+  box-shadow: 0 0 10px 5px var(--steel-blue2) inset, 0 0 3px -1px black;
   font-size: .75rem;
   line-height: 135%;
-  padding: 10px 20px;
-  background: var(--code-bg);
 }
 
 @media screen and (max-width: 600px) {

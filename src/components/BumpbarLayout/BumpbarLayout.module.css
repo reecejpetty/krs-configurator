@@ -156,7 +156,7 @@
     color: black;
     background-color: var(--amber2);
     /* box-shadow: 0 0 6px -1px black inset; */
-    box-shadow: 0 0 15px -5px #965200 inset, inset 0 0 3px 1px #965200;
+    box-shadow: var(--orange-button-shadow);
 }
 
 .switch::before {
@@ -250,7 +250,7 @@
     composes: pinBumpbarLabel;
     background-color: var(--amber2);
     background-image: unset;
-    box-shadow: 0 0 15px -5px #965200 inset, inset 0 0 3px 1px #965200;
+    box-shadow: var(--orange-button-shadow);
 }
 
 .pinBumpbar input[type="checkbox"] {

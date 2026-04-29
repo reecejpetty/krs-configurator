@@ -6,7 +6,7 @@
 .buttonRow {
     composes: flexRow;
     justify-content: space-between;
-    padding-bottom: 10px;
+    margin-bottom: 20px;
 }
 
 .button {
@@ -25,11 +25,18 @@
     cursor: pointer;
 }
 
-.generateButton {
+.previewButton {
     composes: button;
     color: black;
-    background-color: lightgreen;
-    background-image: var(--green-button-gradient);
+    background-color: var(--steel-blue2);
+    background-image: var(--blue-button-gradient);
+}
+
+.previewButtonHide {
+    composes: previewButton;
+    background-image: unset;
+    background-color: var(--amber2);
+    box-shadow: var(--orange-button-shadow);
 }
 
 .krsButton {
@@ -45,6 +52,8 @@
 
 .filePreview pre {
     overflow: auto;
+    margin: 0;
+    padding: 30px;
 }
 
 @media screen and (max-width: 600px) {

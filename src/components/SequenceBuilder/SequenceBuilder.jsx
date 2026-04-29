@@ -43,8 +43,7 @@ function SequenceBuilder({ bumpbarButtons, setBumpbarButtons, currentButton }) {
   let modifierString = "";
   if (Object.values(modifiers).some(Boolean)) {
     modifierString = "[" + Object.entries(modifiers)
-      // eslint-disable-next-line no-unused-vars
-      .filter(([key, active]) => active)
+      .filter(([_key, active]) => active)
       .map(([key]) => key.toUpperCase())
       .join(" + ") + "] + "
   }

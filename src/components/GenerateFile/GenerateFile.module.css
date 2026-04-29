@@ -41,9 +41,9 @@
 
 .krsButton {
     composes: button;
-    color: white;
-    background-color: var(--navy);
-    background-image: var(--navy-button-gradient);
+    color: black;
+    background-color: lightgreen;
+    background-image: var(--green-button-gradient);
 }
 
 .filePreviewHide {

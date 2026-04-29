@@ -42,6 +42,7 @@ input[type="file"] {
 input[type="file"]::file-selector-button {
     padding: 0 20px;
     height: 40px;
+    margin-right: 10px;
     border: none;
     border-radius: 40px;
     color: var(--off-white);

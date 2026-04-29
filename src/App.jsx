@@ -62,9 +62,20 @@ function App() {
         lockSound={lockSound}
         bumpbarButtons={bumpbarButtons}
       />
+      <Footer />
     </>
   )
 }
+
+
+function Footer() {
+  return (
+    <div className="footer">
+      <a href="https://github.com/reecejpetty/krs-configurator">Submit issues to GitHub</a>
+      <p>© 2026 Reece J Petty. All Rights Reserved.</p>
+    </div>
+  )
+} 
 
 
 const initialState = (() => {

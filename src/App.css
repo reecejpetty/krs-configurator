@@ -18,6 +18,14 @@ input[type="checkbox"] {
     accent-color: var(--amber);
 }
 
+.footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 20px 0;
+}
+
 .button {
     padding: 0 20px;
     height: 40px;

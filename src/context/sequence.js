@@ -103,13 +103,15 @@ export function sequenceReducer(state, action) {
     case "reset": {
       return {
         ...state,
-        sequence: []
+        sequence: [],
+        nextId: 0
       };
     }
     case "edit": {
       return {
         ...state,
-        sequence: action.sequence
+        sequence: action.sequence,
+        nextId: action.sequence.length
       }
     }
     case "submitted": {

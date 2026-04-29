@@ -110,10 +110,17 @@ function SequenceOptions({ bumpbarButtons, setBumpbarButtons, currentButton, set
   const handleSubmit = () => {
     if (sequence.sequence.length > 0) {
       const updatedArray = [...bumpbarButtons];
+      const updatedSequence = sequence.sequence.map((item, index) => {
+        return {
+          id: index,
+          string: item.string,
+          keypresses: item.keypresses
+        }
+      })
       updatedArray[currentButton] = {
         string: sequence.sequence.map(item => item.string).join(""),
         keypresses: sequence.sequence.flatMap(item => item.keypresses),
-        sequenceItems: sequence.sequence
+        sequenceItems: updatedSequence
       }
       setBumpbarButtons(updatedArray);
     }

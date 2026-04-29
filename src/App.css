@@ -12,6 +12,11 @@ input[type="number"] {
     font-size: 1rem;
     cursor: pointer;
     outline-color: var(--amber);
+    @media (max-width: 600px) {
+        height: 35px;
+        padding: 0px 16px;
+        font-size: .9rem;
+    }
 }
 
 input[type="checkbox"] {
@@ -32,7 +37,13 @@ input[type="checkbox"] {
     border: none;
     border-radius: 40px;
     box-shadow: var(--button-shadow);
+    font-weight: bold;
     cursor: pointer;
+    @media (max-width: 600px) {
+        height: 35px;
+        padding: 0px 16px;
+        font-size: .9rem;
+    }
 }
 
 .selectOff {

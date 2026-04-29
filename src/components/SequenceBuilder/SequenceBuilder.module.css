@@ -19,27 +19,22 @@
 
 .sequenceOptions {
     display: flex;
+    flex-grow: 1;
     justify-content: space-between;
     align-items: center;
     gap: 30px;
     margin-bottom: 10px;
+    max-width: 600px;
     height: fit-content;
     border-radius: 40px;
 }
 
 .optionButton {
-    composes: selectOff from global;
+    composes: selectOff from global, button from global;
     display: block;
-    border-radius: 40px;
-    height: 40px;
-    padding: 0 20px;
-    border: none;
     font-size: 1rem;
-    font-weight: bold;
     text-align: center;
-    cursor: pointer;
     color: black;
-    box-shadow: var(--button-shadow);
 }
 
 .resetOption {
@@ -175,7 +170,7 @@
     border-radius: 20px;
     background-color: var(--navy);
     box-shadow: 0 3px 5px 0 black;
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 
 .keyboardFunctions button {
@@ -283,16 +278,11 @@
 }
 
 .addButton {
-    padding: 0 20px;
-    height: 40px;
-    border: none;
-    border-radius: 40px;
+    composes: button from global;
     color: var(--off-white);
     background-color: var(--navy);
     background-image: linear-gradient(to bottom, #265ca2, #16355d);
     font-size: 1rem;
-    font-weight: bold;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.7);
 }
 
 .addButton:hover {
@@ -312,11 +302,11 @@
 
 @media screen and (max-width: 600px) {
     .sequenceOptions {
-        gap: 20px;
+        gap: 8px;
     }
 
     .optionButton {
-        padding: 0 16px;
+        padding: 0 10px;
     }
     
     .modifierRow {

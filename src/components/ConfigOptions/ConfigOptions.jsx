@@ -17,11 +17,10 @@ function ConfigOptions({ templateName, setTemplateName, connection, setConnectio
 
 function FileUpload({ templateName, setTemplateName }) {
   return (
-    <div id="file-upload" className={styles.configSection}>
+    <div id="file-upload" className={styles.fileUpload}>
       <h2>Template</h2>
-      <div className={styles.flexRow}>
-        <label htmlFor="template-name">Name:&nbsp;</label>
-        <input type="text" id="template-name" value={templateName} onChange={(e) => setTemplateName(e.target.value)} />
+      <div className={styles.flexRow} style={{ width: "100%" }}>
+        <input type="text" id="template-name" value={templateName} placeholder="Enter new template name..." onChange={(e) => setTemplateName(e.target.value)} />
       </div>
       <input type="file" name="file-upload" id="file-upload" accept=".krs" />
     </div>

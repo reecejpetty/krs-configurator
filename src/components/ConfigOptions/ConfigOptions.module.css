@@ -6,7 +6,6 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    margin-bottom: 5px;
 }
 
 .flexColumn {
@@ -21,7 +20,7 @@
     flex-wrap: wrap;
     width: 100%;
     padding-bottom: 20px;
-    gap: 10px;
+    column-gap: 10px;
 }
 
 .configSection {
@@ -31,6 +30,16 @@
     color: var(--charcoal);
     border-radius: 12px;
     font-weight: bold;
+}
+
+.fileUpload {
+    composes: configSection;
+    flex-grow: 1;
+    max-width: 300px;
+}
+
+.fileUpload input {
+    width: 100%;
 }
 
 input[type="file"] {
@@ -52,6 +61,11 @@ input[type="file"]::file-selector-button {
     font-size: 1rem;
     font-weight: bold;
     cursor: pointer;
+    @media (max-width: 600px) {
+        height: 35px;
+        padding: 0px 16px;
+        font-size: .9rem;
+    }
 }
 
 .configSection input[type="radio"] {

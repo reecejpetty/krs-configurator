@@ -53,14 +53,19 @@ input[type="checkbox"] {
     user-select: none;
 }
 
+.tooltip {
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+    padding-bottom: 6px;
+}
+
 .tooltipIndicator {
     display: flex;
     justify-content: center;
     align-items: center;
     width: 20px;
     height: 20px;
-    margin-top: 4px;
-    margin-left: 10px;
     border: solid 1px var(--steel-blue2);
     border-radius: 40px;
     color: var(--charcoal);
@@ -74,8 +79,11 @@ input[type="checkbox"] {
     display: none;
     position: fixed;
     position-area: top right;
-    width: max-content;
-    max-width: clamp(30px, calc(100% - 10px), 300px);
+    position-try-order: most-width;
+    position-try-fallbacks: flip-block, flip-inline, flip-block flip-inline;
+    left: 5px;
+    bottom: 5px;
+    max-width: clamp(100px, calc(100% - 10px), 300px);
     padding: 5px 10px;
     background-color: var(--off-white);
     border: solid 1px var(--steel-blue2);
@@ -83,6 +91,11 @@ input[type="checkbox"] {
     font-size: .8rem;
     font-weight: normal;
     white-space: pre-line;
+    z-index: 3;
+}
+
+.tooltipContent p {
+    margin: 5px 0;
 }
 
 .tooltip:hover .tooltipContent {

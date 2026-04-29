@@ -158,15 +158,21 @@ function SequenceOptions({ bumpbarButtons, setBumpbarButtons, currentButton, set
   )
 }
 
-
 function CurrentSequence() {
   const sequence = useSequence();
   const sequenceDispatch = useSequenceDispatch();
 
+  const header = (
+    <div className={styles.flexRow}>
+      <h2>Current Sequence</h2>
+      <Tooltip name="current-sequence" text={<><p>This is where your current sequence will be built. Click any keyboard function or enter text to add to your sequence. You can also add a delay between sequence items or a repeat (for Wireless Bumpbars).</p><p>When you are satisfied with your sequence, click "Save to Button" to assign it to the currently selected button.</p></>} />
+    </div>
+  )
+
   if (sequence.sequence.length == 0) {
     return (
       <div className={styles.currentSequence}>
-        <h2>Current Sequence</h2>
+        {header}
         <div className={styles.currentSequenceItems}>
           <div className={`${styles.sequenceItem} ${styles.emptySequence}`}>
             <div className={styles.sequenceItemText}>Your</div>
@@ -205,7 +211,7 @@ function CurrentSequence() {
         }}
       >
         <div className={styles.currentSequence}>
-          <h2>Current Sequence</h2>
+          {header}
           <div className={styles.currentSequenceItems}>
             {sequence.sequence.map((item, index) => (
               <SequenceItem
@@ -266,7 +272,11 @@ function KeypressModifiers({ modifiers, setModifiers, string }) {
     <div className={styles.keypressModifiers}>
       <div className={styles.flexRow}>
         <h2>Modifiers</h2>
-        <Tooltip name="modifiers" text={<span>Enter any keypress with modifiers. Useful for sending multi-keypress inputs like <b>CTRL+ALT+DEL</b> or <b>CTRL+a</b>. Check any modifier needed and then either click desired keyboard function or enter key in Text Entry box.<br/>(<b>NOTE:</b> Only one keypress can be assigned with modifiers at a time. Checkboxes are disabled if Text Entry box is longer than one character.)</span>} />
+        <Tooltip name="modifiers" text=
+          {
+            <><p>Enter any keypress with modifiers. Useful for sending multi-keypress inputs like <b>CTRL+ALT+DEL</b> or <b>CTRL+a</b>. Check any modifier needed and then either click desired keyboard function or enter key in Text Entry box.</p><p>(<b>NOTE:</b> Only one keypress can be assigned with modifiers at a time. Checkboxes are disabled if Text Entry box is longer than one character.)</p></>
+          } 
+        />
       </div>
       <div className={styles.modifierCheckboxes}>
         {modifierArray.map((modifier) => (
@@ -312,7 +322,7 @@ function AddRepeat() {
     <div className={styles.addBlock}>
       <div className={styles.flexRow}>
         <h2>Repeat Keypress</h2>
-        <Tooltip name="repeat" text={<span><b>For Wireless Bumpbars Only</b><br/>Speed at which Bumpbar button keypress is repeated. Must be the first part of sequence, and only one keypress can follow.</span>} />
+        <Tooltip name="repeat" text={<><p><b>For Wireless Bumpbars Only</b></p><p>Speed at which Bumpbar button keypress is repeated. Must be the first part of sequence, and only one keypress can follow.</p><p>(<b>Note:</b> Wired Bumpbars automatically repeat keystrokes when a button is held.)</p></>} />
       </div>
       <form className={styles.addBlockContent} onSubmit={handleSubmit}>
         <div><b>Delay:</b></div>
@@ -359,7 +369,7 @@ function AddPause() {
     <div className={styles.addBlock}>
       <div className={styles.flexRow}>
         <h2>Pause</h2>
-        <Tooltip name="pause" text={<span>Your sequence will be paused for the desired amount of time before the next input is sent.</span>} />
+        <Tooltip name="pause" text={<><p>Your sequence will be paused for the desired amount of time before the next input is sent. Useful for when inputs are sent too quickly (e.g. open a window, wait a few seconds for window to load, then send next command.)</p></>} />
       </div>
       <form className={styles.addBlockContent} onSubmit={handleSubmit}>
         <div><b>Seconds (1-60):</b></div>
@@ -410,7 +420,10 @@ function StringEntry({ string, setString, modifiers, modifierString, modifierVal
 
   return (
     <div className={styles.stringEntry}>
-      <h2>Text Entry</h2>
+      <div className={styles.flexRow}>
+        <h2>Text Entry</h2>
+        <Tooltip name="text-entry" text={<><p>Type any text or characters and hit enter or press ADD to add it to your sequence. If any modifiers are selected, only the first character of your text will be added to the sequence.</p><p>(<b>Note:</b> Text entered will be saved case-sensitively, so you do not need to add SHIFT as a modifier to capitalize letters.)</p></>} />
+      </div>
       <form className={styles.stringEntryInput} onSubmit={handleSubmit}>
         <input type="text" value={string} onChange={handleChange} placeholder="Enter text or character(s) here..." />
         <button type="submit" className={styles.addButton} disabled={string.length === 0}>ADD</button>
@@ -508,7 +521,10 @@ function KeyboardFunctions({ modifierString, modifierValue, setModifiers }) {
 
   return (
     <div>
-      <h2>Keyboard Functions</h2>
+      <div className={styles.flexRow}>
+        <h2>Keyboard Functions</h2>
+        <Tooltip name="keyboard-functions" text={<p>Many keyboard keys cannot be simply typed into the Text Entry box above. To add those keys to your sequence, click any of the keyboard functions below. Modifiers (CTRL, ALT, SHIFT, WIN) can be added to any keypress by selecting the desired modifiers above before clicking a keyboard function.</p>} />
+      </div>
       <div className={styles.keyboardFunctions}>
         {keyboardKeys.map((side, index) => (
           <div className={styles[side.keyboardSide]} key={index}>

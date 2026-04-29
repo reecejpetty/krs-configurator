@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import styles from './BumpbarLayout.module.css'
+import { Tooltip } from '../Snippets';
 
 function BumpbarLayout({ activeSwitch, setActiveSwitch, currentButton, setCurrentButton, bumpbarButtons }) {
   // User will be able to set rowCount to either 2 or 3
@@ -11,7 +12,10 @@ function BumpbarLayout({ activeSwitch, setActiveSwitch, currentButton, setCurren
   return (
     <>
       <div className={styles.flexApart} style={{ columnGap: "30px" }}>
-        <h1 style={{ flexGrow: 1 }}>Bumpbar Buttons</h1>
+        <div className={styles.flexRow} style={{ flexGrow: 1 }}>
+          <h1>Bumpbar Buttons</h1>
+          <Tooltip name="bumpbar-buttons" text={<><p>The buttons below correspond to the buttons on your bumpbar (use LED for alignment).</p><p>You can toggle between a 20 and 30 button layout to match you Bumpbar. Select any button below to add your current sequence to it. You can also edit existing button sequences.</p><p>Press Pin Bumpbar to keep this Bumpbar layout pinned to the top of your screen.</p></>} />
+        </div>
         <ButtonCountToggle active={activeSwitch} setActive={setActiveSwitch} />
         <PinBumpbar sticky={sticky} setSticky={setSticky} />
       </div>

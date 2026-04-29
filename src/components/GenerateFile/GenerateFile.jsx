@@ -2,6 +2,8 @@ import { useState } from 'react';
 import styles from "./GenerateFile.module.css"
 
 function GenerateFile({ activeSwitch, templateName, connection, mode, keypressSound, volume, lockSound, bumpbarButtons }) {
+  const [showPreview, setShowPreview] = useState(false);
+
   const date = new Date();
   const formattedDate = date.toLocaleDateString('en-US');
   const formattedTime = date.toLocaleTimeString('en-US', {
@@ -10,18 +12,18 @@ function GenerateFile({ activeSwitch, templateName, connection, mode, keypressSo
       hour12: true
   });
 
-  let finalTemplateName = templateName;
-  if (finalTemplateName === "") {
-    finalTemplateName = "krs_config";
+  let fileName = templateName.toLowerCase().trim();
+  if (fileName === "") {
+    fileName = "krs_config.krs";
   }
-  if (!finalTemplateName.endsWith(".krs")) {
-    finalTemplateName += ".krs";
+  if (!fileName.endsWith(".krs")) {
+    fileName += ".krs";
   }
 
   let xml = "";
   xml += `<?xml version="1.0" encoding="utf-8"?>\n`;
   xml += `<krs_config>\n`;
-  xml += `    <properties filename="${finalTemplateName}">\n`;
+  xml += `    <properties filename="${fileName}">\n`;
   xml += `    </properties>\n`;
   xml += `    <version ver="1" date="${formattedDate}" time="${formattedTime}">\n`;
   xml += `        <config connect="${connection}" serial="9600N81" mode="${mode}" sound="${keypressSound ? 'on' : 'off'}" volume="${volume}" lock="${lockSound}">\n`;
@@ -39,14 +41,25 @@ function GenerateFile({ activeSwitch, templateName, connection, mode, keypressSo
   xml += `    </version>\n`;
   xml += `</krs_config>`;
 
-  const [showPreview, setShowPreview] = useState(false);
+  const downloadKRS = () => {
+    if (xml != "") {
+        // Create xml blob
+        const blob = new Blob([xml], { type: 'application/xml' });
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(blob);
+        link.download = fileName;
+        // Download the xml blob
+        link.click();
+        URL.revokeObjectURL(link.href);
+    }
+}
 
   return (
     <div>
       <h1>Generate File</h1>
       <div className={styles.buttonRow}>
         <button className={showPreview ? styles.previewButtonHide : styles.previewButton} onClick={() => setShowPreview(!showPreview)}>{showPreview ? "Hide" : "Show"} Preview</button>
-        <button className={styles.krsButton}>Download KRS File (Wired)</button>
+        <button className={styles.krsButton} onClick={downloadKRS} disabled={xml == ""}>Download KRS File (Wired)</button>
         <button className={styles.krsButton}>Download KRSB File (Wireless)</button>
       </div>
       <div className={showPreview ? styles.filePreview : styles.filePreviewHide}>

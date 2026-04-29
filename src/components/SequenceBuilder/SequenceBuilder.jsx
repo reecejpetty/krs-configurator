@@ -406,7 +406,7 @@ function StringEntry({ string, setString, modifiers, modifierString, modifierVal
     <div className={styles.stringEntry}>
       <h2>Text Entry</h2>
       <form className={styles.stringEntryInput} onSubmit={handleSubmit}>
-        <input type="text" value={string} onChange={handleChange} />
+        <input type="text" value={string} onChange={handleChange} placeholder="Enter text or character(s) here..." />
         <button type="submit" className={styles.addButton} disabled={string.length === 0}>ADD</button>
       </form>
     </div>

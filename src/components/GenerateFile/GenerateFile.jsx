@@ -10,10 +10,18 @@ function GenerateFile({ activeSwitch, templateName, connection, mode, keypressSo
       hour12: true
   });
 
+  let finalTemplateName = templateName;
+  if (finalTemplateName === "") {
+    finalTemplateName = "krs_config";
+  }
+  if (!finalTemplateName.endsWith(".krs")) {
+    finalTemplateName += ".krs";
+  }
+
   let xml = "";
   xml += `<?xml version="1.0" encoding="utf-8"?>\n`;
   xml += `<krs_config>\n`;
-  xml += `    <properties filename="${templateName}">\n`;
+  xml += `    <properties filename="${finalTemplateName}">\n`;
   xml += `    </properties>\n`;
   xml += `    <version ver="1" date="${formattedDate}" time="${formattedTime}">\n`;
   xml += `        <config connect="${connection}" serial="9600N81" mode="${mode}" sound="${keypressSound ? 'on' : 'off'}" volume="${volume}" lock="${lockSound}">\n`;

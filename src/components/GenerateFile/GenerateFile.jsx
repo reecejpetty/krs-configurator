@@ -46,7 +46,7 @@ function GenerateFile({ activeSwitch, templateName, connection, mode, keypressSo
   const downloadKRS = () => {
     if (xml != "") {
         // Create xml blob
-        const blob = new Blob([xml], { type: 'application/xml' });
+        const blob = new Blob([xml], { type: 'application/x-krs' });
         const link = document.createElement('a');
         link.href = URL.createObjectURL(blob);
         link.download = fileName;

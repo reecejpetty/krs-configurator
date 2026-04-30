@@ -22,7 +22,7 @@ function App() {
 
   useEffect(() => {
     const sendHeight = () => {
-      const height = document.body.scrollHeight + 50;
+      const height = document.body.scrollHeight;
       window.parent.postMessage(height, "https://krscorporation.com/pages/beta-online-configurator");
     };
 

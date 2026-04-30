@@ -27,6 +27,7 @@
 
 .previewButton {
     composes: button;
+    min-width: 200px;
     color: black;
     background-color: var(--steel-blue2);
     background-image: var(--blue-button-gradient);

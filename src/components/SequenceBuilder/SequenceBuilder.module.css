@@ -63,7 +63,8 @@
     composes: flexRow, selectOff from global;
     align-items: center;
     justify-content: space-between;
-    height: 45px;
+    min-height: 45px;
+    max-width: 100%;
     gap: 10px;
     padding: 10px 20px;
     border-radius: 40px;
@@ -98,6 +99,8 @@
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+    word-break: break-word;
+    text-wrap-style: pretty;
 }
 
 .deleteItem {

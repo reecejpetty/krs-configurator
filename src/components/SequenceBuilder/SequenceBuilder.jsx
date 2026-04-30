@@ -5,6 +5,7 @@ import { useSortable, isSortable } from '@dnd-kit/react/sortable';
 import { useSequence, useSequenceDispatch } from '../../context/sequence';
 import { Tooltip } from '../Snippets';
 import styles from "./SequenceBuilder.module.css"
+import Balancer from 'react-wrap-balancer';
 
 
 const modifierArray = [
@@ -251,7 +252,7 @@ function SequenceItem({ id, index, text }) {
   return (
     <>
       <div className={(isDragSource) ? `${styles.dropzone} ${styles.sequenceItem}` : styles.sequenceItem} ref={ref} >
-        <div className={styles.sequenceItemText}>{text}</div>
+        <div className={styles.sequenceItemText}><Balancer>{text}</Balancer></div>
         <div className={styles.deleteItem} onClick={deleteItem}>✕</div>
       </div>
     </>

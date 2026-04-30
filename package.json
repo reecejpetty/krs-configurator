@@ -9,7 +9,6 @@
     "lint": "eslint .",
     "preview": "vite preview"
   },
-  "npmrc": "legacy-peer-deps=true",
   "dependencies": {
     "@dnd-kit/react": "^0.4.0",
     "react": "^19.2.5",

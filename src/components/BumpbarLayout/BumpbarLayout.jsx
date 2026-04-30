@@ -113,7 +113,7 @@ function SelectedButtonSequence({ currentButton, bumpbarButtons }) {
 function PinBumpbar({ sticky, setSticky }) {
   const isIframe = window.self !== window.top;
   
-  if (!isIframe) {
+  if (isIframe) {
     return null;
   }
   

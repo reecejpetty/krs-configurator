@@ -14,9 +14,11 @@ Project is currently in development. Many features have not been rigorously test
 - Helpful tooltips to explain various parts of the app
 
 ## In Development
-- Upload existing .KRS file
+- Improve how upload files handles strings
 - Improvements to mobile experience
 - Improved documentation and tooltips
 - Integration with official KRS Bumpbar iOS app
 
-© 2026 Reece J Petty. All Rights Reserved.
+***
+
+**© 2026 Reece J Petty. All Rights Reserved.**

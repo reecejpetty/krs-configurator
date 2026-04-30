@@ -46,50 +46,50 @@ function FileUpload({ templateName, setTemplateName, setConnection, mode, setMod
   }
 
   const handleUpload = (e) => {
-    console.log(e);
     const file = e.target.files[0];
     if (file) {
       setTemplateName(file.name.replace(".krs", ""));
       const reader = new FileReader();
       reader.onload = (e) => {
-        console.log("Reader running");
         const fileData = e.target.result;
         const parser = new DOMParser();
         const krsFile = parser.parseFromString(fileData, 'application/xml');
         const config = krsFile.getElementsByTagName("config")[0];
-        const fileMode = config.getAttribute("mode");
-        setMode(fileMode);
-        const connection = config.getAttribute("connect");
-        setConnection(connection);
-        const sound = config.getAttribute("sound");
-        setKeypressSound(sound === "On");
-        const volume = config.getAttribute("volume");
-        if (volume) {
-          setVolume(volume);
+
+        setMode(config.getAttribute("mode"));
+        setConnection(config.getAttribute("connect"));
+        setKeypressSound(config.getAttribute("sound") === "On");
+        if (config.getAttribute("volume")) {
+          setVolume(config.getAttribute("volume"));
         } else {
           setVolume("3");
         }
-        const lock = config.getAttribute("lock");
-        setLockSound(lock);
+        setLockSound(config.getAttribute("lock"));
 
         if (mode == "4") {
           const keyElements = krsFile.getElementsByTagName("key");
           const bumpbarButtons = Array.from(keyElements).map(keyElement => {
-            const string = Array.from(keyElement.getElementsByTagName("seq")).map(seqElement => (
+            const seqArray = Array.from(keyElement.getElementsByTagName("seq"));
+
+            const string = seqArray.map(seqElement => (
               modifierHexMap[seqElement.getAttribute("modifier").replace("0x", "")] + seqElement.textContent
             )).join("");
-            const keyPresses = Array.from(keyElement.getElementsByTagName("seq")).map(seqElement => ({
+
+            const keyPresses = seqArray.map(seqElement => ({
               string: seqElement.textContent,
               usage: seqElement.getAttribute("usage").replace("0x", ""),
               modifier: seqElement.getAttribute("modifier").replace("0x", "")
             }));
-            const sequenceItems = Array.from(keyElement.getElementsByTagName("seq")).map((seqElement, index) => ({
+
+            const sequenceItems = seqArray.map((seqElement, index) => ({
               id: index,
               string: modifierHexMap[seqElement.getAttribute("modifier").replace("0x", "")] + seqElement.textContent,
               keypresses: [keyPresses[index]]
             }));
+
             return { string: string, keypresses: keyPresses, sequenceItems: sequenceItems };
           });
+
           setBumpbarButtons(bumpbarButtons);
         }
       };

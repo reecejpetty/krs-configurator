@@ -32,6 +32,10 @@ input[type="checkbox"] {
     padding: 20px 0;
 }
 
+.footer p {
+    text-align: center;
+}
+
 .button {
     padding: 0 20px;
     height: 40px;

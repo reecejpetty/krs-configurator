@@ -53,6 +53,7 @@ function App() {
         setVolume={setVolume}
         lockSound={lockSound}
         setLockSound={setLockSound}
+        setBumpbarButtons={setBumpbarButtons}
       />
       <BumpbarLayout
         activeSwitch={activeSwitch}

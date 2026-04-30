@@ -1,11 +1,21 @@
 import styles from './ConfigOptions.module.css'
 
-function ConfigOptions({ templateName, setTemplateName, connection, setConnection, mode, setMode, keypressSound, setKeypressSound, volume, setVolume, lockSound, setLockSound }) {
+function ConfigOptions({ templateName, setTemplateName, connection, setConnection, mode, setMode, keypressSound, setKeypressSound, volume, setVolume, lockSound, setLockSound, setBumpbarButtons }) {
   return (
     <div>
       <h1>Configuration Options</h1>
       <div id="config-options" className={styles.configOptions}>
-        <FileUpload templateName={templateName} setTemplateName={setTemplateName} />
+        <FileUpload
+          templateName={templateName}
+          setTemplateName={setTemplateName}
+          setConnection={setConnection}
+          mode={mode}
+          setMode={setMode}
+          setKeypressSound={setKeypressSound}
+          setVolume={setVolume}
+          setLockSound={setLockSound}
+          setBumpbarButtons={setBumpbarButtons}
+        />
         <Connection connection={connection} setConnection={setConnection} />
         <Mode mode={mode} setMode={setMode} />
         <KeypressSound keypressSound={keypressSound} setKeypressSound={setKeypressSound} volume={volume} setVolume={setVolume} />
@@ -15,14 +25,85 @@ function ConfigOptions({ templateName, setTemplateName, connection, setConnectio
   )
 }
 
-function FileUpload({ templateName, setTemplateName }) {
+function FileUpload({ templateName, setTemplateName, setConnection, mode, setMode, setKeypressSound, setVolume, setLockSound, setBumpbarButtons }) {
+  const modifierHexMap = {
+    "0F": "[CTRL + SHIFT + ALT + WIN] + ",
+    "0E": "[SHIFT + ALT + WIN] + ",
+    "0D": "[CTRL + ALT + WIN] + ",
+    "0C": "[ALT + WIN] + ",
+    "0B": "[CTRL + SHIFT + WIN] + ",
+    "0A": "[SHIFT + WIN] + ",
+    "09": "[CTRL + WIN] + ",
+    "08": "[WIN] + ",
+    "07": "[CTRL + SHIFT + ALT] + ",
+    "06": "[SHIFT + ALT] + ",
+    "05": "[CTRL + ALT] + ",
+    "04": "[ALT] + ",
+    "03": "[CTRL + SHIFT] + ",
+    "02": "[SHIFT] + ",
+    "01": "[CTRL] + ",
+    "00": ""
+  }
+
+  const handleUpload = (e) => {
+    console.log(e);
+    const file = e.target.files[0];
+    if (file) {
+      setTemplateName(file.name.replace(".krs", ""));
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        console.log("Reader running");
+        const fileData = e.target.result;
+        const parser = new DOMParser();
+        const krsFile = parser.parseFromString(fileData, 'application/xml');
+        const config = krsFile.getElementsByTagName("config")[0];
+        const fileMode = config.getAttribute("mode");
+        setMode(fileMode);
+        const connection = config.getAttribute("connect");
+        setConnection(connection);
+        const sound = config.getAttribute("sound");
+        setKeypressSound(sound === "On");
+        const volume = config.getAttribute("volume");
+        if (volume) {
+          setVolume(volume);
+        } else {
+          setVolume("3");
+        }
+        const lock = config.getAttribute("lock");
+        setLockSound(lock);
+
+        if (mode == "4") {
+          const keyElements = krsFile.getElementsByTagName("key");
+          const bumpbarButtons = Array.from(keyElements).map(keyElement => {
+            const string = Array.from(keyElement.getElementsByTagName("seq")).map(seqElement => (
+              modifierHexMap[seqElement.getAttribute("modifier").replace("0x", "")] + seqElement.textContent
+            )).join("");
+            const keyPresses = Array.from(keyElement.getElementsByTagName("seq")).map(seqElement => ({
+              string: seqElement.textContent,
+              usage: seqElement.getAttribute("usage").replace("0x", ""),
+              modifier: seqElement.getAttribute("modifier").replace("0x", "")
+            }));
+            const sequenceItems = Array.from(keyElement.getElementsByTagName("seq")).map((seqElement, index) => ({
+              id: index,
+              string: modifierHexMap[seqElement.getAttribute("modifier").replace("0x", "")] + seqElement.textContent,
+              keypresses: [keyPresses[index]]
+            }));
+            return { string: string, keypresses: keyPresses, sequenceItems: sequenceItems };
+          });
+          setBumpbarButtons(bumpbarButtons);
+        }
+      };
+      reader.readAsText(file);
+    }
+  }
+
   return (
     <div id="file-upload" className={styles.fileUpload}>
       <h2>Template</h2>
       <div className={styles.flexRow} style={{ width: "100%" }}>
         <input type="text" id="template-name" value={templateName} placeholder="Enter new template name..." onChange={(e) => setTemplateName(e.target.value)} />
       </div>
-      <input type="file" name="file-upload" id="file-upload" accept=".krs" />
+      <input type="file" name="file-upload" id="file-upload" accept=".krs" onChange={handleUpload} />
     </div>
   )
 }

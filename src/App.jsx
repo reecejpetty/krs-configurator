@@ -91,7 +91,7 @@ function Footer() {
   return (
     <div className="footer">
       <a href="https://github.com/reecejpetty/krs-configurator" target="_blank">Submit issues to GitHub</a>
-      <p>© 2026 Reece J Petty. All Rights Reserved.</p>
+      <p>© 2026 Reece J Petty & KRS Corporation, LLC. All Rights Reserved.</p>
     </div>
   )
 } 

@@ -21,4 +21,4 @@ Project is currently in development. Many features have not been rigorously test
 
 ***
 
-**© 2026 Reece J Petty. All Rights Reserved.**
+**© 2026 Reece J Petty & KRS Corporation, LLC. All Rights Reserved.**

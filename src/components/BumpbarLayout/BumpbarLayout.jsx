@@ -111,6 +111,12 @@ function SelectedButtonSequence({ currentButton, bumpbarButtons }) {
 }
 
 function PinBumpbar({ sticky, setSticky }) {
+  const isIframe = window.self !== window.top;
+  
+  if (!isIframe) {
+    return null;
+  }
+  
   return (
     <div className={styles.pinBumpbar}>
       <label htmlFor="pinBumpbarCheckbox" className={sticky ? styles.pinBumpbarActive : styles.pinBumpbarLabel}>

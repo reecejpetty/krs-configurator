@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import './App.css'
 import ConfigOptions from './components/ConfigOptions/ConfigOptions'
 import BumpbarLayout from './components/BumpbarLayout/BumpbarLayout'
@@ -19,6 +19,24 @@ function App() {
   const [currentButton, setCurrentButton] = useState(null);
 
   const [bumpbarButtons, setBumpbarButtons] = useState(initialState);
+
+  useEffect(() => {
+    const sendHeight = () => {
+      const height = document.body.scrollHeight + 50;
+      window.parent.postMessage(height, "https://krscorporation.com/pages/beta-online-configurator");
+    };
+
+    const observer = new ResizeObserver(sendHeight);
+    observer.observe(document.body);
+    sendHeight(); // send once on mount
+
+    window.addEventListener('resize', sendHeight);
+
+    return () => {
+      observer.disconnect();
+      window.removeEventListener('resize', sendHeight);
+    };
+  }, []);
 
   return (
     <>

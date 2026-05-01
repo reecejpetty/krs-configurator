@@ -1,6 +1,5 @@
 import { Tooltip } from '../Snippets';
 import styles from './ConfigOptions.module.css'
-import keyboardHexMap from "../../keyboardhexmap.json"
 
 function ConfigOptions({ templateName, setTemplateName, connection, setConnection, mode, setMode, keypressSound, setKeypressSound, volume, setVolume, lockSound, setLockSound, setBumpbarButtons }) {
   return (
@@ -28,43 +27,6 @@ function ConfigOptions({ templateName, setTemplateName, connection, setConnectio
 }
 
 function FileUpload({ templateName, setTemplateName, setConnection, mode, setMode, setKeypressSound, setVolume, setLockSound, setBumpbarButtons }) {
-  const modifierHexMap = {
-    "0F": "[CTRL + SHIFT + ALT + WIN] + ",
-    "0E": "[SHIFT + ALT + WIN] + ",
-    "0D": "[CTRL + ALT + WIN] + ",
-    "0C": "[ALT + WIN] + ",
-    "0B": "[CTRL + SHIFT + WIN] + ",
-    "0A": "[SHIFT + WIN] + ",
-    "09": "[CTRL + WIN] + ",
-    "08": "[WIN] + ",
-    "07": "[CTRL + SHIFT + ALT] + ",
-    "06": "[SHIFT + ALT] + ",
-    "05": "[CTRL + ALT] + ",
-    "04": "[ALT] + ",
-    "03": "[CTRL + SHIFT] + ",
-    "02": "[SHIFT] + ",
-    "01": "[CTRL] + ",
-    "00": ""
-  }
-
-  const getModifierString = (usage, modifier, char) => {
-    // Do not include modifier string if Repeat or Pause
-    if (usage == "FE" || usage == "FD") {
-      return "";
-    }
-    // If the key is a shifted character, adjust the modifier string to reflect the actual modifier used.
-    if (keyboardHexMap[char]["modifier"] == "02") {
-      // No modifier string if the modifier is just shift, otherwise subtract shift from modifier.
-      if (modifier =="02") {
-        return "";
-      } else {
-        const dec = parseInt(modifier, 16) - parseInt("02", 16);
-        return modifierHexMap[`0${dec.toString(16).toUpperCase()}`];
-      }
-    }
-    return modifierHexMap[modifier];
-  }
-
   const handleUpload = (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -92,11 +54,7 @@ function FileUpload({ templateName, setTemplateName, setConnection, mode, setMod
           const bumpbarButtons = Array.from(keyElements).map(keyElement => {
             const seqArray = Array.from(keyElement.getElementsByTagName("seq"));
 
-            const string = seqArray.map(seqElement => {
-              const usage = seqElement.getAttribute("usage").replace("0x", "");
-              const modifier = seqElement.getAttribute("modifier").replace("0x", "");
-              return getModifierString(usage, modifier, seqElement.innerHTML) + seqElement.textContent
-            }).join("");
+            const string = seqArray.map(seqElement => seqElement.textContent).join("");
 
             const keyPresses = seqArray.map(seqElement => ({
               string: seqElement.innerHTML,
@@ -105,11 +63,9 @@ function FileUpload({ templateName, setTemplateName, setConnection, mode, setMod
             }));
 
             const sequenceItems = seqArray.map((seqElement, index) => {
-              const usage = seqElement.getAttribute("usage").replace("0x", "");
-              const modifier = seqElement.getAttribute("modifier").replace("0x", "");
               return ({
                 id: index,
-                string: getModifierString(usage, modifier, seqElement.innerHTML) + seqElement.textContent,
+                string: seqElement.textContent,
                 keypresses: [keyPresses[index]]
               })
             });

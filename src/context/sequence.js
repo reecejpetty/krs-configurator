@@ -67,6 +67,7 @@ export function sequenceReducer(state, action) {
     case "added key": {
       const shift_modifiers = ["02", "03", "06", "07", "0A", "0B", "0E", "0F"];
       const usage = keyboardHexMap[action.key].usage;
+      const isShifted = keyboardHexMap[action.key].modifier == "02";
       let modifier = action.modifier;
       
       const string = () => {
@@ -104,7 +105,7 @@ export function sequenceReducer(state, action) {
             }
           }
         }
-        if (hasShiftedValue) {
+        if (isShifted) {
           // Add SHIFT to modifier value and pair with non-shifted value
           const modNum = parseInt(action.modifier, 16);
           modifier = "0" + (modNum + 2).toString(16).toUpperCase();

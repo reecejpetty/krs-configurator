@@ -46,15 +46,22 @@ function FileUpload({ templateName, setTemplateName, setConnection, mode, setMod
     "00": ""
   }
 
-  const getModifierString = (usage, modifier, char="") => {
-    console.log(char, usage, modifier);
+  const getModifierString = (usage, modifier, char) => {
+    // Do not include modifier string if Repeat or Pause
     if (usage == "FE" || usage == "FD") {
       return "";
     }
-    if (char != "" && keyboardHexMap[char]["modifier"] == "02") {
-      return "";
+    // If the key is a shifted character, adjust the modifier string to reflect the actual modifier used.
+    if (keyboardHexMap[char]["modifier"] == "02") {
+      // No modifier string if the modifier is just shift, otherwise subtract shift from modifier.
+      if (modifier =="02") {
+        return "";
+      } else {
+        const dec = parseInt(modifier, 16) - parseInt("02", 16);
+        return modifierHexMap[`0${dec.toString(16).toUpperCase()}`];
+      }
     }
-    return modifierHexMap[modifier] || "";
+    return modifierHexMap[modifier];
   }
 
   const handleUpload = (e) => {
@@ -101,7 +108,7 @@ function FileUpload({ templateName, setTemplateName, setConnection, mode, setMod
               const modifier = seqElement.getAttribute("modifier").replace("0x", "");
               return ({
                 id: index,
-                string: getModifierString(usage, modifier) + seqElement.textContent,
+                string: getModifierString(usage, modifier, seqElement.innerHTML) + seqElement.textContent,
                 keypresses: [keyPresses[index]]
               })
             });

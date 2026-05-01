@@ -1,6 +1,25 @@
 import { useContext, createContext } from "react";
 import keyboardHexMap from "../keyboardhexmap.json"
 
+const modifierHexMap = {
+    "0F": "CTRL+SHIFT+ALT+WIN+",
+    "0E": "SHIFT+ALT+WIN+",
+    "0D": "CTRL+ALT+WIN+",
+    "0C": "ALT+WIN+",
+    "0B": "CTRL+SHIFT+WIN+",
+    "0A": "SHIFT+WIN+",
+    "09": "CTRL+WIN+",
+    "08": "WIN+",
+    "07": "CTRL+SHIFT+ALT+",
+    "06": "SHIFT+ALT+",
+    "05": "CTRL+ALT+",
+    "04": "ALT+",
+    "03": "CTRL+SHIFT+",
+    "02": "SHIFT+",
+    "01": "CTRL+",
+    "00": ""
+  }
+
 export const SequenceContext = createContext(null);
 export const SequenceDispatchContext = createContext(null);
 
@@ -47,25 +66,68 @@ export function sequenceReducer(state, action) {
     }
     case "added key": {
       const shift_modifiers = ["02", "03", "06", "07", "0A", "0B", "0E", "0F"];
-      let modifier = "";
-      if (shift_modifiers.includes(action.modifier)) {
-        modifier = action.modifier;
-      } else {
-        const modifierNum = parseInt(action.modifier, 16);
-        const stringNum = parseInt(keyboardHexMap[action.value].modifier, 16);
-        modifier = `0${(modifierNum + stringNum).toString(16).toUpperCase()}`;
+      const usage = keyboardHexMap[action.key].usage;
+      let modifier = action.modifier;
+      
+      const string = () => {
+        // No modifier string needed if no modifiers
+        if (action.modifier == "00") {
+          return action.key;
+        }
+
+        // Check if usage has a shifted value
+        const hasShiftedValue = (() => {
+          for (const [_key, value] of Object.entries(keyboardHexMap)) {
+            if (value.usage == usage && value.modifier == "02") {
+              return true;
+            }
+          }
+        })();
+
+        if (shift_modifiers.includes(action.modifier)) {
+          // If SHIFT is the only modifier selected
+          if (action.modifier == "02") {
+            // Return shifted value
+            if (hasShiftedValue) {
+              const entry = Object.entries(keyboardHexMap).find(([_key, value]) => value.usage === usage && value.modifier == "02" );
+              return entry[0];
+            } else {
+              // If no shifted value, just make modifier string with original key
+              return `[${modifierHexMap[action.modifier]}${action.key}]`
+            }
+          } else {
+            for (const [key, value] of Object.entries(keyboardHexMap)) {
+              // If modifier in shift_modifiers && multiple modifiers, use non-shifted key
+              if (value.usage == usage && value.modifier == "00") {
+                return `[${modifierHexMap[action.modifier]}${key}]`;
+              }
+            }
+          }
+        }
+        if (hasShiftedValue) {
+          // Add SHIFT to modifier value and pair with non-shifted value
+          const modNum = parseInt(action.modifier, 16);
+          modifier = "0" + (modNum + 2).toString(16).toUpperCase();
+          for (const [key, value] of Object.entries(keyboardHexMap)) {
+            if (value.usage == usage && value.modifier == "00") {
+              return `[${modifierHexMap[modifier]}${key}]`;
+            }
+          }
+        }
+        return `[${modifierHexMap[action.modifier]}${action.key}]`;
       }
+
       return {
         ...state,
         sequence: [
           ...state.sequence,
           {
             id: state.nextId,
-            string: action.string,
+            string: string(),
             keypresses: [
               {
-                "string": action.value,
-                "usage": keyboardHexMap[action.value].usage,
+                "string": string(),
+                "usage": usage,
                 "modifier": modifier
               }
             ]

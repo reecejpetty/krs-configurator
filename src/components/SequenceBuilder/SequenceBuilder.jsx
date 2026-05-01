@@ -9,10 +9,10 @@ import Balancer from 'react-wrap-balancer';
 
 
 const modifierArray = [
-  {"name": "ctrl", "value": "1"},
-  {"name": "shift", "value": "2"},
-  {"name": "alt", "value": "4"},
-  {"name": "win", "value": "8"}
+  {"name": "ctrl", "value": 1},
+  {"name": "shift", "value": 2},
+  {"name": "alt", "value": 4},
+  {"name": "win", "value": 8}
 ]
 
 
@@ -33,21 +33,13 @@ function SequenceBuilder({ bumpbarButtons, setBumpbarButtons, currentButton }) {
       if (value) {
         for (const modifier of modifierArray) {
           if (modifier.name == key) {
-            i += parseInt(modifier.value);
+            i += modifier.value;
           }
         }
       }
     }
     return `0${i.toString(16).toUpperCase()}`;
   })();
-
-  let modifierString = "";
-  if (Object.values(modifiers).some(Boolean)) {
-    modifierString = "[" + Object.entries(modifiers)
-      .filter(([_key, active]) => active)
-      .map(([key]) => key.toUpperCase())
-      .join(" + ") + "] + "
-  }
 
   return (
     <div>
@@ -69,7 +61,6 @@ function SequenceBuilder({ bumpbarButtons, setBumpbarButtons, currentButton }) {
           string={string}
           setString={setString}
           modifiers={modifiers}
-          modifierString={modifierString}
           modifierValue={modifierValue}
           setModifiers={setModifiers}
         />
@@ -85,7 +76,6 @@ function SequenceBuilder({ bumpbarButtons, setBumpbarButtons, currentButton }) {
           </div>
         </div>
         <KeyboardFunctions 
-          modifierString={modifierString}
           modifierValue={modifierValue}
           setModifiers={setModifiers}
         />
@@ -391,7 +381,7 @@ function AddPause() {
 }
 
 
-function StringEntry({ string, setString, modifiers, modifierString, modifierValue, setModifiers }) {
+function StringEntry({ string, setString, modifiers, modifierValue, setModifiers }) {
   const sequenceDispatch = useSequenceDispatch();
 
   const handleSubmit = (e) => {
@@ -399,7 +389,7 @@ function StringEntry({ string, setString, modifiers, modifierString, modifierVal
     setString("");
     sequenceDispatch({
       type: "added string",
-      string: `${modifierString}${string}`
+      string: string
     })
   }
 
@@ -407,8 +397,7 @@ function StringEntry({ string, setString, modifiers, modifierString, modifierVal
     if ((Object.values(modifiers).some(Boolean)) && string.length === 0) {
       sequenceDispatch({
         type: "added key",
-        string: `${modifierString}${e.target.value[0]}`,
-        value: e.target.value[0],
+        key: e.target.value[0],
         modifier: modifierValue
       })
       setModifiers({
@@ -551,14 +540,13 @@ function KeyboardFunctions({ modifierString, modifierValue, setModifiers }) {
 }
 
 
-function KeyboardButton({ value, text, spacing, modifierString, modifierValue, setModifiers }) {
+function KeyboardButton({ value, text, spacing, modifierValue, setModifiers }) {
   const sequenceDispatch = useSequenceDispatch();
 
   const handleClick = () => {
     sequenceDispatch({
       type: "added key",
-      string: `${modifierString}${value}`,
-      value: value,
+      key: value,
       modifier: modifierValue
     })
     setModifiers({

@@ -130,9 +130,7 @@ function FileUpload({ templateName, setTemplateName, setConnection, mode, setMod
         <h2>Template</h2>
         <Tooltip name="file-upload" text={<><p>Upload a .krs file to populate the configuration options and button sequences.</p><p><b>Note:</b> Uploading a file will overwrite all current configuration options and button sequences.</p></>} />
       </div>
-      <div className={styles.flexRow} style={{ width: "100%" }}>
-        <input type="text" id="template-name" value={templateName} placeholder="Enter new template name..." onChange={(e) => setTemplateName(e.target.value)} />
-      </div>
+      <input type="text" id="template-name" value={templateName} placeholder="Enter new template name..." onChange={(e) => setTemplateName(e.target.value)} />
       <input type="file" name="file-upload" id="file-upload" accept=".krs" onChange={handleUpload} />
     </div>
   )
@@ -140,7 +138,7 @@ function FileUpload({ templateName, setTemplateName, setConnection, mode, setMod
 
 function Connection({ connection, setConnection }) {
   return (
-    <div id="connection" className={styles.configSection}>
+    <div id="connection" className={styles.connection}>
       <div className={styles.flexRow}>
         <h2>Connection</h2>
         <Tooltip name="connection" text={<><p>Select the connection type for how you will connect your Bumpbar.</p><p><b>Note:</b> If you are unsure how you will eventually connect, leave connections as "Auto".</p></>} />
@@ -160,7 +158,7 @@ function Connection({ connection, setConnection }) {
 
 function Mode({ mode, setMode }) {
   return (
-    <div id="mode" className={styles.configSection}>
+    <div id="mode" className={styles.mode}>
       <div className={styles.flexRow}>
         <h2>Mode</h2>
         <Tooltip name="mode" text={<><p>All modes except Mode 4 contain pre-configured Bumpbar layouts and configurations for popular KDS systems, while Mode 4 is the user-customizable mode.</p></>} />
@@ -182,7 +180,7 @@ function Mode({ mode, setMode }) {
 
 function KeypressSound({ keypressSound, setKeypressSound, volume, setVolume }) {
   return (
-    <div id="keypress-sound" className={styles.configSection}>
+    <div id="keypress-sound" className={styles.keypressSound}>
       <div className={styles.flexRow}>
         <h2>Keypress Sound</h2>
         <Tooltip name="keypress-sound" text={<><p>Toggle the keypress sound on or off.</p><p>When enabled, the volume can be adjusted from 1 (quiet) to 3 (loud).</p></>} />
@@ -235,7 +233,7 @@ function Beeper({ lockSound, setLockSound }) {
   ]
 
   return (
-    <div id="beeper" className={styles.configSection}>
+    <div id="beeper" className={styles.lockSounds}>
       <div className={styles.flexRow}>
         <h2>Lock Sounds</h2>
         <Tooltip name="beeper" text={<><p>Configure the beeper to sound when certain lock keys are pressed, or to never sound.</p><p><b>Note:</b> Wired Bumpbars will beep continously until the lock key is turned off, while Wireless Bumpbars will beep for 2 seconds.</p></>} />

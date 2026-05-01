@@ -20,7 +20,7 @@
     flex-wrap: wrap;
     width: 100%;
     padding-bottom: 20px;
-    column-gap: 10px;
+    gap: 10px;
 }
 
 .configSection {
@@ -36,6 +36,9 @@
     composes: configSection;
     flex-grow: 1;
     max-width: 300px;
+    @media (max-width: 600px) {
+        max-width: 95%;
+    }
 }
 
 .fileUpload input {
@@ -94,4 +97,26 @@ input[type="file"]::file-selector-button {
     border-radius: 10px !important;
     padding: 4px !important;
     text-align: center;
+}
+
+.connection,
+.mode,
+.keypressSound,
+.lockSounds {
+    composes: configSection;
+}
+
+@media screen and (max-width: 600px) {
+    .connection {
+        order: 3;
+    }
+    .mode {
+        order: 5;
+    }
+    .keypressSound {
+        order: 2;
+    }
+    .lockSounds {
+        order: 4;
+    }
 }

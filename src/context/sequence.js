@@ -46,6 +46,15 @@ export function sequenceReducer(state, action) {
       };
     }
     case "added key": {
+      const shift_modifiers = ["02", "03", "06", "07", "0A", "0B", "0E", "0F"];
+      let modifier = "";
+      if (shift_modifiers.includes(action.modifier)) {
+        modifier = action.modifier;
+      } else {
+        const modifierNum = parseInt(action.modifier, 16);
+        const stringNum = parseInt(keyboardHexMap[action.value].modifier, 16);
+        modifier = `0${(modifierNum + stringNum).toString(16).toUpperCase()}`;
+      }
       return {
         ...state,
         sequence: [
@@ -57,7 +66,7 @@ export function sequenceReducer(state, action) {
               {
                 "string": action.value,
                 "usage": keyboardHexMap[action.value].usage,
-                "modifier": action.modifier
+                "modifier": modifier
               }
             ]
           }

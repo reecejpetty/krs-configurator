@@ -52,7 +52,10 @@ function SequenceBuilder({ bumpbarButtons, setBumpbarButtons, currentButton }) {
   return (
     <div>
       <div className={styles.flexApart}>
-        <h1>Sequence Builder</h1>
+        <div className={styles.flexRow} style={{ flexGrow: 1 }}>
+          <h1>Sequence Builder</h1>
+          <Tooltip name="sequence-builder" text={<><p>Here you can create a new sequence or edit a button's existing sequence.</p><p>With a Bumpbar Button selected, press <b>Edit Button</b> to bring that button's sequence into your <b>Current Sequence</b>.</p><p>Press <b>Save to Button</b> to save your <b>Current Sequence</b> to the selected Bumpbar Button.</p><p>To delete all items in your <b>Current Sequence</b>, press <b>Reset Sequence</b>.</p></>} />
+        </div>
         <SequenceOptions 
           bumpbarButtons={bumpbarButtons}
           setBumpbarButtons={setBumpbarButtons}
@@ -275,7 +278,7 @@ function KeypressModifiers({ modifiers, setModifiers, string }) {
         <h2>Modifiers</h2>
         <Tooltip name="modifiers" text=
           {
-            <><p>Enter any keypress with modifiers. Useful for sending multi-keypress inputs like <b>CTRL+ALT+DEL</b> or <b>CTRL+a</b>. Check any modifier needed and then either click desired keyboard function or enter key in Text Entry box.</p><p>(<b>NOTE:</b> Only one keypress can be assigned with modifiers at a time. Checkboxes are disabled if Text Entry box is longer than one character.)</p></>
+            <><p>Enter any keypress with modifiers. Useful for sending multi-keypress inputs like <b>CTRL+ALT+DEL</b> or <b>CTRL+a</b>. Check any modifier needed and then either click desired keyboard function or enter key in Text Entry box.</p><p><b>Note:</b> Only one keypress can be assigned with modifiers at a time. Checkboxes are disabled if Text Entry box is longer than one character.</p></>
           } 
         />
       </div>
@@ -323,7 +326,7 @@ function AddRepeat() {
     <div className={styles.addBlock}>
       <div className={styles.flexRow}>
         <h2>Repeat Keypress</h2>
-        <Tooltip name="repeat" text={<><p><b>For Wireless Bumpbars Only</b></p><p>Speed at which Bumpbar button keypress is repeated. Must be the first part of sequence, and only one keypress can follow.</p><p>(<b>Note:</b> Wired Bumpbars automatically repeat keystrokes when a button is held.)</p></>} />
+        <Tooltip name="repeat" text={<><p><b>For Wireless Bumpbars Only</b></p><p>Speed at which Bumpbar button keypress is repeated when Bumpbar button is held. Must be the first part of sequence, and only one keypress can follow.</p><p><b>Note:</b> Wired Bumpbars automatically repeat keystrokes when a button is held.</p></>} />
       </div>
       <form className={styles.addBlockContent} onSubmit={handleSubmit}>
         <div><b>Delay:</b></div>

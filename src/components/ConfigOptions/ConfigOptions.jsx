@@ -1,4 +1,5 @@
 import styles from './ConfigOptions.module.css'
+import keyboardHexMap from "../../keyboardhexmap.json"
 
 function ConfigOptions({ templateName, setTemplateName, connection, setConnection, mode, setMode, keypressSound, setKeypressSound, volume, setVolume, lockSound, setLockSound, setBumpbarButtons }) {
   return (
@@ -45,6 +46,17 @@ function FileUpload({ templateName, setTemplateName, setConnection, mode, setMod
     "00": ""
   }
 
+  const getModifierString = (usage, modifier, char="") => {
+    console.log(char, usage, modifier);
+    if (usage == "FE" || usage == "FD") {
+      return "";
+    }
+    if (char != "" && keyboardHexMap[char]["modifier"] == "02") {
+      return "";
+    }
+    return modifierHexMap[modifier] || "";
+  }
+
   const handleUpload = (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -54,6 +66,7 @@ function FileUpload({ templateName, setTemplateName, setConnection, mode, setMod
         const fileData = e.target.result;
         const parser = new DOMParser();
         const krsFile = parser.parseFromString(fileData, 'application/xml');
+        console.log(krsFile);
         const config = krsFile.getElementsByTagName("config")[0];
 
         setMode(config.getAttribute("mode"));
@@ -71,21 +84,27 @@ function FileUpload({ templateName, setTemplateName, setConnection, mode, setMod
           const bumpbarButtons = Array.from(keyElements).map(keyElement => {
             const seqArray = Array.from(keyElement.getElementsByTagName("seq"));
 
-            const string = seqArray.map(seqElement => (
-              modifierHexMap[seqElement.getAttribute("modifier").replace("0x", "")] + seqElement.textContent
-            )).join("");
+            const string = seqArray.map(seqElement => {
+              const usage = seqElement.getAttribute("usage").replace("0x", "");
+              const modifier = seqElement.getAttribute("modifier").replace("0x", "");
+              return getModifierString(usage, modifier, seqElement.innerHTML) + seqElement.textContent
+            }).join("");
 
             const keyPresses = seqArray.map(seqElement => ({
-              string: seqElement.textContent,
+              string: seqElement.innerHTML,
               usage: seqElement.getAttribute("usage").replace("0x", ""),
               modifier: seqElement.getAttribute("modifier").replace("0x", "")
             }));
 
-            const sequenceItems = seqArray.map((seqElement, index) => ({
-              id: index,
-              string: modifierHexMap[seqElement.getAttribute("modifier").replace("0x", "")] + seqElement.textContent,
-              keypresses: [keyPresses[index]]
-            }));
+            const sequenceItems = seqArray.map((seqElement, index) => {
+              const usage = seqElement.getAttribute("usage").replace("0x", "");
+              const modifier = seqElement.getAttribute("modifier").replace("0x", "");
+              return ({
+                id: index,
+                string: getModifierString(usage, modifier) + seqElement.textContent,
+                keypresses: [keyPresses[index]]
+              })
+            });
 
             return { string: string, keypresses: keyPresses, sequenceItems: sequenceItems };
           });

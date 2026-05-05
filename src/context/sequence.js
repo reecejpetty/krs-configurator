@@ -73,7 +73,7 @@ export function sequenceReducer(state, action) {
       const string = () => {
         // No modifier string needed if no modifiers
         if (action.modifier == "00") {
-          return action.key;
+          return action.keyboard ? `[${action.key}]` : action.key;
         }
 
         // Check if usage has a shifted value

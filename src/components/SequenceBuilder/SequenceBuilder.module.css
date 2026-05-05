@@ -53,6 +53,16 @@
     background-image: var(--green-button-gradient);
 }
 
+.maxLength {
+    color: red;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.maxLengthHide {
+    display: none;
+}
+
 .currentSequenceItems {
     composes: flexRow;
     flex-wrap: wrap;

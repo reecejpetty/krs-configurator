@@ -245,6 +245,7 @@ function CurrentSequence() {
               )}
             </DragOverlay>
           </div>
+          <div className={sequence.sequence.length >= MAX_LENGTH ? styles.maxLength : styles.maxLengthHide}>Current Sequence is at maximum length</div>
         </div>
       </DragDropProvider>
     )

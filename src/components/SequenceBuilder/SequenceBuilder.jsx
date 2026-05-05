@@ -200,6 +200,13 @@ function CurrentSequence() {
   } else {
     return (
       <DragDropProvider
+        onBeforeDragStart={(event) => {
+          if (sequence.sequence.length > 0) {
+            if (sequence.sequence[0].keypresses[0].usage == "FD") {
+              event.preventDefault();
+            }
+          }
+        }}
         onDragEnd={(event) => {
           if (event.canceled) return;
   

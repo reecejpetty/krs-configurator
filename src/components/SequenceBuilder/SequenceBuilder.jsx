@@ -20,6 +20,15 @@ const modifierArray = [
 
 
 function SequenceBuilder({ bumpbarButtons, setBumpbarButtons, currentButton }) {
+  const sequence = useSequence();
+  const inputDisabled = (() => {
+    if (sequence.sequence.length >= 58) return true;
+    if (sequence.sequence.length > 0) {
+      if (sequence.sequence[0].keypresses[0].usage == "FD" && sequence.sequence.length >= 2) return true;
+    }
+    return false
+  })();
+
   const [string, setString] = useState("");
   const [modifiers, setModifiers] = useState(
     {
@@ -66,6 +75,7 @@ function SequenceBuilder({ bumpbarButtons, setBumpbarButtons, currentButton }) {
           modifiers={modifiers}
           modifierValue={modifierValue}
           setModifiers={setModifiers}
+          inputDisabled={inputDisabled}
         />
         <div className={styles.modifierRow}>
           <KeypressModifiers
@@ -75,12 +85,13 @@ function SequenceBuilder({ bumpbarButtons, setBumpbarButtons, currentButton }) {
           />
           <div className={styles.addSpecial}>
             <AddRepeat />
-            <AddPause />
+            <AddPause inputDisabled={inputDisabled}/>
           </div>
         </div>
         <KeyboardFunctions 
           modifierValue={modifierValue}
           setModifiers={setModifiers}
+          inputDisabled={inputDisabled}
         />
       </div>
     </div>
@@ -343,8 +354,7 @@ function AddRepeat() {
 }
 
 
-function AddPause() {
-  const sequence = useSequence();
+function AddPause({ inputDisabled }) {
   const sequenceDispatch = useSequenceDispatch();
   const [pause, setPause] = useState("");
 
@@ -377,7 +387,7 @@ function AddPause() {
         <button
           type="submit"
           className={styles.addButton}
-          disabled={pause === "" || pause == 0 || pause > 60 || sequence.sequence.length >= MAX_LENGTH}
+          disabled={pause === "" || pause == 0 || pause > 60 || inputDisabled}
         >ADD</button>
       </form>
     </div>
@@ -385,8 +395,7 @@ function AddPause() {
 }
 
 
-function StringEntry({ string, setString, modifiers, modifierValue, setModifiers }) {
-  const sequence = useSequence();
+function StringEntry({ string, setString, modifiers, modifierValue, setModifiers, inputDisabled }) {
   const sequenceDispatch = useSequenceDispatch();
 
   const handleSubmit = (e) => {
@@ -425,14 +434,14 @@ function StringEntry({ string, setString, modifiers, modifierValue, setModifiers
       </div>
       <form className={styles.stringEntryInput} onSubmit={handleSubmit}>
         <input type="text" value={string} onChange={handleChange} placeholder="Enter text or character(s) here..." />
-        <button type="submit" className={styles.addButton} disabled={string.length === 0 || sequence.sequence.length >= MAX_LENGTH}>ADD</button>
+        <button type="submit" className={styles.addButton} disabled={string.length === 0 || inputDisabled}>ADD</button>
       </form>
     </div>
   )
 }
 
 
-function KeyboardFunctions({ modifierString, modifierValue, setModifiers }) {
+function KeyboardFunctions({ modifierString, modifierValue, setModifiers, inputDisabled }) {
   const keyboardKeys = [
     {
       "keyboardSide": "leftKeyboard",
@@ -536,6 +545,7 @@ function KeyboardFunctions({ modifierString, modifierValue, setModifiers }) {
                 modifierString={modifierString}
                 modifierValue={modifierValue}
                 setModifiers={setModifiers}
+                inputDisabled={inputDisabled}
               />
             ))}
           </div>
@@ -546,8 +556,7 @@ function KeyboardFunctions({ modifierString, modifierValue, setModifiers }) {
 }
 
 
-function KeyboardButton({ value, text, spacing, modifierValue, setModifiers }) {
-  const sequence = useSequence();
+function KeyboardButton({ value, text, spacing, modifierValue, setModifiers, inputDisabled }) {
   const sequenceDispatch = useSequenceDispatch();
 
   const handleClick = () => {
@@ -568,7 +577,7 @@ function KeyboardButton({ value, text, spacing, modifierValue, setModifiers }) {
   if (value === "") {
     return <span className={styles[spacing]}></span>
   } else {
-    return <button value={value} className={styles[spacing]} onClick={handleClick} disabled={sequence.sequence.length >= MAX_LENGTH}>{text}</button>
+    return <button value={value} className={styles[spacing]} onClick={handleClick} disabled={inputDisabled}>{text}</button>
   }
 }
 

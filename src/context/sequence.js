@@ -61,7 +61,8 @@ export function sequenceReducer(state, action) {
             keypresses: keypressArray
           }
         ],
-        nextId: state.nextId + 1
+        nextId: state.nextId + 1,
+        currentLength: state.currentLength + keypressArray.length
       };
     }
     case "added key": {
@@ -134,7 +135,8 @@ export function sequenceReducer(state, action) {
             ]
           }
         ],
-        nextId: state.nextId + 1
+        nextId: state.nextId + 1,
+        currentLength: state.currentLength + 1
       };
     }
     case "added special": {
@@ -154,13 +156,15 @@ export function sequenceReducer(state, action) {
             ]
           }
         ],
-        nextId: state.nextId + 1
+        nextId: state.nextId + 1,
+        currentLength: state.currentLength + 1
       };
     }
     case "deleted": {
       return {
         ...state,
-        sequence: state.sequence.filter(item => item.id !== action.id)
+        sequence: state.sequence.filter(item => item.id !== action.id),
+        currentLength: state.currentLength - state.sequence.find(item => item.id == action.id).keypresses.length
       };
     }
     case "reordered": {
@@ -176,14 +180,17 @@ export function sequenceReducer(state, action) {
       return {
         ...state,
         sequence: [],
-        nextId: 0
+        nextId: 0,
+        currentLength: 0
       };
     }
     case "edit": {
+      // Iterate through keypresses and add together
       return {
         ...state,
         sequence: action.sequence,
-        nextId: action.sequence.length
+        nextId: action.sequence.length,
+        currentLength: action.sequenceLength
       }
     }
     case "submitted": {
@@ -200,5 +207,6 @@ export function sequenceReducer(state, action) {
 
 export const initialState = {
   sequence: [],
-  nextId: 0
+  nextId: 0,
+  currentLength: 0
 }

@@ -22,7 +22,7 @@ const modifierArray = [
 function SequenceBuilder({ bumpbarButtons, setBumpbarButtons, currentButton }) {
   const sequence = useSequence();
   const inputDisabled = (() => {
-    if (sequence.sequence.length >= 58) return true;
+    if (sequence.currentLength >= 58) return true;
     if (sequence.sequence.length > 0) {
       if (sequence.sequence[0].keypresses[0].usage == "FD" && sequence.sequence.length >= 2) return true;
     }
@@ -139,9 +139,12 @@ function SequenceOptions({ bumpbarButtons, setBumpbarButtons, currentButton, set
       return;
     }
     const selectedSequence = bumpbarButtons[currentButton].sequenceItems;
+    let sequenceLength = 0
+    selectedSequence.forEach((item) => sequenceLength += item.keypresses.length);
     sequenceDispatch({
       type: "edit",
-      sequence: selectedSequence
+      sequence: selectedSequence,
+      sequenceLength: sequenceLength
     });
   }
 
@@ -404,6 +407,7 @@ function AddPause({ inputDisabled }) {
 
 
 function StringEntry({ string, setString, modifiers, modifierValue, setModifiers, inputDisabled }) {
+  const sequence = useSequence();
   const sequenceDispatch = useSequenceDispatch();
 
   const handleSubmit = (e) => {
@@ -430,6 +434,10 @@ function StringEntry({ string, setString, modifiers, modifierValue, setModifiers
         "win": false
       })
     } else {
+      console.log(sequence.sequence.length, e.target.value.length)
+      if (sequence.currentLength + e.target.value.length > MAX_LENGTH) {
+        return;
+      }
       setString(e.target.value);
     }
   }

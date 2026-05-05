@@ -8,6 +8,9 @@ import styles from "./SequenceBuilder.module.css"
 import Balancer from 'react-wrap-balancer';
 
 
+const MAX_LENGTH = 58;
+
+
 const modifierArray = [
   {"name": "ctrl", "value": 1},
   {"name": "shift", "value": 2},
@@ -341,6 +344,7 @@ function AddRepeat() {
 
 
 function AddPause() {
+  const sequence = useSequence();
   const sequenceDispatch = useSequenceDispatch();
   const [pause, setPause] = useState("");
 
@@ -373,7 +377,7 @@ function AddPause() {
         <button
           type="submit"
           className={styles.addButton}
-          disabled={(pause === "" || pause == 0 || pause > 60)}
+          disabled={pause === "" || pause == 0 || pause > 60 || sequence.sequence.length >= MAX_LENGTH}
         >ADD</button>
       </form>
     </div>
@@ -382,6 +386,7 @@ function AddPause() {
 
 
 function StringEntry({ string, setString, modifiers, modifierValue, setModifiers }) {
+  const sequence = useSequence();
   const sequenceDispatch = useSequenceDispatch();
 
   const handleSubmit = (e) => {
@@ -420,7 +425,7 @@ function StringEntry({ string, setString, modifiers, modifierValue, setModifiers
       </div>
       <form className={styles.stringEntryInput} onSubmit={handleSubmit}>
         <input type="text" value={string} onChange={handleChange} placeholder="Enter text or character(s) here..." />
-        <button type="submit" className={styles.addButton} disabled={string.length === 0}>ADD</button>
+        <button type="submit" className={styles.addButton} disabled={string.length === 0 || sequence.sequence.length >= MAX_LENGTH}>ADD</button>
       </form>
     </div>
   )
@@ -542,6 +547,7 @@ function KeyboardFunctions({ modifierString, modifierValue, setModifiers }) {
 
 
 function KeyboardButton({ value, text, spacing, modifierValue, setModifiers }) {
+  const sequence = useSequence();
   const sequenceDispatch = useSequenceDispatch();
 
   const handleClick = () => {
@@ -562,7 +568,7 @@ function KeyboardButton({ value, text, spacing, modifierValue, setModifiers }) {
   if (value === "") {
     return <span className={styles[spacing]}></span>
   } else {
-    return <button value={value} className={styles[spacing]} onClick={handleClick}>{text}</button>
+    return <button value={value} className={styles[spacing]} onClick={handleClick} disabled={sequence.sequence.length >= MAX_LENGTH}>{text}</button>
   }
 }
 

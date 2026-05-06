@@ -115,6 +115,20 @@ function SequenceOptions({ bumpbarButtons, setBumpbarButtons, currentButton, set
     }
   }
 
+  const handleErase = () => {
+    if (currentButton == null) {
+      return;
+    }
+
+    const updatedArray = [...bumpbarButtons];
+    updatedArray[currentButton] = {
+      string: "",
+      keypresses: [],
+      sequenceItems: []
+    }
+    setBumpbarButtons(updatedArray);
+  }
+
   const handleSubmit = () => {
     if (sequence.sequence.length > 0) {
       const updatedArray = [...bumpbarButtons];
@@ -156,9 +170,14 @@ function SequenceOptions({ bumpbarButtons, setBumpbarButtons, currentButton, set
         disabled={sequence.sequence.length === 0}
       >Reset Sequence</button>
       <button
+        className={`${styles.optionButton} ${styles.eraseOption}`}
+        onClick={handleErase}
+        disabled={currentButton === null || bumpbarButtons[currentButton].keypresses.length === 0}
+      >Erase Button</button>
+      <button
         className={`${styles.optionButton} ${styles.editOption}`}
         onClick={handleEdit}
-        disabled={currentButton === null}
+        disabled={currentButton === null || bumpbarButtons[currentButton].keypresses.length === 0}
       >Edit Button</button>
       <button
         className={`${styles.optionButton} ${styles.addOption}`}

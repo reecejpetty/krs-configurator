@@ -94,7 +94,7 @@ function ButtonCountToggle({ active, setActive }) {
 }
 
 function SelectedButtonSequence({ currentButton, bumpbarButtons }) {
-  if (currentButton == null) {
+  if (currentButton == null || bumpbarButtons[currentButton].keypresses.length === 0) {
     return null;
   }
 

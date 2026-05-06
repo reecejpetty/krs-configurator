@@ -103,6 +103,10 @@ input[type="checkbox"] {
     margin: 5px 0;
 }
 
+.tooltipContent ul {
+    padding-left: 20px;
+}
+
 .tooltip:hover .tooltipContent {
     display: block;
 }

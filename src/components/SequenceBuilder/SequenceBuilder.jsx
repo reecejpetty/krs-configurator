@@ -164,7 +164,10 @@ function SequenceOptions({ bumpbarButtons, setBumpbarButtons, currentButton, set
 
   return (
     <div className={styles.sequenceOptionsRow}>
-      <h2>Selected Button</h2>
+      <div className={styles.flexRow}>
+        <h2>Selected Button</h2>
+        <Tooltip name="selected-button" text={<><p>These options configure the currently selected Bumpbar button from the display above.</p><ul><li><b>Erase</b> removes all sequence items from the button.</li><li><b>Edit</b> copies all sequence items to the <b>Current Sequence</b> below.</li><li><b>Save</b> copies all sequence items from the <b>Current Sequence</b> to the current button.</li></ul></>} />
+      </div>
       <div></div>
       <div className={styles.sequenceOptions}>
         <button
@@ -381,7 +384,7 @@ function AddRepeat() {
           type="submit"
           className={styles.addButton}
           disabled={sequence.sequence.length > 0}
-        >ADD</button>
+        >Add</button>
       </form>
     </div>
   )
@@ -422,7 +425,7 @@ function AddPause({ inputDisabled }) {
           type="submit"
           className={styles.addButton}
           disabled={pause === "" || pause == 0 || pause > 60 || inputDisabled}
-        >ADD</button>
+        >Add</button>
       </form>
     </div>
   )
@@ -473,7 +476,7 @@ function StringEntry({ string, setString, modifiers, modifierValue, setModifiers
       </div>
       <form className={styles.stringEntryInput} onSubmit={handleSubmit}>
         <input type="text" value={string} onChange={handleChange} placeholder="Enter text or character(s) here..." />
-        <button type="submit" className={styles.addButton} disabled={string.length === 0 || inputDisabled}>ADD</button>
+        <button type="submit" className={styles.addButton} disabled={string.length === 0 || inputDisabled}>Add</button>
       </form>
     </div>
   )

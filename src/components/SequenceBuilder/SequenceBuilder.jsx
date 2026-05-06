@@ -163,27 +163,31 @@ function SequenceOptions({ bumpbarButtons, setBumpbarButtons, currentButton, set
   }
 
   return (
-    <div className={styles.sequenceOptions}>
+    <div className={styles.sequenceOptionsRow}>
+      <h2>Selected Button</h2>
+      <div></div>
+      <div className={styles.sequenceOptions}>
+        <button
+          className={`${styles.optionButton} ${styles.eraseOption}`}
+          onClick={handleErase}
+          disabled={currentButton === null || bumpbarButtons[currentButton].keypresses.length === 0}
+        >Erase</button>
+        <button
+          className={`${styles.optionButton} ${styles.editOption}`}
+          onClick={handleEdit}
+          disabled={currentButton === null || bumpbarButtons[currentButton].keypresses.length === 0}
+        >Edit</button>
+        <button
+          className={`${styles.optionButton} ${styles.addOption}`}
+          onClick={handleSubmit}
+          disabled={sequence.sequence.length === 0 || currentButton === null}
+        >Save</button>
+      </div>
       <button
         className={`${styles.optionButton} ${styles.resetOption}`}
         onClick={handleReset}
         disabled={sequence.sequence.length === 0}
-      >Reset Sequence</button>
-      <button
-        className={`${styles.optionButton} ${styles.eraseOption}`}
-        onClick={handleErase}
-        disabled={currentButton === null || bumpbarButtons[currentButton].keypresses.length === 0}
-      >Erase Button</button>
-      <button
-        className={`${styles.optionButton} ${styles.editOption}`}
-        onClick={handleEdit}
-        disabled={currentButton === null || bumpbarButtons[currentButton].keypresses.length === 0}
-      >Edit Button</button>
-      <button
-        className={`${styles.optionButton} ${styles.addOption}`}
-        onClick={handleSubmit}
-        disabled={sequence.sequence.length === 0 || currentButton === null}
-      >Save to Button</button>
+        >Reset Sequence</button>
     </div>
   )
 }

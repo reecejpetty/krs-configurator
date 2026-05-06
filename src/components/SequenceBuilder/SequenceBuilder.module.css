@@ -17,14 +17,19 @@
     flex-wrap: wrap;
 }
 
+.sequenceOptionsRow {
+    flex-grow: 1;
+    display: grid;
+    justify-content: end;
+    grid-template-columns: 1fr 1fr;
+}
+
 .sequenceOptions {
     display: flex;
-    flex-grow: 1;
     justify-content: space-between;
     align-items: center;
     gap: 20px;
     margin-bottom: 10px;
-    max-width: 700px;
     height: fit-content;
     border-radius: 40px;
 }
@@ -32,12 +37,14 @@
 .optionButton {
     composes: selectOff from global, button from global;
     display: block;
+    max-width: max-content;
     font-size: 1rem;
     text-align: center;
     color: black;
 }
 
 .resetOption {
+    justify-self: end;
     background-color: #ff606b;
     background-image: var(--red-button-gradient);
 }

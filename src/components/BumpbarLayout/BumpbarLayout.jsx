@@ -56,16 +56,6 @@ function BumpbarButton({number, id, text, currentButton, setCurrentButton, activ
   )
 }
 
-function ButtonActions() {
-  return (
-    <div className={styles.buttonActions}>
-      <button className={styles.updateButton}>Update</button>
-      <button className={styles.eraseButton}>Erase</button>
-      <button className={styles.resetButton}>Reset All</button>
-    </div>
-  )
-}
-
 function ButtonCountToggle({ active, setActive }) {
   return (
     <div className={active == 2 ? styles.switch20 : styles.switch}>

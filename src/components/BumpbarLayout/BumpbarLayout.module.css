@@ -124,36 +124,6 @@
     background-color: var(--amber);
 }
 
-.buttonActions {
-    display: flex;
-    justify-content: space-around;
-}
-
-.buttonAction {
-    width: 200px;
-    border: none;
-    border-radius: 10px;
-    padding: 10px;
-    text-align: center;
-    font-size: 1.25rem;
-    margin-bottom: 20px;
-}
-
-.updateButton {
-    composes: buttonAction;
-    background-color: lightgreen;
-}
-
-.eraseButton {
-    composes: buttonAction;
-    background-color: lightpink;
-}
-
-.resetButton {
-    composes: buttonAction;
-    background-color: lightcoral;
-}
-
 .switch {
     position: relative;
     display: flex;

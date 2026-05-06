@@ -134,6 +134,11 @@
     font-weight: bold;
 }
 
+.keyDown {
+    width: 100%;
+    background-color: var(--steel-blue2);
+}
+
 .modifierRow {
     composes: flexRow;
     justify-content: space-between;

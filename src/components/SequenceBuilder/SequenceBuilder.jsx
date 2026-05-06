@@ -77,6 +77,9 @@ function SequenceBuilder({ bumpbarButtons, setBumpbarButtons, currentButton }) {
           setModifiers={setModifiers}
           inputDisabled={inputDisabled}
         />
+        <div>
+          <KeypressChecker />
+        </div>
         <div className={styles.modifierRow}>
           <KeypressModifiers
             modifiers={modifiers}
@@ -479,6 +482,20 @@ function StringEntry({ string, setString, modifiers, modifierValue, setModifiers
         <button type="submit" className={styles.addButton} disabled={string.length === 0 || inputDisabled}>Add</button>
       </form>
     </div>
+  )
+}
+
+
+function KeypressChecker() {
+  const [keyDown, setKeyDown] = useState([]);
+  const handleKeyDown = (event) => {
+    event.preventDefault();
+    setKeyDown([...keyDown, `[${event.key}]`]);
+  }
+  return (
+    <>
+      <input className={styles.keyDown} type="text" onKeyDown={handleKeyDown} value={keyDown.join(" ")} readOnly /> 
+    </>
   )
 }
 

@@ -51,7 +51,7 @@ function FileUpload({ templateName, setTemplateName, setConnection, mode, setMod
 
         if (mode == "4") {
           const keyElements = krsFile.getElementsByTagName("key");
-          const bumpbarButtons = Array.from(keyElements).map(keyElement => {
+          const bumpbarButtons = Array.from(keyElements).map((keyElement, index) => {
             const seqArray = Array.from(keyElement.getElementsByTagName("seq"));
 
             const string = seqArray.map(seqElement => seqElement.textContent).join("");
@@ -70,7 +70,7 @@ function FileUpload({ templateName, setTemplateName, setConnection, mode, setMod
               })
             });
 
-            return { string: string, keypresses: keyPresses, sequenceItems: sequenceItems };
+            return { id: index, string: string, keypresses: keyPresses, sequenceItems: sequenceItems };
           });
 
           setBumpbarButtons(bumpbarButtons);

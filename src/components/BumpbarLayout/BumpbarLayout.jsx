@@ -29,13 +29,10 @@ function BumpbarLayout({ activeSwitch, setActiveSwitch, currentButton, setCurren
         <DragDropProvider
           plugins={(defaults) => [
             ...defaults,
-            Feedback.configure({feedback: "clone", dropAnimation: null}),
+            Feedback.configure({feedback: "clone"}),
           ]}
           onDragOver={(event) => {
             event.preventDefault();
-            if (isSortableOperation(event.operation)) {
-              console.log("Source: ", event.operation.source.id, "Target: ", event.operation.target.id);
-            }
           }}
           onDragEnd={(event) => {
             if (event.canceled) return;
@@ -43,7 +40,7 @@ function BumpbarLayout({ activeSwitch, setActiveSwitch, currentButton, setCurren
             if (isSortableOperation(event.operation)) {
               const updatedArray = swap([...bumpbarButtons], event);
               setBumpbarButtons(updatedArray);
-              console.log(updatedArray);
+              setCurrentButton(event.operation.target.index);
             }
           }}
         >

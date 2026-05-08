@@ -143,6 +143,7 @@ function SequenceOptions({ bumpbarButtons, setBumpbarButtons, currentButton, set
         }
       })
       updatedArray[currentButton] = {
+        id: bumpbarButtons[currentButton].id,
         string: sequence.sequence.map(item => item.string).join(""),
         keypresses: sequence.sequence.flatMap(item => item.keypresses),
         sequenceItems: updatedSequence

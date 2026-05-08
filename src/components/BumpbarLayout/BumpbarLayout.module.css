@@ -109,7 +109,7 @@
     cursor: pointer;
 }
 
-.bumpbarButton::before {
+.bumpbarButton:hover::before {
     content: attr(data-number);
     position: absolute;
     top: 0;

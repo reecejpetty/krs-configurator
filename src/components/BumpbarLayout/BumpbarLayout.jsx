@@ -39,7 +39,11 @@ function BumpbarLayout({ activeSwitch, setActiveSwitch, currentButton, setCurren
             if (isSortableOperation(event.operation)) {
               const updatedArray = swap([...bumpbarButtons], event);
               setBumpbarButtons(updatedArray);
-              setCurrentButton(event.operation.target.index);
+              if (currentButton == event.operation.source.index) {
+                setCurrentButton(event.operation.target.index);
+              } else if (currentButton == event.operation.target.index) {
+                setCurrentButton(event.operation.source.index)
+              }
             }
           }}
         >

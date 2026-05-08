@@ -490,11 +490,19 @@ function KeypressChecker() {
   const [keyDown, setKeyDown] = useState([]);
   const handleKeyDown = (event) => {
     event.preventDefault();
+    if (
+      (event.shiftKey && event.key == "Shift") || 
+      (event.ctrlKey && event.key == "Control") || 
+      (event.altKey && event.key == "Alt") || 
+      (event.metaKey && event.key == "Meta")
+     ) {
+      return;
+    }
     setKeyDown([...keyDown, `[${event.key}]`]);
   }
   return (
     <>
-      <input className={styles.keyDown} type="text" onKeyDown={handleKeyDown} value={keyDown.join(" ")} readOnly /> 
+      <input className={styles.keyDown} type="text" onKeyDown={handleKeyDown} onKeyUp={e => e.preventDefault()} value={keyDown.join(" ")} readOnly /> 
     </>
   )
 }

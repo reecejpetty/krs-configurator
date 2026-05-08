@@ -1,8 +1,14 @@
 import { useState } from 'react';
+import { DragDropProvider, DragOverlay } from '@dnd-kit/react';
+import { swap } from '@dnd-kit/helpers';
+import { Feedback } from '@dnd-kit/dom';
+import { SortableKeyboardPlugin } from '@dnd-kit/dom/sortable';
+import { pointerIntersection } from '@dnd-kit/collision';
+import { useSortable, isSortableOperation } from '@dnd-kit/react/sortable';
 import styles from './BumpbarLayout.module.css'
 import { Tooltip } from '../Snippets';
 
-function BumpbarLayout({ activeSwitch, setActiveSwitch, currentButton, setCurrentButton, bumpbarButtons }) {
+function BumpbarLayout({ activeSwitch, setActiveSwitch, currentButton, setCurrentButton, bumpbarButtons, setBumpbarButtons }) {
   // User will be able to set rowCount to either 2 or 3
   const [sticky, setSticky] = useState(false);
   const rowCount = activeSwitch;
@@ -20,21 +26,45 @@ function BumpbarLayout({ activeSwitch, setActiveSwitch, currentButton, setCurren
         <PinBumpbar sticky={sticky} setSticky={setSticky} />
       </div>
       <div className={sticky ? styles.bumpbarSticky : styles.bumpbar}>
-        <div className={activeSwitch == 2 ? styles.bumpbarLayout20 : styles.bumpbarLayout }>
-          {rowArray.map((_, rowIndex) => (
-            buttonArray.map((_, colIndex) => (
-              <BumpbarButton
-                key={(rowIndex * 10) + colIndex}
-                id={(rowIndex * 10) + colIndex}
-                number={(rowIndex * 10) + colIndex + 1}
-                text={bumpbarButtons[(rowIndex * 10) + colIndex].string }
-                currentButton={currentButton}
-                setCurrentButton={setCurrentButton}
-                active={(rowIndex * 10) + colIndex == currentButton}
-              />
-            ))
-          ))}
-        </div>
+        <DragDropProvider
+          plugins={(defaults) => [
+            ...defaults,
+            Feedback.configure({feedback: "clone", dropAnimation: null}),
+          ]}
+          onDragOver={(event) => {
+            event.preventDefault();
+            if (isSortableOperation(event.operation)) {
+              console.log("Source: ", event.operation.source.id, "Target: ", event.operation.target.id);
+            }
+          }}
+          onDragEnd={(event) => {
+            if (event.canceled) return;
+            
+            if (isSortableOperation(event.operation)) {
+              const updatedArray = swap([...bumpbarButtons], event);
+              setBumpbarButtons(updatedArray);
+              console.log(updatedArray);
+            }
+          }}
+        >
+          <div className={activeSwitch == 2 ? styles.bumpbarLayout20 : styles.bumpbarLayout }>
+            {rowArray.map((_, rowIndex) => (
+              buttonArray.map((_, colIndex) => (
+                <BumpbarButton
+                  key={bumpbarButtons[(rowIndex * 10) + colIndex].id}
+                  id={bumpbarButtons[(rowIndex * 10) + colIndex].id}
+                  index={(rowIndex * 10) + colIndex}
+                  number={(rowIndex * 10) + colIndex + 1}
+                  text={bumpbarButtons[(rowIndex * 10) + colIndex].string }
+                  currentButton={currentButton}
+                  setCurrentButton={setCurrentButton}
+                  active={(rowIndex * 10) + colIndex == currentButton}
+                  bumpbarButtons={bumpbarButtons}
+                />
+              ))
+            ))}
+          </div>
+        </DragDropProvider>
       </div>
       <div className={styles.flexRow}>
         <SelectedButtonSequence currentButton={currentButton} bumpbarButtons={bumpbarButtons} />
@@ -43,14 +73,22 @@ function BumpbarLayout({ activeSwitch, setActiveSwitch, currentButton, setCurren
   )
 }
 
-function BumpbarButton({number, id, text, currentButton, setCurrentButton, active}) {
-  const handleClick = (e) => {
-    const button = e.currentTarget.id;
+function BumpbarButton({number, id, index, text, currentButton, setCurrentButton, active}) {
+  const {ref, isDragSource, isDropTarget} = useSortable({id, index, collisionDetector: pointerIntersection});
+
+  const handleClick = () => {
+    const button = index;
     setCurrentButton((currentButton != button ? button : null))
   }
 
   return (
-    <button id={id} className={active ? styles.activeButton : styles.bumpbarButton} data-number={number} onClick={handleClick}>
+    <button 
+      id={id} 
+      ref={ref} 
+      className={`${active ? styles.activeButton : styles.bumpbarButton} ${isDragSource ? styles.dragSource : ""} ${isDropTarget ? styles.dropTarget : ""}`}
+      data-number={number}
+      onClick={handleClick}
+    >
       <span className={styles.bumpbarButtonText}>{text}</span>
     </button>
   )

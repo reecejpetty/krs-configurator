@@ -83,6 +83,18 @@
     word-wrap: break-word;
 }
 
+.dragSource {
+    border: solid 1px blue;
+}
+
+.dropTarget {
+    border: solid 1px red;
+}
+
+.bumpbarButton * {
+    pointer-events: none;
+}
+
 .bumpbarButton span {
     width: 100%;
     max-height: 100%;

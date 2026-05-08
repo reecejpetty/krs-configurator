@@ -12,8 +12,7 @@ function BumpbarLayout({ activeSwitch, setActiveSwitch, currentButton, setCurren
   // User will be able to set rowCount to either 2 or 3
   const [sticky, setSticky] = useState(false);
   const rowCount = activeSwitch;
-  const rowArray = Array.from({ length: rowCount });
-  const buttonArray = Array.from({ length: 10 })
+  const buttonArray = Array.from({ length: (10*rowCount) });
 
   return (
     <>
@@ -29,7 +28,7 @@ function BumpbarLayout({ activeSwitch, setActiveSwitch, currentButton, setCurren
         <DragDropProvider
           plugins={(defaults) => [
             ...defaults,
-            Feedback.configure({feedback: "clone"}),
+            Feedback.configure({feedback: "clone", dropAnimation: null}),
           ]}
           onDragOver={(event) => {
             event.preventDefault();
@@ -45,20 +44,17 @@ function BumpbarLayout({ activeSwitch, setActiveSwitch, currentButton, setCurren
           }}
         >
           <div className={activeSwitch == 2 ? styles.bumpbarLayout20 : styles.bumpbarLayout }>
-            {rowArray.map((_, rowIndex) => (
-              buttonArray.map((_, colIndex) => (
-                <BumpbarButton
-                  key={bumpbarButtons[(rowIndex * 10) + colIndex].id}
-                  id={bumpbarButtons[(rowIndex * 10) + colIndex].id}
-                  index={(rowIndex * 10) + colIndex}
-                  number={(rowIndex * 10) + colIndex + 1}
-                  text={bumpbarButtons[(rowIndex * 10) + colIndex].string }
-                  currentButton={currentButton}
-                  setCurrentButton={setCurrentButton}
-                  active={(rowIndex * 10) + colIndex == currentButton}
-                  bumpbarButtons={bumpbarButtons}
-                />
-              ))
+            {buttonArray.map((_, index) => (
+              <BumpbarButton
+                key={bumpbarButtons[index].id}
+                id={bumpbarButtons[index].id}
+                index={index}
+                number={index + 1}
+                text={bumpbarButtons[index].string }
+                currentButton={currentButton}
+                setCurrentButton={setCurrentButton}
+                active={index == currentButton}
+              />
             ))}
           </div>
         </DragDropProvider>

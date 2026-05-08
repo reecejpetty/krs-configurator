@@ -93,7 +93,7 @@
     color: black;
     background-color: var(--amber2);
     font-weight: bold;
-    cursor: pointer;
+    cursor: grab;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
 }
 
@@ -132,6 +132,7 @@
 .deleteItem:hover {
     color: var(--off-white);
     font-weight: bold;
+    cursor: pointer;
 }
 
 .keyDown {

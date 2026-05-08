@@ -82,7 +82,7 @@ function BumpbarButton({number, id, index, text, currentButton, setCurrentButton
     <button 
       id={id} 
       ref={ref} 
-      className={`${active ? styles.activeButton : styles.bumpbarButton} ${isDragSource ? styles.dragSource : ""} ${isDropTarget ? styles.dropTarget : ""}`}
+      className={`${active ? styles.activeButton : styles.bumpbarButton} ${isDragSource ? styles.dragSource : ""} ${(isDropTarget && !isDragSource) ? styles.dropTarget : ""}`}
       data-number={number}
       onClick={handleClick}
     >

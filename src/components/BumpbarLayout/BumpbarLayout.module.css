@@ -84,11 +84,12 @@
 }
 
 .dragSource {
-    border: solid 1px blue;
+    background-color: var(--steel-blue2);
+    opacity: 90%;
 }
 
 .dropTarget {
-    border: solid 1px red;
+    background-color: #13bc6a;
 }
 
 .bumpbarButton * {

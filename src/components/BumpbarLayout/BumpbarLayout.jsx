@@ -79,7 +79,7 @@ function BumpbarButton({number, id, index, text, currentButton, setCurrentButton
   }
 
   return (
-    <button 
+    <div 
       id={id} 
       ref={ref} 
       className={`${active ? styles.activeButton : styles.bumpbarButton} ${isDragSource ? styles.dragSource : ""} ${(isDropTarget && !isDragSource) ? styles.dropTarget : ""}`}
@@ -87,7 +87,7 @@ function BumpbarButton({number, id, index, text, currentButton, setCurrentButton
       onClick={handleClick}
     >
       <span className={styles.bumpbarButtonText}>{text}</span>
-    </button>
+    </div>
   )
 }
 

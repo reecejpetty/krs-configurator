@@ -166,23 +166,19 @@ function Beeper({ lockSound, setLockSound }) {
   const lockSoundOptions = [
     {
       "value": "None",
-      "label": "Never"
+      "label": "Off"
     },
     {
       "value": "Num",
-      "label": "Num Lock"
+      "label": "NUM"
     },
     {
       "value": "Caps",
-      "label": "Caps Lock"
+      "label": "CAPS"
     },
     {
       "value": "Scroll",
-      "label": "Scroll Lock"
-    },
-    {
-      "value": "Bel",
-      "label": "BEL"
+      "label": "SCROLL"
     }
   ]
 
@@ -192,26 +188,24 @@ function Beeper({ lockSound, setLockSound }) {
         <h2>Lock Sounds</h2>
         <Tooltip name="beeper" text={<><p>Configure the beeper to sound when certain lock keys are pressed, or to never sound.</p><p><b>Note:</b> Wired Bumpbars will beep continously until the lock key is turned off, while Wireless Bumpbars will beep for 2 seconds.</p></>} />
       </div>
-      <div className={styles.flexColumn}>
-        <div className={styles.beeperOptions}>
-          {lockSoundOptions.map((option, index) => (
-            <label className={lockSound === option.value? styles.beeperOptionActive : styles.beeperOption} key={index} htmlFor={`beeper-${option.value}`}>
-              <input
-                type="radio"
-                name="beeper-option"
-                id={`beeper-${option.value}`}
-                value={option.value}
-                checked={lockSound === option.value}
-                onChange={e => setLockSound(e.target.value)}
-              />{option.label}
-            </label>
-          ))}
-          <div className={styles.flexRow}>
-            <input type="radio" name="beeper-option" id="beeper-other" />
-            <label htmlFor="beeper-other">Other:&nbsp;
-              <input type="text" className={styles.otherText} defaultValue="0x07" />
-            </label>
-          </div>
+      <div className={styles.beeperOptions}>
+        {lockSoundOptions.map((option, index) => (
+          <label className={lockSound === option.value? styles.beeperOptionActive : styles.beeperOption} key={index} htmlFor={`beeper-${option.value}`}>
+            <input
+              type="radio"
+              name="beeper-option"
+              id={`beeper-${option.value}`}
+              value={option.value}
+              checked={lockSound === option.value}
+              onChange={e => setLockSound(e.target.value)}
+            />{option.label}
+          </label>
+        ))}
+        <div className={styles.flexRow} style={{ display: "none"}}>
+          <input type="radio" name="beeper-option" id="beeper-other" />
+          <label htmlFor="beeper-other">Other:&nbsp;
+            <input type="text" className={styles.otherText} defaultValue="0x07" />
+          </label>
         </div>
       </div>
     </div>

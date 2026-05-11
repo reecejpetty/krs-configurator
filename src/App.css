@@ -103,6 +103,9 @@ input[type="checkbox"] {
     align-items: center;
     padding-left: 10px;
     padding-bottom: 6px;
+    @media (max-width: 600px) {
+        padding-left: 6px;
+    }
 }
 
 .tooltipIndicator {

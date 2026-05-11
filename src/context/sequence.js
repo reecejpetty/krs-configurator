@@ -45,6 +45,9 @@ export function sequenceReducer(state, action) {
         if (char == ">") {
             char = "&gt;";
         }
+        if (!Object.keys(keyboardHexMap).includes(char)) {
+          return state;
+        }
         keypressArray.push({
           "string": char,
           "usage": keyboardHexMap[char].usage,
@@ -66,6 +69,9 @@ export function sequenceReducer(state, action) {
       };
     }
     case "added key": {
+      if (!Object.keys(keyboardHexMap).includes(action.key)) {
+        return state;
+      }
       const shift_modifiers = ["02", "03", "06", "07", "0A", "0B", "0E", "0F"];
       const usage = keyboardHexMap[action.key].usage;
       const isShifted = keyboardHexMap[action.key].modifier == "02";

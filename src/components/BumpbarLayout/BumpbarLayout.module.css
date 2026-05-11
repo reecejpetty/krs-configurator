@@ -109,9 +109,12 @@
     cursor: pointer;
 }
 
-.bumpbarButton:hover::before {
+.bumpbarButton::before {
     content: attr(data-number);
     position: absolute;
+    display: none;
+    justify-content: center;
+    align-items: center;
     top: 0;
     left: 0;
     min-width: fit-content;
@@ -122,6 +125,10 @@
     background-color: var(--steel-blue2);
     font-size: .65rem;
     text-align: center;
+}
+
+.bumpbarButton:hover::before {
+    display: flex;
 }
 
 .bumpbarButtonText {
@@ -271,8 +278,6 @@
 
     .bumpbarButton::before {
         display: flex;
-        align-items: center;
-        justify-content: center;
         top: unset;
         left: unset;
         width: 100%;

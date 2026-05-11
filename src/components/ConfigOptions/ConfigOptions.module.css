@@ -144,7 +144,7 @@ input[type="file"]::file-selector-button {
 }
 
 .beeperOption {
-    composes: flexRow, button from global;
+    composes: flexRow, button from global, selectOff from global;
     display: flex;
     align-items: center;
     color: black;

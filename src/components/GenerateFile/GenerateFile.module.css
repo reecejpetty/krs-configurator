@@ -9,24 +9,14 @@
     margin-bottom: 20px;
 }
 
-.button {
+.largeButton {
     padding: 0px 30px;
     height: 45px;
-    border: none;
-    border-radius: 40px;
-    box-shadow: var(--button-shadow);
     font-size: 1.1rem;
-    font-weight: bold;
-    text-align: center;
-    cursor: pointer;
-}
-
-.button:hover {
-    cursor: pointer;
 }
 
 .previewButton {
-    composes: button;
+    composes: largeButton, button from global;
     min-width: 200px;
     color: black;
     background-color: var(--steel-blue2);
@@ -41,7 +31,7 @@
 }
 
 .krsButton {
-    composes: button;
+    composes: largeButton, button from global;
     color: black;
     background-color: lightgreen;
     background-image: var(--green-button-gradient);

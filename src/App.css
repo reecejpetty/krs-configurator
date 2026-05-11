@@ -32,6 +32,10 @@ input[type="number"] {
     }
 }
 
+input[type="number"] {
+    padding: 0 10px 0 25px;
+}
+
 input[type="text"]:focus,
 input[type="text"]:focus-visible,
 input[type="number"]:focus,
@@ -62,6 +66,7 @@ input[type="checkbox"] {
     border: none;
     border-radius: 40px;
     box-shadow: var(--button-shadow);
+    text-align: center;
     font-weight: bold;
     white-space: nowrap;
     cursor: pointer;
@@ -72,12 +77,16 @@ input[type="checkbox"] {
     }
 }
 
+.button:active {
+    box-shadow: var(--button-active-shadow);
+}
+
 .dropdown {
     display: flex;
     flex-direction: row;
     align-items: center;
     height: 40px;
-    padding: 0 8px;
+    padding: 0 10px;
     background-color: white;
     border-radius: 40px;
     box-shadow: var(--button-shadow);
@@ -163,6 +172,6 @@ input[type="checkbox"] {
 
     input[type="text"],
     input[type="number"] {
-        padding: 8px 16px;
+        padding: 0px 16px;
     }
 }

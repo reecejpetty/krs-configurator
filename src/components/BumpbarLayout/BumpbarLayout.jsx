@@ -19,7 +19,7 @@ function BumpbarLayout({ activeSwitch, setActiveSwitch, currentButton, setCurren
       <div className={styles.flexApart} style={{ columnGap: "30px" }}>
         <div className={styles.flexRow} style={{ flexGrow: 1 }}>
           <h1>Bumpbar Buttons</h1>
-          <Tooltip name="bumpbar-buttons" text={<><p>The buttons below correspond to the buttons on your Bumpbar (use LED for alignment).</p><p>Select any button to configure and save a new sequence to it, or edit the button's current sequence (the button's currently configured sequence will appear below the Bumpbar when clicked).</p><p>You can toggle between a 20 and 30 button layout to match you Bumpbar.</p></>} />
+          <Tooltip name="bumpbar-buttons" text={<><p>The buttons below correspond to the buttons on your Bumpbar (use LED for alignment).</p><p>Select any button to configure and save a new sequence to it, or edit the button's current sequence (the button's currently configured sequence will appear below the Bumpbar when clicked).</p><p>You can toggle between a 20 and 30 button layout to match you Bumpbar.</p><p><b>Drag and drop buttons to swap them.</b></p></>} />
         </div>
         <ButtonCountToggle active={activeSwitch} setActive={setActiveSwitch} />
         <PinBumpbar sticky={sticky} setSticky={setSticky} />

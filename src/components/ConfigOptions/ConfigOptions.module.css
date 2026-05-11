@@ -76,11 +76,6 @@ input[type="file"]::file-selector-button {
     margin-top: 0px;
 }
 
-.configSection input[type="text"]:focus,
-.configSection input[type="text"]:focus-visible {
-    outline-color: var(--amber);
-}
-
 .keypressSoundSwitch {
     composes: flexRow;
     position: relative;

@@ -24,11 +24,20 @@ input[type="number"] {
     font-size: 1rem;
     cursor: pointer;
     outline-color: var(--amber);
+    box-shadow: var(--button-shadow);
     @media (max-width: 600px) {
         height: 35px;
         padding: 0px 16px;
         font-size: .9rem;
     }
+}
+
+input[type="text"]:focus,
+input[type="text"]:focus-visible,
+input[type="number"]:focus,
+input[type="number"]:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--amber);
 }
 
 input[type="checkbox"] {

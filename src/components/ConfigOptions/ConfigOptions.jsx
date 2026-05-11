@@ -141,16 +141,14 @@ function KeypressSound({ keypressSound, setKeypressSound, volume, setVolume }) {
         <h2>Keypress Sound</h2>
         <Tooltip name="keypress-sound" text={<><p>Toggle the keypress sound on or off.</p><p>When enabled, the volume can be adjusted from 1 (quiet) to 3 (loud).</p></>} />
       </div>
-      <div className={styles.flexRow}>
+      <div className={keypressSound ? styles.keypressSoundSwitchOn : styles.keypressSoundSwitch}>
         <div className={styles.flexRow}>
-          <div className={styles.flexRow}>
-            <input type="radio" name="keypress" id="keypress-enable" value="true" checked={keypressSound} onChange={e => setKeypressSound(e.target.value === "true")} />
-            <label htmlFor="keypress-enable">Enable</label>
-          </div>
-          <div className={styles.flexRow}>
-            <input type="radio" name="keypress" id="keypress-disable" value="false" checked={!keypressSound} onChange={e => setKeypressSound(e.target.value === "true")} />
-            <label htmlFor="keypress-disable">Disable</label>
-          </div>
+          <label htmlFor="keypress-enable" className={styles.keypressSoundOption}>
+            <input type="radio" name="keypress" id="keypress-enable" value="true" checked={keypressSound} onChange={e => setKeypressSound(e.target.value === "true")} />Enable</label>
+        </div>
+        <div className={styles.flexRow}>
+          <label htmlFor="keypress-disable" className={styles.keypressSoundOption}>
+            <input type="radio" name="keypress" id="keypress-disable" value="false" checked={!keypressSound} onChange={e => setKeypressSound(e.target.value === "true")} />Disable</label>
         </div>
       </div>
       <div className={styles.flexRow}>

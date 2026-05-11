@@ -83,6 +83,60 @@ input[type="file"]::file-selector-button {
     outline-color: var(--amber);
 }
 
+.keypressSoundSwitch {
+    composes: flexRow;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 10px;
+    height: 40px;
+    border-radius: 40px;
+    padding: 4px;
+    color: black;
+    background-color: var(--amber2);
+    /* box-shadow: 0 0 6px -1px black inset; */
+    box-shadow: var(--orange-button-shadow);
+    @media (max-width: 600px) {
+        height: 35px;
+    }
+}
+
+.keypressSoundSwitch::before {
+    content: "";
+    position: absolute;
+    right: 1.5%;
+    width: 47%;
+    height: 34px;
+    border-radius: 40px;
+    background-color: var(--steel-blue2);
+    background-image: var(--blue-button-gradient);
+    box-shadow: 0 1px 3px -1px rgb(20, 20, 70);
+    z-index: 1;
+    transition: right 0.3s ease-in-out;
+    @media (max-width: 600px) {
+        height: 29px;
+    }
+}
+
+.keypressSoundSwitchOn {
+    composes: keypressSoundSwitch;
+}
+
+.keypressSoundSwitchOn::before {
+    right: 51.5%;
+}
+
+.keypressSoundOption {
+    composes: selectOff from global;
+    border-radius: 30px;
+    padding: 5px 12px;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 2;
+}
+
 .beeperOptions {
     display: grid;
     gap: 10px;
@@ -109,6 +163,7 @@ input[type="file"]::file-selector-button {
     box-shadow: var(--orange-button-shadow);
 }
 
+.keypressSoundSwitch input[type="radio"],
 .beeperOption input[type="radio"] {
     width: 0;
     margin: 0;

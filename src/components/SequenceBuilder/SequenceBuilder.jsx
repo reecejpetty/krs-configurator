@@ -77,9 +77,6 @@ function SequenceBuilder({ bumpbarButtons, setBumpbarButtons, currentButton }) {
           setModifiers={setModifiers}
           inputDisabled={inputDisabled}
         />
-        <div>
-          <KeypressChecker />
-        </div>
         <div className={styles.modifierRow}>
           <KeypressModifiers
             modifiers={modifiers}

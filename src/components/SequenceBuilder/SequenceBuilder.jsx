@@ -125,6 +125,7 @@ function SequenceOptions({ bumpbarButtons, setBumpbarButtons, currentButton, set
 
     const updatedArray = [...bumpbarButtons];
     updatedArray[currentButton] = {
+      id: bumpbarButtons[currentButton].id,
       string: "",
       keypresses: [],
       sequenceItems: []

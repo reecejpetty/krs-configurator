@@ -276,7 +276,7 @@ function CurrentSequence() {
               )}
             </DragOverlay>
           </div>
-          <div className={sequence.sequence.length >= MAX_LENGTH ? styles.maxLength : styles.maxLengthHide}>Current Sequence is at maximum length</div>
+          <div className={sequence.currentLength >= MAX_LENGTH ? styles.maxLength : styles.maxLengthHide}>Current Sequence is at maximum length (58).</div>
         </div>
       </DragDropProvider>
     )
@@ -480,6 +480,7 @@ function StringEntry({ string, setString, modifiers, modifierValue, setModifiers
         <input type="text" value={string} onChange={handleChange} placeholder="Enter text or character(s) here..." />
         <button type="submit" className={styles.addButton} disabled={string.length === 0 || inputDisabled}>Add</button>
       </form>
+      <div className={sequence.currentLength + string.length >= MAX_LENGTH ? styles.maxLength : styles.maxLengthHide}>Text Entry and Current Sequence are at maximum length (58).</div>
     </div>
   )
 }

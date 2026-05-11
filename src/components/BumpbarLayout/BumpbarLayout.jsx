@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { DragDropProvider, DragOverlay } from '@dnd-kit/react';
 import { swap } from '@dnd-kit/helpers';
-import { Feedback } from '@dnd-kit/dom';
+import { AutoScroller, Feedback } from '@dnd-kit/dom';
 import { SortableKeyboardPlugin } from '@dnd-kit/dom/sortable';
 import { pointerIntersection } from '@dnd-kit/collision';
 import { useSortable, isSortableOperation } from '@dnd-kit/react/sortable';
@@ -27,7 +27,7 @@ function BumpbarLayout({ activeSwitch, setActiveSwitch, currentButton, setCurren
       <div className={sticky ? styles.bumpbarSticky : styles.bumpbar}>
         <DragDropProvider
           plugins={(defaults) => [
-            ...defaults,
+            ...defaults.filter((plugin) => plugin !== AutoScroller),
             Feedback.configure({feedback: "clone", dropAnimation: null}),
           ]}
           onDragOver={(event) => {
@@ -61,6 +61,13 @@ function BumpbarLayout({ activeSwitch, setActiveSwitch, currentButton, setCurren
               />
             ))}
           </div>
+          <DragOverlay>
+            {source => (
+              <div className={styles.dragOverlay}>
+                <span className={styles.bumpbarButtonText}>{source.data["dragText"]}</span>
+              </div>
+            )}
+          </DragOverlay>
         </DragDropProvider>
       </div>
       <div className={styles.flexRow}>
@@ -71,7 +78,7 @@ function BumpbarLayout({ activeSwitch, setActiveSwitch, currentButton, setCurren
 }
 
 function BumpbarButton({number, id, index, text, currentButton, setCurrentButton, active}) {
-  const {ref, isDragSource, isDropTarget} = useSortable({id, index, collisionDetector: pointerIntersection});
+  const {ref, isDragSource, isDropTarget} = useSortable({id, index, data:{["dragText"]: text}, collisionDetector: pointerIntersection});
 
   const handleClick = () => {
     const button = index;

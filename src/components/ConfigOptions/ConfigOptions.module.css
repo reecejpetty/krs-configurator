@@ -85,10 +85,34 @@ input[type="file"]::file-selector-button {
 
 .beeperOptions {
     display: grid;
-    column-gap: 10px;
+    gap: 10px;
     grid-template-columns: auto auto;
     grid-template-rows: auto auto auto;
     justify-items: start;
+}
+
+.beeperOption {
+    composes: flexRow, button from global;
+    display: flex;
+    align-items: center;
+    color: black;
+    background-color: var(--steel-blue2);
+    background-image: var(--blue-button-gradient);
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.beeperOptionActive {
+    composes: beeperOption;
+    background-color: var(--amber2);
+    background-image: unset;
+    box-shadow: var(--orange-button-shadow);
+}
+
+.beeperOption input[type="radio"] {
+    width: 0;
+    margin: 0;
+    opacity: 0;
 }
 
 .otherText {

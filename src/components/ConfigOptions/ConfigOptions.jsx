@@ -197,7 +197,7 @@ function Beeper({ lockSound, setLockSound }) {
       <div className={styles.flexColumn}>
         <div className={styles.beeperOptions}>
           {lockSoundOptions.map((option, index) => (
-            <div className={styles.flexRow} key={index}>
+            <label className={lockSound === option.value? styles.beeperOptionActive : styles.beeperOption} key={index} htmlFor={`beeper-${option.value}`}>
               <input
                 type="radio"
                 name="beeper-option"
@@ -205,9 +205,8 @@ function Beeper({ lockSound, setLockSound }) {
                 value={option.value}
                 checked={lockSound === option.value}
                 onChange={e => setLockSound(e.target.value)}
-              />
-              <label htmlFor={`beeper-${option.value}`}>{option.label}</label>
-            </div>
+              />{option.label}
+            </label>
           ))}
           <div className={styles.flexRow}>
             <input type="radio" name="beeper-option" id="beeper-other" />

@@ -2,12 +2,24 @@
     box-sizing: border-box;
 }
 
-select,
+select {
+    width: 100%;
+    border: none;
+    background-color: transparent;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+select:focus,
+select:focus-visible {
+    outline: none;
+}
+
 input[type="text"],
 input[type="number"] {
     height: 40px;
     padding: 0px 20px;
-    border: solid 1px black;
+    border: none;
     border-radius: 40px;
     font-size: 1rem;
     cursor: pointer;
@@ -49,6 +61,25 @@ input[type="checkbox"] {
         padding: 0px 16px;
         font-size: .9rem;
     }
+}
+
+.dropdown {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 40px;
+    padding: 0 8px;
+    background-color: white;
+    border-radius: 40px;
+    box-shadow: var(--button-shadow);
+    @media (max-width: 600px) {
+        height: 35px;
+    }
+}
+
+.dropdown:has(select:focus),
+.dropdown:has(select:focus-visible) {
+    box-shadow: 0 0 0 2px var(--amber);
 }
 
 .selectOff {
@@ -115,7 +146,11 @@ input[type="checkbox"] {
     select,
     input[type="text"],
     input[type="number"] {
-        padding: 8px 16px;
         font-size: .9rem;
+    }
+
+    input[type="text"],
+    input[type="number"] {
+        padding: 8px 16px;
     }
 }

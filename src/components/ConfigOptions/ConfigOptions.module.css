@@ -77,9 +77,7 @@ input[type="file"]::file-selector-button {
 }
 
 .configSection input[type="text"]:focus,
-.configSection input[type="text"]:focus-visible,
-.configSection select:focus,
-.configSection select:focus-visible {
+.configSection input[type="text"]:focus-visible {
     outline-color: var(--amber);
 }
 

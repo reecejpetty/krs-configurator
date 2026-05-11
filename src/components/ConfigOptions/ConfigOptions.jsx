@@ -99,7 +99,7 @@ function Connection({ connection, setConnection }) {
         <h2>Connection</h2>
         <Tooltip name="connection" text={<><p>Select the connection type for how you will connect your Bumpbar.</p><p><b>Note:</b> If you are unsure how you will eventually connect, leave connections as "Auto".</p></>} />
       </div>
-      <div className={styles.flexRow}>
+      <div className="dropdown">
         <select name="connection-dropdown" id="connection-dropdown" value={connection} onChange={e => setConnection(e.target.value)}>
           <option value="Auto">Auto</option>
           <option value="BLE">Bluetooth</option>
@@ -119,7 +119,7 @@ function Mode({ mode, setMode }) {
         <h2>Mode</h2>
         <Tooltip name="mode" text={<><p>All modes except Mode 4 contain pre-configured Bumpbar layouts and configurations for popular KDS systems, while Mode 4 is the user-customizable mode.</p></>} />
       </div>
-      <div className={styles.flexRow}>
+      <div className="dropdown">
         <select name="mode-dropdown" id="mode-dropdown" value={mode} onChange={e => setMode(e.target.value)}>
           <option value="1">1</option>
           <option value="2">2</option>
@@ -151,7 +151,7 @@ function KeypressSound({ keypressSound, setKeypressSound, volume, setVolume }) {
             <input type="radio" name="keypress" id="keypress-disable" value="false" checked={!keypressSound} onChange={e => setKeypressSound(e.target.value === "true")} />Disable</label>
         </div>
       </div>
-      <div className={styles.flexRow}>
+      <div className="dropdown">
         <select name="volume-dropdown" id="volume-dropdown" value={volume} onChange={e => setVolume(e.target.value)}>
           <option value="1">1 (Quiet)</option>
           <option value="2">2</option>

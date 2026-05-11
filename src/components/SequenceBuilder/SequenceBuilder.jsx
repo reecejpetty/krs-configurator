@@ -376,7 +376,7 @@ function AddRepeat() {
       </div>
       <form className={styles.addBlockContent} onSubmit={handleSubmit}>
         <div><b>Delay:</b></div>
-        <div>
+        <div className="dropdown">
           <select value={delay} onChange={(e) => setDelay(e.target.value)}>
             <option value="1">1 (Slow)</option>
             <option value="2">2</option>

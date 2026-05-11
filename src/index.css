@@ -17,7 +17,8 @@
   --green-button-gradient: linear-gradient(to bottom, #1fe887, #13bc6a);
   --red-button-gradient: linear-gradient(to bottom, #ff606b, #e34550);
   --disabled-button-gradient: linear-gradient(to bottom, gray, dimgray);
-
+  --input-gradient: linear-gradient(to bottom, white, rgb(220, 220, 220));
+  
   --navy: #1A3F6F;
   --steel-blue: #4A90C4;
   --steel-blue2: #68a2ce;

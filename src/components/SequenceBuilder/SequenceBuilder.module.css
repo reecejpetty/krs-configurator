@@ -21,7 +21,7 @@
     flex-grow: 1;
     display: grid;
     justify-content: end;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1.25fr 1fr;
 }
 
 .sequenceOptions {
@@ -31,13 +31,12 @@
     gap: 20px;
     margin-bottom: 10px;
     height: fit-content;
-    border-radius: 40px;
 }
 
 .optionButton {
     composes: selectOff from global, button from global;
     display: block;
-    max-width: max-content;
+    flex-grow: 1;
     font-size: 1rem;
     text-align: center;
     color: black;

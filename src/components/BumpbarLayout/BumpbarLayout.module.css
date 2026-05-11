@@ -18,7 +18,7 @@
     min-width: 350px;
     width: 100%;
     aspect-ratio: 3.5/1;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
     padding: 4%;
     border-radius: 15px;
     background-color: rgb(0, 0, 0);
@@ -213,6 +213,7 @@
     flex-wrap: wrap;
     gap: 10px;
     margin-top: 5px;
+    margin-bottom: 20px;
 }
 
 .sequenceItem {

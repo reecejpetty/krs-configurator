@@ -52,6 +52,7 @@ input[type="file"] {
     border: none;
     padding: 10px 0;
     font-size: 1rem;
+    cursor: pointer;
 }
 
 input[type="file"]::file-selector-button {

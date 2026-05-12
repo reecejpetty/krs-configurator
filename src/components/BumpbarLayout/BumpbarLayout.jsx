@@ -37,6 +37,7 @@ function BumpbarLayout({ buttonCount, setButtonCount, currentButton, setCurrentB
             if (event.canceled) return;
             
             if (isSortableOperation(event.operation)) {
+              setMode("4");
               const updatedArray = swap([...bumpbarButtons], event);
               setBumpbarButtons(updatedArray);
               if (currentButton == event.operation.source.index) {

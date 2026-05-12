@@ -46,11 +46,13 @@ function ConfigOptions({ templateName, setTemplateName, connection, setConnectio
           volume={volume}
           setVolume={setVolume}
           setMode={setMode}
+          advanced={advanced}
         />
         <Beeper
           lockSound={lockSound}
           setLockSound={setLockSound}
           setMode={setMode}
+          advanced={advanced}
         />
       </div>
     </div>
@@ -231,7 +233,7 @@ function Mode({ mode, setMode, setBumpbarButtons, setConnection, setKeypressSoun
   )
 }
 
-function KeypressSound({ keypressSound, setKeypressSound, volume, setVolume, setMode }) {
+function KeypressSound({ keypressSound, setKeypressSound, volume, setVolume, setMode, advanced }) {
   const handleChange = (e) => {
     setMode("4");
     setKeypressSound(e.target.value === "true")
@@ -253,7 +255,7 @@ function KeypressSound({ keypressSound, setKeypressSound, volume, setVolume, set
             <input type="radio" name="keypress" id="keypress-disable" value="false" checked={!keypressSound} onChange={handleChange} />Disable</label>
         </div>
       </div>
-      <div className="dropdown">
+      <div className="dropdown" style={{ display: advanced ? "flex" : "none" }}>
         <select name="volume-dropdown" id="volume-dropdown" value={volume} onChange={e => setVolume(e.target.value)}>
           <option value="1">1 (Quiet)</option>
           <option value="2">2</option>
@@ -264,23 +266,37 @@ function KeypressSound({ keypressSound, setKeypressSound, volume, setVolume, set
   )
 }
 
-function Beeper({ lockSound, setLockSound, setMode }) {
+function Beeper({ lockSound, setLockSound, setMode, advanced }) {
   const lockSoundOptions = [
     {
       "value": "None",
-      "label": "Off"
+      "label": "Off",
+      "advanced": false
     },
     {
       "value": "Num",
-      "label": "NUM"
+      "label": "NUM",
+      "advanced": false
     },
     {
       "value": "Caps",
-      "label": "CAPS"
+      "label": "CAPS",
+      "advanced": false
     },
     {
       "value": "Scroll",
-      "label": "SCROLL"
+      "label": "SCROLL",
+      "advanced": false
+    },
+    {
+      "value": "Bel",
+      "label": "BEL",
+      "advanced": true
+    },
+    {
+      "value": "Other",
+      "label": "Other",
+      "advanced": true
     }
   ]
 
@@ -296,18 +312,21 @@ function Beeper({ lockSound, setLockSound, setMode }) {
         <Tooltip name="beeper" text={<><p>Configure the beeper to sound when certain lock keys are pressed, or to never sound.</p><p><b>Note:</b> Wired Bumpbars will beep continously until the lock key is turned off, while Wireless Bumpbars will beep for 2 seconds.</p></>} />
       </div>
       <div className={styles.beeperOptions}>
-        {lockSoundOptions.map((option, index) => (
-          <label className={lockSound === option.value? styles.beeperOptionActive : styles.beeperOption} key={index} htmlFor={`beeper-${option.value}`}>
-            <input
-              type="radio"
-              name="beeper-option"
-              id={`beeper-${option.value}`}
-              value={option.value}
-              checked={lockSound === option.value}
-              onChange={handleChange}
-            />{option.label}
-          </label>
-        ))}
+        {lockSoundOptions.map((option, index) => {
+          if (!option.advanced || option.advanced === advanced) {
+            return (
+              <label className={lockSound === option.value? styles.beeperOptionActive : styles.beeperOption} key={index} htmlFor={`beeper-${option.value}`}>
+                <input
+                  type="radio"
+                  name="beeper-option"
+                  id={`beeper-${option.value}`}
+                  value={option.value}
+                  checked={lockSound === option.value}
+                  onChange={handleChange}
+                />{option.label}
+              </label>
+            )
+          }})}
         <div className={styles.flexRow} style={{ display: "none"}}>
           <input type="radio" name="beeper-option" id="beeper-other" />
           <label htmlFor="beeper-other">Other:&nbsp;

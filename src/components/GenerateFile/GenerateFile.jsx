@@ -3,7 +3,7 @@ import styles from "./GenerateFile.module.css"
 import { krstobin, downloadKrsb } from "../../krstobin";
 
 
-function GenerateFile({ activeSwitch, templateName, connection, serialInfo, mode, keypressSound, volume, lockSound, otherValue, bumpbarButtons }) {
+function GenerateFile({ buttonCount, templateName, connection, serialInfo, mode, keypressSound, volume, lockSound, otherValue, bumpbarButtons }) {
   const [showPreview, setShowPreview] = useState(false);
 
   const date = new Date();
@@ -34,7 +34,7 @@ function GenerateFile({ activeSwitch, templateName, connection, serialInfo, mode
     xml += `        <key keynum="${i + 1}">\n`;
     for (const keyPress of bumpbarButtons[i].keypresses) {
       // Only writes <key> if usage and modifier are not empty.
-      if (keyPress.usage != "00" && keyPress.usage != "00" && i < activeSwitch * 10) {
+      if (keyPress.usage != "00" && keyPress.usage != "00" && i < buttonCount * 10) {
         xml += `            <seq usage="0x${keyPress.usage}" modifier="0x${keyPress.modifier}">${keyPress.string}</seq>\n`;
       }
     }

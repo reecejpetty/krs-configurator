@@ -19,7 +19,14 @@ function ConfigOptions({ templateName, setTemplateName, connection, setConnectio
           setBumpbarButtons={setBumpbarButtons}
         />
         <Connection connection={connection} setConnection={setConnection} />
-        <Mode mode={mode} setMode={setMode} setBumpbarButtons={setBumpbarButtons} />
+        <Mode
+          mode={mode}
+          setMode={setMode}
+          setBumpbarButtons={setBumpbarButtons}
+          setConnection={setConnection}
+          setKeypressSound={setKeypressSound}
+          setLockSound={setLockSound}
+        />
         <KeypressSound keypressSound={keypressSound} setKeypressSound={setKeypressSound} volume={volume} setVolume={setVolume} />
         <Beeper lockSound={lockSound} setLockSound={setLockSound} />
       </div>
@@ -113,31 +120,47 @@ function Connection({ connection, setConnection }) {
   )
 }
 
-function Mode({ mode, setMode, setBumpbarButtons }) {
+function Mode({ mode, setMode, setBumpbarButtons, setConnection, setKeypressSound, setLockSound }) {
   const changeModes = (e) => {
     const newMode = e.target.value;
     const modeObject = modes.find((item) => item.mode == newMode);
-    const newButtonArray = modeObject.keys.map((key, index) => (
-      {
-        "id": index,
-        "string": key.string,
-        "keypresses": [{
-          "string": key.string,
-          "usage": key.usage,
-          "modifier": key.modifier
-        }],
-        "sequenceItems": [{
-          "id": 0,
-          "string": key.string,
-          "keypresses": {
+    const newButtonArray = modeObject.keys.map((key, index) => {
+      if (key.string) {
+        return (
+          {
+            "id": index,
             "string": key.string,
-            "usage": key.usage,
-            "modifier": key.modifier
+            "keypresses": [{
+              "string": key.string,
+              "usage": key.usage,
+              "modifier": key.modifier
+            }],
+            "sequenceItems": [{
+              "id": 0,
+              "string": key.string,
+              "keypresses": [{
+                "string": key.string,
+                "usage": key.usage,
+                "modifier": key.modifier
+              }]
+            }]
           }
-        }]
+        )
+      } else {
+        return (
+          {
+            "id": index,
+            "string": "",
+            "keypresses": [],
+            "sequenceItems": []
+          }
+        )
       }
-    ))
+    })
     setMode(newMode);
+    setConnection(modeObject.connection);
+    setKeypressSound(modeObject.sound);
+    setLockSound(modeObject.lock);
     setBumpbarButtons(newButtonArray);
   }
 

@@ -8,10 +8,10 @@ import { useSortable, isSortableOperation } from '@dnd-kit/react/sortable';
 import styles from './BumpbarLayout.module.css'
 import { Tooltip } from '../Snippets';
 
-function BumpbarLayout({ activeSwitch, setActiveSwitch, currentButton, setCurrentButton, bumpbarButtons, setBumpbarButtons, setMode }) {
+function BumpbarLayout({ buttonCount, setButtonCount, currentButton, setCurrentButton, bumpbarButtons, setBumpbarButtons, setMode }) {
   // User will be able to set rowCount to either 2 or 3
   const [sticky, setSticky] = useState(false);
-  const rowCount = activeSwitch;
+  const rowCount = buttonCount;
   const buttonArray = Array.from({ length: (10*rowCount) });
 
   return (
@@ -21,7 +21,7 @@ function BumpbarLayout({ activeSwitch, setActiveSwitch, currentButton, setCurren
           <h1>Bumpbar Buttons</h1>
           <Tooltip name="bumpbar-buttons" text={<><p>The buttons below correspond to the buttons on your Bumpbar (use LED for alignment).</p><p>Select any button to configure and save a new sequence to it, or edit the button's current sequence (the button's currently configured sequence will appear below the Bumpbar when clicked).</p><p>You can toggle between a 20 and 30 button layout to match you Bumpbar.</p><p><b>Drag and drop buttons to swap them.</b></p></>} />
         </div>
-        <ButtonCountToggle active={activeSwitch} setActive={setActiveSwitch} setMode={setMode} />
+        <ButtonCountToggle buttonCount={buttonCount} setButtonCount={setButtonCount} setMode={setMode} />
         <PinBumpbar sticky={sticky} setSticky={setSticky} />
       </div>
       <div className={sticky ? styles.bumpbarSticky : styles.bumpbar}>
@@ -47,7 +47,7 @@ function BumpbarLayout({ activeSwitch, setActiveSwitch, currentButton, setCurren
             }
           }}
         >
-          <div className={activeSwitch == 2 ? styles.bumpbarLayout20 : styles.bumpbarLayout }>
+          <div className={buttonCount == 2 ? styles.bumpbarLayout20 : styles.bumpbarLayout }>
             {buttonArray.map((_, index) => (
               <BumpbarButton
                 key={bumpbarButtons[index].id}
@@ -98,19 +98,19 @@ function BumpbarButton({number, id, index, text, currentButton, setCurrentButton
   )
 }
 
-function ButtonCountToggle({ active, setActive, setMode }) {
+function ButtonCountToggle({ buttonCount, setButtonCount, setMode }) {
   const handleChange = (e) => {
     setMode("4");
-    setActive(e.target.id === "20-switch" ? 2 : 3);
+    setButtonCount(e.target.id === "20-switch" ? 2 : 3);
   }
   return (
-    <div className={active == 2 ? styles.switch20 : styles.switch}>
+    <div className={buttonCount == 2 ? styles.switch20 : styles.switch}>
       <label className={styles.switchOption} htmlFor='20-switch'>
         <input
           type='radio'
           id='20-switch'
           name='button-count-switch'
-          checked={active == 2}
+          checked={buttonCount == 2}
           onChange={handleChange}
         />20 Button
       </label>
@@ -119,7 +119,7 @@ function ButtonCountToggle({ active, setActive, setMode }) {
           type='radio'
           id='30-switch'
           name='button-count-switch'
-          checked={active == 3}
+          checked={buttonCount == 3}
           onChange={handleChange}
         />30 Button
       </label>

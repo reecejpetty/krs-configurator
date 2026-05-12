@@ -2,7 +2,7 @@ import { Tooltip } from '../Snippets';
 import styles from './ConfigOptions.module.css'
 import modes from "../../modes.json"
 
-function ConfigOptions({ templateName, setTemplateName, connection, setConnection, mode, setMode, keypressSound, setKeypressSound, volume, setVolume, lockSound, setLockSound, setBumpbarButtons }) {
+function ConfigOptions({ templateName, setTemplateName, connection, setConnection, mode, setMode, keypressSound, setKeypressSound, volume, setVolume, lockSound, setLockSound, setBumpbarButtons, setButtonCount }) {
   return (
     <div>
       <h1>Configuration Options</h1>
@@ -30,6 +30,7 @@ function ConfigOptions({ templateName, setTemplateName, connection, setConnectio
           setConnection={setConnection}
           setKeypressSound={setKeypressSound}
           setLockSound={setLockSound}
+          setButtonCount={setButtonCount}
         />
         <KeypressSound
           keypressSound={keypressSound}
@@ -138,7 +139,7 @@ function Connection({ connection, setConnection, setMode }) {
   )
 }
 
-function Mode({ mode, setMode, setBumpbarButtons, setConnection, setKeypressSound, setLockSound }) {
+function Mode({ mode, setMode, setBumpbarButtons, setConnection, setKeypressSound, setLockSound, setButtonCount }) {
   const changeModes = (e) => {
     const newMode = e.target.value;
     const modeObject = modes.find((item) => item.mode == newMode);
@@ -179,6 +180,7 @@ function Mode({ mode, setMode, setBumpbarButtons, setConnection, setKeypressSoun
     setConnection(modeObject.connection);
     setKeypressSound(modeObject.sound);
     setLockSound(modeObject.lock);
+    setButtonCount(modeObject.buttonCount);
     setBumpbarButtons(newButtonArray);
   }
 

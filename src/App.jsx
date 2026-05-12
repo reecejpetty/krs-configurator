@@ -13,7 +13,7 @@ function App() {
   const [keypressSound, setKeypressSound] = useState(true);  
   const [volume, setVolume] = useState("3");
   const [lockSound, setLockSound] = useState("Scroll");
-  const [activeSwitch, setActiveSwitch] = useState(3)
+  const [buttonCount, setButtonCount] = useState(3)
 
   const [currentButton, setCurrentButton] = useState(null);
 
@@ -53,10 +53,11 @@ function App() {
         lockSound={lockSound}
         setLockSound={setLockSound}
         setBumpbarButtons={setBumpbarButtons}
+        setButtonCount={setButtonCount}
       />
       <BumpbarLayout
-        activeSwitch={activeSwitch}
-        setActiveSwitch={setActiveSwitch}
+        buttonCount={buttonCount}
+        setButtonCount={setButtonCount}
         bumpbarButtons={bumpbarButtons}
         setBumpbarButtons={setBumpbarButtons}
         currentButton={currentButton}
@@ -72,8 +73,8 @@ function App() {
         />
       </SequenceProvider>
       <GenerateFile
-        activeSwitch={activeSwitch}
-        setActiveSwitch={setActiveSwitch}
+        buttonCount={buttonCount}
+        setButtonCount={setButtonCount}
         templateName={templateName}
         connection={connection}
         mode={mode}

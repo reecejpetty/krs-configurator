@@ -4,6 +4,7 @@
         "connection": "Auto",
         "sound": "On",
         "lock": "Scroll",
+        "buttonCount": "3",
         "keys": [
             { "string": "1", "usage": "1E", "modifier": "00" },
             { "string": "2", "usage": "1F", "modifier": "00" },
@@ -42,6 +43,7 @@
         "connection": "USB",
         "sound": "On",
         "lock": "Num",
+        "buttonCount": "3",
         "keys": [
             { "string": "h", "usage": "0B", "modifier": "00" },
             { "string": "i", "usage": "0C", "modifier": "00" },
@@ -80,6 +82,7 @@
         "connection": "USB",
         "sound": "On",
         "lock": "Scroll",
+        "buttonCount": "2",
         "keys": [
             { "string": "1", "usage": "1E", "modifier": "00" },
             { "string": "2", "usage": "1F", "modifier": "00" },
@@ -118,6 +121,7 @@
         "connection": "Auto",
         "sound": "On",
         "lock": "Scroll",
+        "buttonCount": "3",
         "keys": [
             { "string": "", "usage": "00", "modifier": "00" },
             { "string": "", "usage": "00", "modifier": "00" },
@@ -156,6 +160,7 @@
         "connection": "Serial",
         "sound": "On",
         "lock": "Bel",
+        "buttonCount": "3",
         "keys": [
             { "string": "", "usage": "00", "modifier": "00" },
             { "string": "", "usage": "00", "modifier": "00" },
@@ -194,6 +199,7 @@
         "connection": "USB",
         "sound": "On",
         "lock": "Scroll",
+        "buttonCount": "2",
         "keys": [
             { "string": "1", "usage": "1E", "modifier": "00" },
             { "string": "2", "usage": "1F", "modifier": "00" },
@@ -232,6 +238,7 @@
         "connection": "USB",
         "sound": "On",
         "lock": "Scroll",
+        "buttonCount": "2",
         "keys": [
             { "string": "[CTRL]", "usage": "00", "modifier": "01" },
             { "string": "[NUM_-]", "usage": "56", "modifier": "00" },

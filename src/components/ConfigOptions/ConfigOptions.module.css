@@ -40,7 +40,7 @@
     flex-grow: 1;
     max-width: 300px;
     @media (max-width: 600px) {
-        max-width: 95%;
+        max-width: 75%;
     }
 }
 
@@ -97,6 +97,7 @@ input[type="file"]::file-selector-button {
     box-shadow: var(--orange-button-shadow);
     @media (max-width: 600px) {
         height: 35px;
+        gap: 0px;
     }
 }
 
@@ -184,17 +185,17 @@ input[type="file"]::file-selector-button {
     composes: configSection;
 }
 
-/* @media screen and (max-width: 600px) {
+@media screen and (max-width: 600px) {
     .connection {
         order: 3;
     }
     .mode {
-        order: 5;
-    }
-    .keypressSound {
         order: 2;
     }
-    .lockSounds {
+    .keypressSound {
         order: 4;
     }
-} */
+    .lockSounds {
+        order: 5;
+    }
+}

@@ -1,5 +1,6 @@
 import { Tooltip } from '../Snippets';
 import styles from './ConfigOptions.module.css'
+import modes from "../../modes.json"
 
 function ConfigOptions({ templateName, setTemplateName, connection, setConnection, mode, setMode, keypressSound, setKeypressSound, volume, setVolume, lockSound, setLockSound, setBumpbarButtons }) {
   return (
@@ -18,7 +19,7 @@ function ConfigOptions({ templateName, setTemplateName, connection, setConnectio
           setBumpbarButtons={setBumpbarButtons}
         />
         <Connection connection={connection} setConnection={setConnection} />
-        <Mode mode={mode} setMode={setMode} />
+        <Mode mode={mode} setMode={setMode} setBumpbarButtons={setBumpbarButtons} />
         <KeypressSound keypressSound={keypressSound} setKeypressSound={setKeypressSound} volume={volume} setVolume={setVolume} />
         <Beeper lockSound={lockSound} setLockSound={setLockSound} />
       </div>
@@ -112,7 +113,34 @@ function Connection({ connection, setConnection }) {
   )
 }
 
-function Mode({ mode, setMode }) {
+function Mode({ mode, setMode, setBumpbarButtons }) {
+  const changeModes = (e) => {
+    const newMode = e.target.value;
+    const modeObject = modes.find((item) => item.mode == newMode);
+    const newButtonArray = modeObject.keys.map((key, index) => (
+      {
+        "id": index,
+        "string": key.string,
+        "keypresses": [{
+          "string": key.string,
+          "usage": key.usage,
+          "modifier": key.modifier
+        }],
+        "sequenceItems": [{
+          "id": 0,
+          "string": key.string,
+          "keypresses": {
+            "string": key.string,
+            "usage": key.usage,
+            "modifier": key.modifier
+          }
+        }]
+      }
+    ))
+    setMode(newMode);
+    setBumpbarButtons(newButtonArray);
+  }
+
   return (
     <div id="mode" className={styles.mode}>
       <div className={styles.flexRow}>
@@ -120,7 +148,7 @@ function Mode({ mode, setMode }) {
         <Tooltip name="mode" text={<><p>All modes except Mode 4 contain pre-configured Bumpbar layouts and configurations for popular KDS systems, while Mode 4 is the user-customizable mode.</p></>} />
       </div>
       <div className="dropdown">
-        <select name="mode-dropdown" id="mode-dropdown" value={mode} onChange={e => setMode(e.target.value)}>
+        <select name="mode-dropdown" id="mode-dropdown" value={mode} onChange={changeModes}>
           <option value="1">1</option>
           <option value="2">2</option>
           <option value="3">3</option>

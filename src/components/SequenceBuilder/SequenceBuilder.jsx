@@ -440,14 +440,32 @@ function StringEntry({ string, setString, modifiers, modifierValue, setModifiers
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setString("");
-    sequenceDispatch({
-      type: "added string",
-      string: string
+    if ((Object.values(modifiers).some(Boolean)) && string.length === 1) {
+      sequenceDispatch({
+        type: "added key",
+        key: string,
+        modifier: modifierValue,
+        keyboard: false
+      })
+    } else {
+      sequenceDispatch({
+        type: "added string",
+        string: string
+      })
+    }
+    setModifiers({
+      "ctrl": false,
+      "shift": false,
+      "alt": false,
+      "win": false
     })
+    setString("");
   }
 
   const handleChange = (e) => {
+    if (sequence.currentLength + e.target.value.length > MAX_LENGTH) {
+      return;
+    }
     if ((Object.values(modifiers).some(Boolean)) && string.length === 0) {
       sequenceDispatch({
         type: "added key",
@@ -462,10 +480,6 @@ function StringEntry({ string, setString, modifiers, modifierValue, setModifiers
         "win": false
       })
     } else {
-      console.log(sequence.sequence.length, e.target.value.length)
-      if (sequence.currentLength + e.target.value.length > MAX_LENGTH) {
-        return;
-      }
       setString(e.target.value);
     }
   }

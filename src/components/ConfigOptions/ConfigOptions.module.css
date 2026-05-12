@@ -174,12 +174,23 @@ input[type="file"]::file-selector-button {
 }
 
 .beeperOptions {
-    display: grid;
+    display: flex;
     gap: 10px;
+    @media (max-width: 600px) {
+        display: grid;
+        grid-template-columns: auto auto;
+        justify-items: start;
+    }
+}
+
+.beeperOptionsAdvanced {
+    display: grid;
     grid-template-columns: auto auto;
     justify-items: start;
+    gap: 10px;
     @media (max-width: 600px) {
-        grid-template-columns: repeat(4, auto);
+        display: flex;
+        flex-wrap: wrap;
     }
 }
 

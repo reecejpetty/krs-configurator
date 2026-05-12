@@ -311,7 +311,7 @@ function Beeper({ lockSound, setLockSound, setMode, advanced }) {
         <h2>Lock Sounds</h2>
         <Tooltip name="beeper" text={<><p>Configure the beeper to sound when certain lock keys are pressed, or to never sound.</p><p><b>Note:</b> Wired Bumpbars will beep continously until the lock key is turned off, while Wireless Bumpbars will beep for 2 seconds.</p></>} />
       </div>
-      <div className={styles.beeperOptions}>
+      <div className={advanced ? styles.beeperOptionsAdvanced : styles.beeperOptions}>
         {lockSoundOptions.map((option, index) => {
           if (!option.advanced || option.advanced === advanced) {
             return (

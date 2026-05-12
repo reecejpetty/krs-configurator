@@ -5,7 +5,6 @@ import BumpbarLayout from './components/BumpbarLayout/BumpbarLayout'
 import SequenceBuilder from './components/SequenceBuilder/SequenceBuilder'
 import GenerateFile from "./components/GenerateFile/GenerateFile"
 import { SequenceProvider } from './context/SequenceProvider'
-import keyboardHexMap from "./keyboardhexmap.json"
 
 function App() {
   const [templateName, setTemplateName] = useState("");
@@ -99,26 +98,12 @@ function Footer() {
 
 const initialState = (() => {
   const mode1Array = [0,1,2,3,4,5,6,7,8,9,'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t'];
-  return mode1Array.map((key, index) => {
+  return mode1Array.map((_, index) => {
     return {
       id: index,
-      string: key,
-      keypresses: [
-        {
-          string: key,
-          usage: keyboardHexMap[key].usage,
-          modifier: keyboardHexMap[key].modifier
-        }
-      ],
-      sequenceItems: [{
-        id: 0,
-        string: key,
-        keypresses: [{
-          string: key,
-          usage: keyboardHexMap[key].usage,
-          modifier: keyboardHexMap[key].modifier
-        }]
-      }]
+      string: "",
+      keypresses: [],
+      sequenceItems: []
     }
   })
 })

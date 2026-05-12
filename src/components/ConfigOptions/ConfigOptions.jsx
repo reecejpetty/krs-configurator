@@ -37,6 +37,8 @@ function ConfigOptions({ templateName, setTemplateName, connection, setConnectio
           setMode={setMode}
           setBumpbarButtons={setBumpbarButtons}
           setConnection={setConnection}
+          serialInfo={serialInfo}
+          setSerialInfo={setSerialInfo}
           setKeypressSound={setKeypressSound}
           setLockSound={setLockSound}
           setButtonCount={setButtonCount}
@@ -229,7 +231,7 @@ function Connection({ connection, setConnection, serialInfo, setSerialInfo, setM
   )
 }
 
-function Mode({ mode, setMode, setBumpbarButtons, setConnection, setKeypressSound, setLockSound, setButtonCount, display }) {
+function Mode({ mode, setMode, setBumpbarButtons, setConnection, serialInfo, setSerialInfo, setKeypressSound, setLockSound, setButtonCount, display }) {
   if (!display) {
     return;
   }
@@ -272,6 +274,7 @@ function Mode({ mode, setMode, setBumpbarButtons, setConnection, setKeypressSoun
     })
     setMode(newMode);
     setConnection(modeObject.connection);
+    if (newMode === "5") setSerialInfo({...serialInfo, baudRate: "1200"});
     setKeypressSound(modeObject.sound);
     setLockSound(modeObject.lock);
     setButtonCount(modeObject.buttonCount);

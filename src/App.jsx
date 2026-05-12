@@ -61,12 +61,14 @@ function App() {
         setBumpbarButtons={setBumpbarButtons}
         currentButton={currentButton}
         setCurrentButton={setCurrentButton}
+        setMode={setMode}
       />
       <SequenceProvider>
         <SequenceBuilder
           bumpbarButtons={bumpbarButtons}
           setBumpbarButtons={setBumpbarButtons}
           currentButton={currentButton}
+          setMode={setMode}
         />
       </SequenceProvider>
       <GenerateFile

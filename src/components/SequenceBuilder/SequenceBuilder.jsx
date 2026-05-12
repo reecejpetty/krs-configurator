@@ -19,7 +19,7 @@ const modifierArray = [
 ]
 
 
-function SequenceBuilder({ bumpbarButtons, setBumpbarButtons, currentButton }) {
+function SequenceBuilder({ bumpbarButtons, setBumpbarButtons, currentButton, setMode }) {
   const sequence = useSequence();
   const inputDisabled = (() => {
     if (sequence.currentLength >= 58) return true;
@@ -65,6 +65,7 @@ function SequenceBuilder({ bumpbarButtons, setBumpbarButtons, currentButton }) {
           setBumpbarButtons={setBumpbarButtons}
           currentButton={currentButton}
           setModifiers={setModifiers}
+          setMode={setMode}
         />
       </div>
       <div className={styles.flexColumn}>
@@ -99,7 +100,7 @@ function SequenceBuilder({ bumpbarButtons, setBumpbarButtons, currentButton }) {
 }
 
 
-function SequenceOptions({ bumpbarButtons, setBumpbarButtons, currentButton, setModifiers }) {
+function SequenceOptions({ bumpbarButtons, setBumpbarButtons, currentButton, setModifiers, setMode }) {
   const sequence = useSequence();
   const sequenceDispatch = useSequenceDispatch();
 
@@ -120,6 +121,7 @@ function SequenceOptions({ bumpbarButtons, setBumpbarButtons, currentButton, set
       return;
     }
 
+    setMode("4");
     const updatedArray = [...bumpbarButtons];
     updatedArray[currentButton] = {
       id: bumpbarButtons[currentButton].id,
@@ -131,6 +133,7 @@ function SequenceOptions({ bumpbarButtons, setBumpbarButtons, currentButton, set
   }
 
   const handleSubmit = () => {
+    setMode("4");
     if (sequence.sequence.length > 0) {
       const updatedArray = [...bumpbarButtons];
       const updatedSequence = sequence.sequence.map((item, index) => {

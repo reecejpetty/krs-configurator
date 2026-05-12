@@ -18,7 +18,11 @@ function ConfigOptions({ templateName, setTemplateName, connection, setConnectio
           setLockSound={setLockSound}
           setBumpbarButtons={setBumpbarButtons}
         />
-        <Connection connection={connection} setConnection={setConnection} />
+        <Connection
+          connection={connection}
+          setConnection={setConnection}
+          setMode={setMode}
+        />
         <Mode
           mode={mode}
           setMode={setMode}
@@ -27,8 +31,18 @@ function ConfigOptions({ templateName, setTemplateName, connection, setConnectio
           setKeypressSound={setKeypressSound}
           setLockSound={setLockSound}
         />
-        <KeypressSound keypressSound={keypressSound} setKeypressSound={setKeypressSound} volume={volume} setVolume={setVolume} />
-        <Beeper lockSound={lockSound} setLockSound={setLockSound} />
+        <KeypressSound
+          keypressSound={keypressSound}
+          setKeypressSound={setKeypressSound}
+          volume={volume}
+          setVolume={setVolume}
+          setMode={setMode}
+        />
+        <Beeper
+          lockSound={lockSound}
+          setLockSound={setLockSound}
+          setMode={setMode}
+        />
       </div>
     </div>
   )
@@ -100,7 +114,11 @@ function FileUpload({ templateName, setTemplateName, setConnection, mode, setMod
   )
 }
 
-function Connection({ connection, setConnection }) {
+function Connection({ connection, setConnection, setMode }) {
+  const handleChange = (e) => {
+    setMode("4");
+    setConnection(e.target.value)
+  }
   return (
     <div id="connection" className={styles.connection}>
       <div className={styles.flexRow}>
@@ -108,7 +126,7 @@ function Connection({ connection, setConnection }) {
         <Tooltip name="connection" text={<><p>Select the connection type for how you will connect your Bumpbar.</p><p><b>Note:</b> If you are unsure how you will eventually connect, leave connections as "Auto".</p></>} />
       </div>
       <div className="dropdown">
-        <select name="connection-dropdown" id="connection-dropdown" value={connection} onChange={e => setConnection(e.target.value)}>
+        <select name="connection-dropdown" id="connection-dropdown" value={connection} onChange={handleChange}>
           <option value="Auto">Auto</option>
           <option value="BLE">Bluetooth</option>
           <option value="USB">USB</option>
@@ -185,7 +203,12 @@ function Mode({ mode, setMode, setBumpbarButtons, setConnection, setKeypressSoun
   )
 }
 
-function KeypressSound({ keypressSound, setKeypressSound, volume, setVolume }) {
+function KeypressSound({ keypressSound, setKeypressSound, volume, setVolume, setMode }) {
+  const handleChange = (e) => {
+    setMode("4");
+    setKeypressSound(e.target.value === "true")
+  }
+
   return (
     <div id="keypress-sound" className={styles.keypressSound}>
       <div className={styles.flexRow}>
@@ -195,11 +218,11 @@ function KeypressSound({ keypressSound, setKeypressSound, volume, setVolume }) {
       <div className={keypressSound ? styles.keypressSoundSwitchOn : styles.keypressSoundSwitch}>
         <div className={styles.flexRow}>
           <label htmlFor="keypress-enable" className={styles.keypressSoundOption}>
-            <input type="radio" name="keypress" id="keypress-enable" value="true" checked={keypressSound} onChange={e => setKeypressSound(e.target.value === "true")} />Enable</label>
+            <input type="radio" name="keypress" id="keypress-enable" value="true" checked={keypressSound} onChange={handleChange} />Enable</label>
         </div>
         <div className={styles.flexRow}>
           <label htmlFor="keypress-disable" className={styles.keypressSoundOption}>
-            <input type="radio" name="keypress" id="keypress-disable" value="false" checked={!keypressSound} onChange={e => setKeypressSound(e.target.value === "true")} />Disable</label>
+            <input type="radio" name="keypress" id="keypress-disable" value="false" checked={!keypressSound} onChange={handleChange} />Disable</label>
         </div>
       </div>
       <div className="dropdown">
@@ -213,7 +236,7 @@ function KeypressSound({ keypressSound, setKeypressSound, volume, setVolume }) {
   )
 }
 
-function Beeper({ lockSound, setLockSound }) {
+function Beeper({ lockSound, setLockSound, setMode }) {
   const lockSoundOptions = [
     {
       "value": "None",
@@ -233,6 +256,11 @@ function Beeper({ lockSound, setLockSound }) {
     }
   ]
 
+  const handleChange = (e) => {
+    setMode("4");
+    setLockSound(e.target.value)
+  }
+
   return (
     <div id="beeper" className={styles.lockSounds}>
       <div className={styles.flexRow}>
@@ -248,7 +276,7 @@ function Beeper({ lockSound, setLockSound }) {
               id={`beeper-${option.value}`}
               value={option.value}
               checked={lockSound === option.value}
-              onChange={e => setLockSound(e.target.value)}
+              onChange={handleChange}
             />{option.label}
           </label>
         ))}

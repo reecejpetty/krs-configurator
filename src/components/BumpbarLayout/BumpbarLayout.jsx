@@ -8,7 +8,7 @@ import { useSortable, isSortableOperation } from '@dnd-kit/react/sortable';
 import styles from './BumpbarLayout.module.css'
 import { Tooltip } from '../Snippets';
 
-function BumpbarLayout({ activeSwitch, setActiveSwitch, currentButton, setCurrentButton, bumpbarButtons, setBumpbarButtons }) {
+function BumpbarLayout({ activeSwitch, setActiveSwitch, currentButton, setCurrentButton, bumpbarButtons, setBumpbarButtons, setMode }) {
   // User will be able to set rowCount to either 2 or 3
   const [sticky, setSticky] = useState(false);
   const rowCount = activeSwitch;
@@ -21,7 +21,7 @@ function BumpbarLayout({ activeSwitch, setActiveSwitch, currentButton, setCurren
           <h1>Bumpbar Buttons</h1>
           <Tooltip name="bumpbar-buttons" text={<><p>The buttons below correspond to the buttons on your Bumpbar (use LED for alignment).</p><p>Select any button to configure and save a new sequence to it, or edit the button's current sequence (the button's currently configured sequence will appear below the Bumpbar when clicked).</p><p>You can toggle between a 20 and 30 button layout to match you Bumpbar.</p><p><b>Drag and drop buttons to swap them.</b></p></>} />
         </div>
-        <ButtonCountToggle active={activeSwitch} setActive={setActiveSwitch} />
+        <ButtonCountToggle active={activeSwitch} setActive={setActiveSwitch} setMode={setMode} />
         <PinBumpbar sticky={sticky} setSticky={setSticky} />
       </div>
       <div className={sticky ? styles.bumpbarSticky : styles.bumpbar}>
@@ -98,7 +98,11 @@ function BumpbarButton({number, id, index, text, currentButton, setCurrentButton
   )
 }
 
-function ButtonCountToggle({ active, setActive }) {
+function ButtonCountToggle({ active, setActive, setMode }) {
+  const handleChange = (e) => {
+    setMode("4");
+    setActive(e.target.id === "20-switch" ? 2 : 3);
+  }
   return (
     <div className={active == 2 ? styles.switch20 : styles.switch}>
       <label className={styles.switchOption} htmlFor='20-switch'>
@@ -107,8 +111,7 @@ function ButtonCountToggle({ active, setActive }) {
           id='20-switch'
           name='button-count-switch'
           checked={active == 2}
-          onChange={() => setActive(2)}
-          onClick={() => setActive(active == 2 ? 3 : 2)}
+          onChange={handleChange}
         />20 Button
       </label>
       <label className={styles.switchOption} htmlFor='30-switch'>
@@ -117,8 +120,7 @@ function ButtonCountToggle({ active, setActive }) {
           id='30-switch'
           name='button-count-switch'
           checked={active == 3}
-          onChange={() => setActive(3)}
-          onClick={() => setActive(active == 3 ? 2 : 3)}
+          onChange={handleChange}
         />30 Button
       </label>
     </div>

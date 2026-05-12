@@ -13,10 +13,10 @@ function App() {
   const [keypressSound, setKeypressSound] = useState(true);  
   const [volume, setVolume] = useState("3");
   const [lockSound, setLockSound] = useState("Scroll");
+  const [otherValue, setOtherValue] = useState("0x07");
   const [buttonCount, setButtonCount] = useState(3)
 
   const [currentButton, setCurrentButton] = useState(null);
-
   const [bumpbarButtons, setBumpbarButtons] = useState(initialState);
 
   useEffect(() => {
@@ -52,6 +52,8 @@ function App() {
         setVolume={setVolume}
         lockSound={lockSound}
         setLockSound={setLockSound}
+        otherValue={otherValue}
+        setOtherValue={setOtherValue}
         setBumpbarButtons={setBumpbarButtons}
         setButtonCount={setButtonCount}
       />
@@ -81,6 +83,7 @@ function App() {
         keypressSound={keypressSound}
         volume={volume}
         lockSound={lockSound}
+        otherValue={otherValue}
         bumpbarButtons={bumpbarButtons}
       />
       <Footer />

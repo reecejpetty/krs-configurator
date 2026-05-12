@@ -3,7 +3,7 @@ import styles from './ConfigOptions.module.css'
 import modes from "../../modes.json"
 import { useState } from 'react';
 
-function ConfigOptions({ templateName, setTemplateName, connection, setConnection, mode, setMode, keypressSound, setKeypressSound, volume, setVolume, lockSound, setLockSound, setBumpbarButtons, setButtonCount }) {
+function ConfigOptions({ templateName, setTemplateName, connection, setConnection, mode, setMode, keypressSound, setKeypressSound, volume, setVolume, lockSound, setLockSound, otherValue, setOtherValue, setBumpbarButtons, setButtonCount }) {
   const [advanced, setAdvanced] = useState(false);
 
   return (
@@ -51,6 +51,8 @@ function ConfigOptions({ templateName, setTemplateName, connection, setConnectio
         <Beeper
           lockSound={lockSound}
           setLockSound={setLockSound}
+          otherValue={otherValue}
+          setOtherValue={setOtherValue}
           setMode={setMode}
           advanced={advanced}
         />
@@ -266,7 +268,7 @@ function KeypressSound({ keypressSound, setKeypressSound, volume, setVolume, set
   )
 }
 
-function Beeper({ lockSound, setLockSound, setMode, advanced }) {
+function Beeper({ lockSound, setLockSound, otherValue, setOtherValue, setMode, advanced }) {
   const lockSoundOptions = [
     {
       "value": "None",
@@ -314,25 +316,27 @@ function Beeper({ lockSound, setLockSound, setMode, advanced }) {
       <div className={advanced ? styles.beeperOptionsAdvanced : styles.beeperOptions}>
         {lockSoundOptions.map((option, index) => {
           if (!option.advanced || option.advanced === advanced) {
+            let otherTextBox = null;
+            if (option.value === "Other" && lockSound === "Other") {
+              otherTextBox = <input type="text" className={styles.otherText} value={otherValue} onChange={(e) => setOtherValue(e.target.value)} pattern="0x[a-fA-F0-9]{2}" requred />
+            }
             return (
-              <label className={lockSound === option.value? styles.beeperOptionActive : styles.beeperOption} key={index} htmlFor={`beeper-${option.value}`}>
-                <input
-                  type="radio"
-                  name="beeper-option"
-                  id={`beeper-${option.value}`}
-                  value={option.value}
-                  checked={lockSound === option.value}
-                  onChange={handleChange}
-                />{option.label}
-              </label>
+              <div className={styles.flexRow}>
+                <label className={lockSound === option.value? styles.beeperOptionActive : styles.beeperOption} key={index} htmlFor={`beeper-${option.value}`}>
+                  <input
+                    type="radio"
+                    name="beeper-option"
+                    id={`beeper-${option.value}`}
+                    value={option.value}
+                    checked={lockSound === option.value}
+                    onChange={handleChange}
+                  />{option.label}
+                </label>
+                {otherTextBox}
+              </div>
             )
-          }})}
-        <div className={styles.flexRow} style={{ display: "none"}}>
-          <input type="radio" name="beeper-option" id="beeper-other" />
-          <label htmlFor="beeper-other">Other:&nbsp;
-            <input type="text" className={styles.otherText} defaultValue="0x07" />
-          </label>
-        </div>
+          }
+        })}
       </div>
     </div>
   )

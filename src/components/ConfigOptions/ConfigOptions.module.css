@@ -47,17 +47,21 @@
     composes: selectOff from global;
     display: flex;
     justify-content: flex-end;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
 }
 
 .advancedToggleLabel {
     composes: button from global;
     display: flex;
+    justify-content: center;
     align-items: center;
-    width: fit-content;
+    width: 260px;
     color: black;
     background-color: var(--steel-blue2);
     background-image: var(--blue-button-gradient);
+    @media (max-width: 600px) {
+        width: 210px;
+    }
 }
 
 .advancedToggleActive {
@@ -78,7 +82,7 @@
     flex-grow: 1;
     max-width: 300px;
     @media (max-width: 600px) {
-        max-width: 75%;
+        max-width: 100%;
     }
 }
 
@@ -220,11 +224,13 @@ input[type="file"]::file-selector-button {
 }
 
 .otherText {
-    height: fit-content !important;
-    width: 60px;
-    border-radius: 10px !important;
-    padding: 4px !important;
+    width: 90px;
+    margin-left: 10px;
     text-align: center;
+}
+
+.otherText:invalid {
+    box-shadow: 0 0 0 2px red !important;
 }
 
 .connection,

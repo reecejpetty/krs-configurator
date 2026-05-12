@@ -160,7 +160,7 @@
         "connection": "Serial",
         "sound": "On",
         "lock": "Bel",
-        "buttonCount": "3",
+        "buttonCount": "2",
         "keys": [
             { "string": "", "usage": "00", "modifier": "00" },
             { "string": "", "usage": "00", "modifier": "00" },

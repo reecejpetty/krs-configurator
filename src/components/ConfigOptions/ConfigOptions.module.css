@@ -13,6 +13,14 @@
     flex-direction: column;
 }
 
+.flexApart {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+    flex-wrap: wrap;
+}
+
 .configOptions {
     composes: flexRow;
     align-items: flex-start;
@@ -33,6 +41,36 @@
     color: var(--charcoal);
     border-radius: 12px;
     font-weight: bold;
+}
+
+.advancedToggle {
+    composes: selectOff from global;
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 10px;
+}
+
+.advancedToggleLabel {
+    composes: button from global;
+    display: flex;
+    align-items: center;
+    width: fit-content;
+    color: black;
+    background-color: var(--steel-blue2);
+    background-image: var(--blue-button-gradient);
+}
+
+.advancedToggleActive {
+    composes: advancedToggleLabel;
+    background-color: var(--amber2);
+    background-image: unset;
+    box-shadow: var(--orange-button-shadow);
+}
+
+.advancedToggle input[type="checkbox"] {
+    width: 0;
+    opacity: 0;
+    margin: 0;
 }
 
 .fileUpload {

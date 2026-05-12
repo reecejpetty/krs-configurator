@@ -1,11 +1,17 @@
 import { Tooltip } from '../Snippets';
 import styles from './ConfigOptions.module.css'
 import modes from "../../modes.json"
+import { useState } from 'react';
 
 function ConfigOptions({ templateName, setTemplateName, connection, setConnection, mode, setMode, keypressSound, setKeypressSound, volume, setVolume, lockSound, setLockSound, setBumpbarButtons, setButtonCount }) {
+  const [advanced, setAdvanced] = useState(false);
+
   return (
     <div>
-      <h1>Configuration Options</h1>
+      <div className={styles.flexApart}>
+        <h1>Configuration Options</h1>
+        <AdvancedOptions advanced={advanced} setAdvanced={setAdvanced} />
+      </div>
       <div id="config-options" className={styles.configOptions}>
         <FileUpload
           templateName={templateName}
@@ -22,6 +28,7 @@ function ConfigOptions({ templateName, setTemplateName, connection, setConnectio
           connection={connection}
           setConnection={setConnection}
           setMode={setMode}
+          display={advanced}
         />
         <Mode
           mode={mode}
@@ -31,6 +38,7 @@ function ConfigOptions({ templateName, setTemplateName, connection, setConnectio
           setKeypressSound={setKeypressSound}
           setLockSound={setLockSound}
           setButtonCount={setButtonCount}
+          display={advanced}
         />
         <KeypressSound
           keypressSound={keypressSound}
@@ -47,6 +55,17 @@ function ConfigOptions({ templateName, setTemplateName, connection, setConnectio
       </div>
     </div>
   )
+}
+
+function AdvancedOptions({ advanced, setAdvanced }) {
+    return (
+      <div className={styles.advancedToggle}>
+        <label htmlFor="advancedOptionCheckbox" className={advanced ? styles.advancedToggleActive : styles.advancedToggleLabel}>
+          <input type="checkbox" id="advancedOptionCheckbox" checked={advanced} onChange={e => setAdvanced(e.target.checked)} />
+          {advanced ? "Hide" : "Show"} Advanced Options
+        </label>
+      </div>
+    )
 }
 
 function FileUpload({ templateName, setTemplateName, setConnection, mode, setMode, setKeypressSound, setVolume, setLockSound, setBumpbarButtons }) {
@@ -115,7 +134,10 @@ function FileUpload({ templateName, setTemplateName, setConnection, mode, setMod
   )
 }
 
-function Connection({ connection, setConnection, setMode }) {
+function Connection({ connection, setConnection, setMode, display }) {
+  if (!display) {
+    return;
+  }
   const handleChange = (e) => {
     setMode("4");
     setConnection(e.target.value)
@@ -139,7 +161,11 @@ function Connection({ connection, setConnection, setMode }) {
   )
 }
 
-function Mode({ mode, setMode, setBumpbarButtons, setConnection, setKeypressSound, setLockSound, setButtonCount }) {
+function Mode({ mode, setMode, setBumpbarButtons, setConnection, setKeypressSound, setLockSound, setButtonCount, display }) {
+  if (!display) {
+    return;
+  }
+  
   const changeModes = (e) => {
     const newMode = e.target.value;
     const modeObject = modes.find((item) => item.mode == newMode);

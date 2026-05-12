@@ -122,6 +122,18 @@ input[type="file"]::file-selector-button {
     margin-top: 0px;
 }
 
+.serialInfo {
+    composes: flexColumn;
+    margin-top: 10px;
+    gap: 5px;
+}
+
+.serialInfoRow {
+    display: grid;
+    grid-template-columns: 100px 110px;
+    align-items: center;
+}
+
 .keypressSoundSwitch {
     composes: flexRow;
     position: relative;

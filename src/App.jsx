@@ -9,6 +9,7 @@ import { SequenceProvider } from './context/SequenceProvider'
 function App() {
   const [templateName, setTemplateName] = useState("");
   const [connection, setConnection] = useState("Auto");
+  const [serialInfo, setSerialInfo] = useState(initialSerialState)
   const [mode, setMode] = useState("4");
   const [keypressSound, setKeypressSound] = useState(true);  
   const [volume, setVolume] = useState("3");
@@ -44,6 +45,8 @@ function App() {
         setTemplateName={setTemplateName}
         connection={connection}
         setConnection={setConnection}
+        serialInfo={serialInfo}
+        setSerialInfo={setSerialInfo}
         mode={mode}
         setMode={setMode}
         keypressSound={keypressSound}
@@ -79,6 +82,7 @@ function App() {
         setButtonCount={setButtonCount}
         templateName={templateName}
         connection={connection}
+        serialInfo={serialInfo}
         mode={mode}
         keypressSound={keypressSound}
         volume={volume}
@@ -113,6 +117,15 @@ const initialState = (() => {
     }
   })
 })
+
+const initialSerialState = (() => (
+  {
+    "baudRate": "9600",
+    "parity": "N",
+    "wordSize": "8",
+    "stopBits": "1"
+  }
+))
 
 
 export default App

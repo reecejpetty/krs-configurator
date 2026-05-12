@@ -3,7 +3,7 @@ import styles from './ConfigOptions.module.css'
 import modes from "../../modes.json"
 import { useState } from 'react';
 
-function ConfigOptions({ templateName, setTemplateName, connection, setConnection, mode, setMode, keypressSound, setKeypressSound, volume, setVolume, lockSound, setLockSound, otherValue, setOtherValue, setBumpbarButtons, setButtonCount }) {
+function ConfigOptions({ templateName, setTemplateName, connection, setConnection, serialInfo, setSerialInfo, mode, setMode, keypressSound, setKeypressSound, volume, setVolume, lockSound, setLockSound, otherValue, setOtherValue, setBumpbarButtons, setButtonCount }) {
   const [advanced, setAdvanced] = useState(false);
 
   return (
@@ -27,6 +27,8 @@ function ConfigOptions({ templateName, setTemplateName, connection, setConnectio
         <Connection
           connection={connection}
           setConnection={setConnection}
+          serialInfo={serialInfo}
+          setSerialInfo={setSerialInfo}
           setMode={setMode}
           display={advanced}
         />
@@ -138,7 +140,7 @@ function FileUpload({ templateName, setTemplateName, setConnection, mode, setMod
   )
 }
 
-function Connection({ connection, setConnection, setMode, display }) {
+function Connection({ connection, setConnection, serialInfo, setSerialInfo, setMode, display }) {
   if (!display) {
     return;
   }
@@ -146,6 +148,67 @@ function Connection({ connection, setConnection, setMode, display }) {
     setMode("4");
     setConnection(e.target.value)
   }
+
+  const serialSection = (
+    <div className={styles.serialInfo}>
+      <div className={styles.serialInfoRow}>
+        <label htmlFor="baudRate">Baud Rate:</label>
+        <div className="dropdown">
+          <select name="baudRate" id="baudRate" value={serialInfo.baudRate}
+            onChange={e => setSerialInfo({...serialInfo, baudRate: e.target.value})}
+          >
+            <option value="1200">1200</option>
+            <option value="2400">2400</option>
+            <option value="4800">4800</option>
+            <option value="9600">9600</option>
+            <option value="19200">19200</option>
+            <option value="38400">38400</option>
+            <option value="57600">57600</option>
+            <option value="115200">115200</option>
+          </select>
+        </div>
+      </div>
+      <div className={styles.serialInfoRow}>
+        <label htmlFor="parity">Parity:</label>
+        <div className="dropdown">
+          <select name="parity" id="parity" value={serialInfo.parity}
+            onChange={e => setSerialInfo({...serialInfo, parity: e.target.value})}
+          >
+            <option value="N">None</option>
+            <option value="E">Even</option>
+            <option value="O">Odd</option>
+            <option value="M">Mark</option>
+            <option value="S">Space</option>
+          </select>
+        </div>
+      </div>
+      <div className={styles.serialInfoRow}>
+        <label htmlFor="wordSize">Word Size:</label>
+        <div className="dropdown">
+          <select name="wordSize" id="wordSize" value={serialInfo.wordSize}
+            onChange={e => setSerialInfo({...serialInfo, wordSize: e.target.value})}
+          >
+            <option value="5">5 bits</option>
+            <option value="6">6 bits</option>
+            <option value="7">7 bits</option>
+            <option value="8">8 bits</option>
+          </select>
+        </div>
+      </div>
+      <div className={styles.serialInfoRow}>
+        <label htmlFor="stopBits">Stop Bits:</label>
+        <div className="dropdown">
+          <select name="stopBits" id="stopBits" value={serialInfo.stopBits}
+            onChange={e => setSerialInfo({...serialInfo, stopBits: e.target.value})}
+          >
+            <option value="1">1 bit</option>
+            <option value="2">2 bits</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  )
+
   return (
     <div id="connection" className={styles.connection}>
       <div className={styles.flexRow}>
@@ -161,6 +224,7 @@ function Connection({ connection, setConnection, setMode, display }) {
           <option value="Serial">Serial</option>
         </select>
       </div>
+      {connection == "Serial" ? serialSection : null}
     </div>
   )
 }

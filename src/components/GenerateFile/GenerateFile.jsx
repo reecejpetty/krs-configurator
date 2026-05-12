@@ -3,7 +3,7 @@ import styles from "./GenerateFile.module.css"
 import { krstobin, downloadKrsb } from "../../krstobin";
 
 
-function GenerateFile({ activeSwitch, templateName, connection, mode, keypressSound, volume, lockSound, otherValue, bumpbarButtons }) {
+function GenerateFile({ activeSwitch, templateName, connection, serialInfo, mode, keypressSound, volume, lockSound, otherValue, bumpbarButtons }) {
   const [showPreview, setShowPreview] = useState(false);
 
   const date = new Date();
@@ -28,7 +28,7 @@ function GenerateFile({ activeSwitch, templateName, connection, mode, keypressSo
   xml += `    <properties filename="${fileName}">\n`;
   xml += `    </properties>\n`;
   xml += `    <version ver="1" date="${formattedDate}" time="${formattedTime}">\n`;
-  xml += `        <config connect="${connection}" serial="9600N81" mode="${mode}" sound="${keypressSound ? 'On' : 'Off'}" volume="${volume}" lock="${lockSound != "Other" ? lockSound : otherValue}">\n`;
+  xml += `        <config connect="${connection}" serial="${Object.values(serialInfo).join("")}" mode="${mode}" sound="${keypressSound ? 'On' : 'Off'}" volume="${volume}" lock="${lockSound != "Other" ? lockSound : otherValue}">\n`;
   xml += `        </config>\n`;
   for (let i = 0; i < 30; i++) {
     xml += `        <key keynum="${i + 1}">\n`;

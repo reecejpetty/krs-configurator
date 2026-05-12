@@ -82,7 +82,7 @@
     flex-grow: 1;
     max-width: 300px;
     @media (max-width: 600px) {
-        max-width: 100%;
+        max-width: 75%;
     }
 }
 
@@ -132,6 +132,9 @@ input[type="file"]::file-selector-button {
     display: grid;
     grid-template-columns: 100px 110px;
     align-items: center;
+    @media (max-width: 600px) {
+        grid-template-columns: 90px 100px;
+    }
 }
 
 .keypressSoundSwitch {

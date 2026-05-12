@@ -388,7 +388,7 @@ function Beeper({ lockSound, setLockSound, otherValue, setOtherValue, setMode, a
               otherTextBox = <input type="text" className={styles.otherText} value={otherValue} onChange={(e) => setOtherValue(e.target.value)} pattern="0x[a-fA-F0-9]{2}" requred />
             }
             return (
-              <div className={styles.flexRow}>
+              <div className={styles.flexRow} key={index}>
                 <label className={lockSound === option.value? styles.beeperOptionActive : styles.beeperOption} key={index} htmlFor={`beeper-${option.value}`}>
                   <input
                     type="radio"

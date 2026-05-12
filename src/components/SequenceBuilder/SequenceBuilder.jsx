@@ -618,11 +618,11 @@ function KeyboardFunctions({ modifierString, modifierValue, setModifiers, inputD
         <Tooltip name="keyboard-functions" text={<><p>Click keyboard keys below to add functions that cannot simply be typed into the <b>Text Entry</b> box above.</p><p>Modifiers (CTRL, ALT, SHIFT, WIN) can be added to any keypress by selecting the desired modifiers above before clicking a keyboard function.</p></>} />
       </div>
       <div className={styles.keyboardFunctions}>
-        {keyboardKeys.map((side, index) => (
-          <div className={styles[side.keyboardSide]} key={index}>
+        {keyboardKeys.map((side, sideIndex) => (
+          <div className={styles[side.keyboardSide]} key={sideIndex}>
             {side.keys.map((key, index) => (
               <KeyboardButton
-                key={index}
+                key={sideIndex+ "-" + index}
                 value={key.value}
                 text={key.text}
                 spacing={key.spacing}

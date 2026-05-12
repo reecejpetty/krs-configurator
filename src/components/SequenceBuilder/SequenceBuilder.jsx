@@ -58,7 +58,7 @@ function SequenceBuilder({ bumpbarButtons, setBumpbarButtons, currentButton }) {
       <div className={styles.flexApart}>
         <div className={styles.flexRow} style={{ flexGrow: 1 }}>
           <h1>Sequence Builder</h1>
-          <Tooltip name="sequence-builder" text={<><p>Here you can create a new sequence or edit a button's existing sequence.</p><p>With a Bumpbar Button selected, press <b>Edit Button</b> to bring that button's sequence into your <b>Current Sequence</b>.</p><p>Press <b>Save to Button</b> to save your <b>Current Sequence</b> to the selected Bumpbar Button.</p><p>To delete all items in your <b>Current Sequence</b>, press <b>Reset Sequence</b>.</p></>} />
+          <Tooltip name="sequence-builder" text={<><p>Here you can create a new sequence or edit a button's existing sequence.</p><p>Press <b>Erase, Edit, or Save</b> to customize the selected Bumpbar Button.</p><p>To delete all items in your <b>Current Sequence</b>, press <b>Reset Sequence</b>.</p></>} />
         </div>
         <SequenceOptions 
           bumpbarButtons={bumpbarButtons}
@@ -168,7 +168,7 @@ function SequenceOptions({ bumpbarButtons, setBumpbarButtons, currentButton, set
     <div className={styles.sequenceOptionsRow}>
       <div className={styles.flexRow}>
         <h2>Selected Button</h2>
-        <Tooltip name="selected-button" text={<><p>These options configure the currently selected Bumpbar button from the display above.</p><ul><li><b>Erase</b> removes all sequence items from the button.</li><li><b>Edit</b> copies all sequence items to the <b>Current Sequence</b> below.</li><li><b>Save</b> copies all sequence items from the <b>Current Sequence</b> to the current button.</li></ul></>} />
+        <Tooltip name="selected-button" text={<><p>These options configure the currently selected Bumpbar button from the display above.</p><ul><li><b>Erase</b> removes all sequence items saved to the button.</li><li><b>Edit</b> copies all sequence items from selected button to the <b>Current Sequence</b> below.</li><li><b>Save</b> copies all sequence items from the <b>Current Sequence</b> to the current button.</li></ul></>} />
       </div>
       <div></div>
       <div className={styles.sequenceOptions}>
@@ -204,7 +204,7 @@ function CurrentSequence() {
   const header = (
     <div className={styles.flexRow}>
       <h2>Current Sequence</h2>
-      <Tooltip name="current-sequence" text={<><p>This is where your current sequence will be built. Click any keyboard function or enter text to add to your sequence. You can also add a delay between sequence items or a repeat (for Wireless Bumpbars).</p><p>When you are satisfied with your sequence, click "Save to Button" to assign it to the currently selected button.</p></>} />
+      <Tooltip name="current-sequence" text={<><p>This is where your current sequence will be built.</p><p>Use the <b>Text Entry</b> box to add strings or characters to <b>Current Sequence</b>.</p><p>Use the on-screen <b>Keyboard Functions</b> below to add non-typeable keys to <b>Current Sequence</b>.</p><p>You can also add a <b>Pause</b> between sequence items, or configure a sequence item to <b>Repeat</b> when the button is held (for Wireless Bumpbars).</p><p>When you are satisfied with your sequence, click <b>Save</b> to assign it to the currently selected button.</p></>} />
     </div>
   )
 
@@ -369,7 +369,7 @@ function AddRepeat() {
     <div className={styles.addBlock}>
       <div className={styles.flexRow}>
         <h2>Repeat Keypress</h2>
-        <Tooltip name="repeat" text={<><p><b>For Wireless Bumpbars Only</b></p><p>Speed at which Bumpbar button keypress is repeated when Bumpbar button is held. Must be the first part of sequence, and only one keypress can follow.</p><p><b>Note:</b> Wired Bumpbars automatically repeat keystrokes when a button is held.</p></>} />
+        <Tooltip name="repeat" text={<><p><b>For Wireless Bumpbars Only</b></p><p>Set sequence item to repeat when Bumpbar button is held. Delay represents speed at which keypress is repeated. Must be the first part of sequence, and only one keypress can follow.</p><p><b>Note:</b> Wired Bumpbars automatically repeat first keypress when button is held, so Repeat is not necessary.</p></>} />
       </div>
       <form className={styles.addBlockContent} onSubmit={handleSubmit}>
         <div><b>Delay:</b></div>
@@ -416,7 +416,7 @@ function AddPause({ inputDisabled }) {
     <div className={styles.addBlock}>
       <div className={styles.flexRow}>
         <h2>Pause</h2>
-        <Tooltip name="pause" text={<><p>Your sequence will be paused for the desired amount of time before the next input is sent. Useful for when inputs are sent too quickly (e.g. open a window, wait a few seconds for window to load, then send next command.)</p></>} />
+        <Tooltip name="pause" text={<><p>Set the amount of time (up to 60 seconds) for which sequence will be paused until the next input is sent. Useful for when inputs need to be spaced out (e.g. open a window, wait a few seconds for window to load, then send next command).</p></>} />
       </div>
       <form className={styles.addBlockContent} onSubmit={handleSubmit}>
         <div><b>Seconds (1-60):</b></div>
@@ -474,7 +474,7 @@ function StringEntry({ string, setString, modifiers, modifierValue, setModifiers
     <div className={styles.stringEntry}>
       <div className={styles.flexRow}>
         <h2>Text Entry</h2>
-        <Tooltip name="text-entry" text={<><p>Type any text or characters and hit enter or press ADD to add it to your sequence. If any modifiers are selected, only the first character of your text will be added to the sequence.</p><p>(<b>Note:</b> Text entered will be saved case-sensitively, so you do not need to add SHIFT as a modifier to capitalize letters.)</p></>} />
+        <Tooltip name="text-entry" text={<><p>Type any text or characters and hit enter or press <b>Add</b> to add it to your sequence. If any modifiers are selected, only the first character of your text will be added to the sequence.</p><p>(<b>Note:</b> Text entered will be saved case-sensitively, so you do not need to add SHIFT as a modifier to capitalize letters.)</p></>} />
       </div>
       <form className={styles.stringEntryInput} onSubmit={handleSubmit}>
         <input type="text" value={string} onChange={handleChange} placeholder="Enter text or character(s) here..." />
@@ -598,7 +598,7 @@ function KeyboardFunctions({ modifierString, modifierValue, setModifiers, inputD
     <div>
       <div className={styles.flexRow}>
         <h2>Keyboard Functions</h2>
-        <Tooltip name="keyboard-functions" text={<p>Many keyboard keys cannot be simply typed into the Text Entry box above. To add those keys to your sequence, click any of the keyboard functions below. Modifiers (CTRL, ALT, SHIFT, WIN) can be added to any keypress by selecting the desired modifiers above before clicking a keyboard function.</p>} />
+        <Tooltip name="keyboard-functions" text={<><p>Click keyboard keys below to add functions that cannot simply be typed into the <b>Text Entry</b> box above.</p><p>Modifiers (CTRL, ALT, SHIFT, WIN) can be added to any keypress by selecting the desired modifiers above before clicking a keyboard function.</p></>} />
       </div>
       <div className={styles.keyboardFunctions}>
         {keyboardKeys.map((side, index) => (

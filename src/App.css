@@ -63,13 +63,17 @@ input[type="checkbox"] {
 }
 
 .button {
+    display: block;
     padding: 0 20px;
     height: 40px;
     border: none;
     border-radius: 40px;
+    color: black;
     box-shadow: var(--button-shadow);
     text-align: center;
+    font-size: 1rem;
     font-weight: bold;
+    text-align: center;
     white-space: nowrap;
     cursor: pointer;
     @media (max-width: 600px) {

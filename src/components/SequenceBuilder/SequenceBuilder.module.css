@@ -35,11 +35,7 @@
 
 .optionButton {
     composes: selectOff from global, button from global;
-    display: block;
     flex-grow: 1;
-    font-size: 1rem;
-    text-align: center;
-    color: black;
 }
 
 .resetOption {

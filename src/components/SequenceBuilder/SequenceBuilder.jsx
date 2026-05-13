@@ -21,10 +21,11 @@ const modifierArray = [
 
 function SequenceBuilder({ bumpbarButtons, setBumpbarButtons, currentButton, setMode }) {
   const sequence = useSequence();
+  
   const inputDisabled = (() => {
     if (sequence.currentLength >= 58) return true;
     if (sequence.sequence.length > 0) {
-      if (sequence.sequence[0].keypresses[0].usage == "FD" && sequence.sequence.length >= 2) return true;
+      if (sequence.sequence[0].keypresses[0].usage == "FD" && sequence.currentLength >= 2) return true;
     }
     return false
   })();
@@ -443,6 +444,14 @@ function StringEntry({ string, setString, modifiers, modifierValue, setModifiers
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setString("");
+    setModifiers({
+      "ctrl": false,
+      "shift": false,
+      "alt": false,
+      "win": false
+    })
+
     if ((Object.values(modifiers).some(Boolean)) && string.length === 1) {
       sequenceDispatch({
         type: "added key",
@@ -450,24 +459,39 @@ function StringEntry({ string, setString, modifiers, modifierValue, setModifiers
         modifier: modifierValue,
         keyboard: false
       })
-    } else {
-      sequenceDispatch({
-        type: "added string",
-        string: string
-      })
+      return;
     }
-    setModifiers({
-      "ctrl": false,
-      "shift": false,
-      "alt": false,
-      "win": false
+    if (sequence.currentLength > 0) {
+      if (sequence.sequence[0].keypresses[0].usage == "FD") {
+        sequenceDispatch({
+          type: "added key",
+          key: string[0],
+          modifier: modifierValue,
+          keyboard: false
+        })
+        return;
+      }
+    }
+    sequenceDispatch({
+      type: "added string",
+      string: string
     })
-    setString("");
   }
 
   const handleChange = (e) => {
     if (sequence.currentLength + e.target.value.length > MAX_LENGTH) {
       return;
+    }
+    if (inputDisabled) {
+      return;
+    }
+    if (sequence.currentLength > 0) {
+      if (sequence.sequence[0].keypresses[0].usage == "FD" && string.length >= 1) {
+        if (e.target.value.length <= 1) {
+          setString(e.target.value);
+        }
+        return;
+      }
     }
     if ((Object.values(modifiers).some(Boolean)) && string.length === 0) {
       sequenceDispatch({

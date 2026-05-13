@@ -24,55 +24,57 @@ function BumpbarLayout({ buttonCount, setButtonCount, currentButton, setCurrentB
         <ButtonCountToggle buttonCount={buttonCount} setButtonCount={setButtonCount} setMode={setMode} />
         <PinBumpbar sticky={sticky} setSticky={setSticky} />
       </div>
-      <div className={sticky ? styles.bumpbarSticky : styles.bumpbar}>
-        <DragDropProvider
-          plugins={(defaults) => [
-            ...defaults.filter((plugin) => plugin !== AutoScroller),
-            Feedback.configure({feedback: "clone", dropAnimation: null}),
-          ]}
-          onDragOver={(event) => {
-            event.preventDefault();
-          }}
-          onDragEnd={(event) => {
-            if (event.canceled) return;
-            
-            if (isSortableOperation(event.operation)) {
-              setMode("4");
-              const updatedArray = swap([...bumpbarButtons], event);
-              setBumpbarButtons(updatedArray);
-              if (currentButton == event.operation.source.index) {
-                setCurrentButton(event.operation.target.index);
-              } else if (currentButton == event.operation.target.index) {
-                setCurrentButton(event.operation.source.index)
+      <div className={sticky ? styles.bumpbarContainerSticky : styles.bumpbarContainer}>
+        <div className={styles.bumpbar}>
+          <DragDropProvider
+            plugins={(defaults) => [
+              ...defaults.filter((plugin) => plugin !== AutoScroller),
+              Feedback.configure({feedback: "clone", dropAnimation: null}),
+            ]}
+            onDragOver={(event) => {
+              event.preventDefault();
+            }}
+            onDragEnd={(event) => {
+              if (event.canceled) return;
+        
+              if (isSortableOperation(event.operation)) {
+                setMode("4");
+                const updatedArray = swap([...bumpbarButtons], event);
+                setBumpbarButtons(updatedArray);
+                if (currentButton == event.operation.source.index) {
+                  setCurrentButton(event.operation.target.index);
+                } else if (currentButton == event.operation.target.index) {
+                  setCurrentButton(event.operation.source.index)
+                }
               }
-            }
-          }}
-        >
-          <div className={buttonCount == 2 ? styles.bumpbarLayout20 : styles.bumpbarLayout }>
-            {buttonArray.map((_, index) => (
-              <BumpbarButton
-                key={bumpbarButtons[index].id}
-                id={bumpbarButtons[index].id}
-                index={index}
-                number={index + 1}
-                text={bumpbarButtons[index].string }
-                currentButton={currentButton}
-                setCurrentButton={setCurrentButton}
-                active={index == currentButton}
-              />
-            ))}
-          </div>
-          <DragOverlay>
-            {source => (
-              <div className={styles.dragOverlay}>
-                <span className={styles.bumpbarButtonText}>{source.data["dragText"]}</span>
-              </div>
-            )}
-          </DragOverlay>
-        </DragDropProvider>
-      </div>
-      <div className={styles.flexRow}>
-        <SelectedButtonSequence currentButton={currentButton} bumpbarButtons={bumpbarButtons} />
+            }}
+          >
+            <div className={buttonCount == 2 ? styles.bumpbarLayout20 : styles.bumpbarLayout }>
+              {buttonArray.map((_, index) => (
+                <BumpbarButton
+                  key={bumpbarButtons[index].id}
+                  id={bumpbarButtons[index].id}
+                  index={index}
+                  number={index + 1}
+                  text={bumpbarButtons[index].string }
+                  currentButton={currentButton}
+                  setCurrentButton={setCurrentButton}
+                  active={index == currentButton}
+                />
+              ))}
+            </div>
+            <DragOverlay>
+              {source => (
+                <div className={styles.dragOverlay}>
+                  <span className={styles.bumpbarButtonText}>{source.data["dragText"]}</span>
+                </div>
+              )}
+            </DragOverlay>
+          </DragDropProvider>
+        </div>
+        <div className={styles.flexRow}>
+          <SelectedButtonSequence currentButton={currentButton} bumpbarButtons={bumpbarButtons} />
+        </div>
       </div>
     </>
   )

@@ -11,6 +11,25 @@
     flex-wrap: wrap;
 }
 
+.bumpbarContainer {
+    position: relative;
+}
+
+.bumpbarContainerSticky {
+    position: sticky;
+    box-sizing: content-box;
+    top: 10px;
+    z-index: 2;
+}
+
+.bumpbarContainerSticky .selectedButtonSequence {
+    background-color: var(--off-white);
+    box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.5);
+    padding: 20px;
+    margin-top: -10px;
+    border-radius: 40px;
+}
+
 .bumpbar {
     position: relative;
     display: flex;
@@ -28,13 +47,6 @@
     @media (max-width: 600px) {
         padding: 3.5%;
     }
-}
-
-.bumpbarSticky {
-    composes: bumpbar;
-    position: sticky;
-    top: 10px;
-    z-index: 2;
 }
 
 .bumpbar:has(.bumpbarLayout20) {

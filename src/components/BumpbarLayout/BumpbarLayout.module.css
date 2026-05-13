@@ -124,16 +124,17 @@
     display: none;
     justify-content: center;
     align-items: center;
-    top: 0;
-    left: 0;
+    bottom: 3px;
+    right: 3px;
     min-width: fit-content;
     width: 18%;
-    border-right: solid 1px black;
-    border-bottom: solid 1px black;
-    border-bottom-right-radius: 2px;
+    aspect-ratio: 1/1;
+    border-radius: 40px;
     color: black;
-    background-color: var(--steel-blue);
+    background-color: var(--amber2);
+    box-shadow: 0 0 3px 0 black;
     font-size: .65rem;
+    font-weight: bold;
     text-align: center;
     @media (max-width: 600px) {
         display: none;

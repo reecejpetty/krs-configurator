@@ -3,14 +3,14 @@ import styles from './ConfigOptions.module.css'
 import modes from "../../modes.json"
 import { useState } from 'react';
 
-function ConfigOptions({ templateName, setTemplateName, connection, setConnection, serialInfo, setSerialInfo, mode, setMode, keypressSound, setKeypressSound, volume, setVolume, lockSound, setLockSound, otherValue, setOtherValue, setBumpbarButtons, setButtonCount }) {
+function ConfigOptions({ resetConfig, templateName, setTemplateName, connection, setConnection, serialInfo, setSerialInfo, mode, setMode, keypressSound, setKeypressSound, volume, setVolume, lockSound, setLockSound, otherValue, setOtherValue, setBumpbarButtons, setButtonCount }) {
   const [advanced, setAdvanced] = useState(false);
 
   return (
     <div>
       <div className={styles.flexApart}>
         <h1>Configuration Options</h1>
-        <AdvancedOptions advanced={advanced} setAdvanced={setAdvanced} />
+        <AdvancedOptions advanced={advanced} setAdvanced={setAdvanced} resetConfig={resetConfig} />
       </div>
       <div id="config-options" className={styles.configOptions}>
         <FileUpload
@@ -65,13 +65,14 @@ function ConfigOptions({ templateName, setTemplateName, connection, setConnectio
   )
 }
 
-function AdvancedOptions({ advanced, setAdvanced }) {
+function AdvancedOptions({ advanced, setAdvanced, resetConfig }) {
     return (
       <div className={styles.advancedToggle}>
         <label htmlFor="advancedOptionCheckbox" className={advanced ? styles.advancedToggleActive : styles.advancedToggleLabel}>
           <input type="checkbox" id="advancedOptionCheckbox" checked={advanced} onChange={e => setAdvanced(e.target.checked)} />
           {advanced ? "Hide" : "Show"} Advanced Options
         </label>
+        <button className={styles.resetButton} onClick={resetConfig}>Reset Options</button>
       </div>
     )
 }

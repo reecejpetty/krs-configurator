@@ -15,10 +15,21 @@ function App() {
   const [volume, setVolume] = useState("3");
   const [lockSound, setLockSound] = useState("Scroll");
   const [otherValue, setOtherValue] = useState("0x07");
+  
   const [buttonCount, setButtonCount] = useState(3)
-
   const [currentButton, setCurrentButton] = useState(null);
   const [bumpbarButtons, setBumpbarButtons] = useState(initialState);
+
+  const resetConfig = () => {
+    setTemplateName("");
+    setConnection("Auto");
+    setSerialInfo(initialSerialState);
+    setMode("4");
+    setKeypressSound(true);
+    setVolume("3");
+    setLockSound("Scroll");
+    setOtherValue("0x07");
+  }
 
   useEffect(() => {
     const sendHeight = () => {
@@ -41,6 +52,7 @@ function App() {
   return (
     <>
       <ConfigOptions
+        resetConfig={resetConfig}
         templateName={templateName}
         setTemplateName={setTemplateName}
         connection={connection}

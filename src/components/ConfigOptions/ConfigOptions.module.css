@@ -161,7 +161,6 @@ input[type="file"]::file-selector-button {
     box-shadow: var(--orange-button-shadow);
     @media (max-width: 600px) {
         height: 35px;
-        gap: 0px;
     }
 }
 

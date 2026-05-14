@@ -222,6 +222,18 @@
     background-color: var(--amber2);
 }
 
+.keyboardFunctions button:disabled {
+    background-color: lightgray;
+}
+
+.keyboardFunctions button:disabled:hover {
+    cursor: default;
+}
+
+.keyboardFunctions:has(button:disabled) {
+    background-color: #404040;
+}
+
 .u1 {
     grid-column: span 4;
 }

@@ -152,9 +152,10 @@ input[type="checkbox"] {
     bottom: 5px;
     max-width: clamp(100px, calc(100% - 10px), 300px);
     padding: 5px 10px;
-    background-color: var(--off-white);
     border: solid 1px var(--steel-blue2);
     border-radius: 10px;
+    background-color: var(--off-white);
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
     font-size: .8rem;
     font-weight: normal;
     white-space: pre-line;

@@ -23,7 +23,7 @@ function SequenceBuilder({ bumpbarButtons, setBumpbarButtons, currentButton, set
   const sequence = useSequence();
   
   const inputDisabled = (() => {
-    if (sequence.currentLength >= 58) return true;
+    if (sequence.currentLength >= MAX_LENGTH) return true;
     if (sequence.sequence.length > 0) {
       if (sequence.sequence[0].keypresses[0].usage == "FD" && sequence.currentLength >= 2) return true;
     }
@@ -84,6 +84,7 @@ function SequenceBuilder({ bumpbarButtons, setBumpbarButtons, currentButton, set
             modifiers={modifiers}
             setModifiers={setModifiers}
             string={string}
+            inputDisabled={inputDisabled}
           />
           <div className={styles.addSpecial}>
             <AddRepeat />
@@ -310,7 +311,7 @@ function SequenceItem({ id, index, text }) {
 }
 
 
-function KeypressModifiers({ modifiers, setModifiers, string }) {
+function KeypressModifiers({ modifiers, setModifiers, string, inputDisabled }) {
   const handleChange = (e) => {
     const { id, checked } = e.target;
     setModifiers({
@@ -338,7 +339,7 @@ function KeypressModifiers({ modifiers, setModifiers, string }) {
               value={modifier.value}
               checked={modifiers[modifier.name]}
               onChange={handleChange}
-              disabled={string.length > 1}
+              disabled={string.length > 1 || inputDisabled}
             />{modifier.name.toUpperCase()}
           </label>
           )

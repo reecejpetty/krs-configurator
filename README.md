@@ -1,6 +1,6 @@
 # KRS Online Configurator
 
-The new version of the KRS Online Configurator built with React. Access app [here](https://reecejpetty.github.io/krs-configurator/).
+The new version of the KRS Online Configurator built with React. Access app [here](https://rjpetty.com/krs-configurator/).
 Project is currently in development. More testing and debugging is required before production release.
 
 ## New Features
